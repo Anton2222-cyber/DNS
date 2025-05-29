@@ -1,0 +1,868 @@
+﻿
+	(*********************)
+	(*                   *)
+	(*     FUNCTIONS     *)
+	(*                   *)
+	(*********************)
+
+(*BACNET .PLL FOR M172P/FREE ADVANCE TARGET*)
+
+FUNCTION sysBACnet_DeProfileName: USINT
+	{ DE:" Set the Profile_Name of the Device Object.
+Calling this function the Profile_Name propriety of the
+Device Object is setted by user. Max len 64 chars.
+
+The function return a USINT which could have the following meanings:
+0 = Parameters correctly reloaded.
+255 = string too long, no parameters reloaded.
+" }
+
+	VAR_INPUT
+		profile_name: STRING; { DE:"Device Object Profile_Name string, max 64 chars" }		
+	END_VAR
+
+    {CODE:EMBEDDED}
+END_FUNCTION
+
+FUNCTION sysBACnet_BBMD : BOOL
+{ DE:"Function to set-up Foreing Devices Handling.
+Return always TRUE" }
+        
+    VAR_INPUT
+		ip_1	: USINT; { DE:"1 st part of Ip address of the BBMD" }		
+		ip_2	: USINT; { DE:"2 nd part of Ip address of the BBMD" }		
+		ip_3	: USINT; { DE:"3 rd part of Ip address of the BBMD" }		
+		ip_4	: USINT; { DE:"4 th part of Ip address of the BBMD" }		
+		port	: UINT;  { DE:"Port of the BBMD" }	
+		tmo	: UINT;  { DE:"Underflow timeout in seconds [0...65535]" }	
+    END_VAR
+    
+    {CODE:EMBEDDED}
+END_FUNCTION
+
+FUNCTION sysBACnet_Ca_PresentValue : BOOL
+{ DE:"It updates Present Value Property of the Calendar Object instance.
+
+Calling the function with ADR=0 forces the update of all the defined 
+Calendar objects. This feature is available since bios version 
+596.2, 423.23, 477.23, 489.16.
+
+If ADR<>0, it returns the Present Value, otherwise it returns TRUE 
+if at least an object has been updated.
+" }
+        
+    VAR_INPUT
+	address	 : UDINT;	  { DE:"ADR of Calendar Object" }
+    END_VAR
+    
+    {CODE:EMBEDDED}
+END_FUNCTION
+
+FUNCTION sysBACnet_MV_PresentValue : UDINT
+{ DE:"It updates Present Value Property of the Multi State Value Object instance.
+
+Calling the function with ADR=0 forces the update of all the defined 
+Multi State objects and returns the number of updated objects. 
+This feature is available since bios version 596.2, 423.23, 477.23, 489.16.
+
+if ADR<>0, it returns the Present Value, otherwise it returns the 
+number of updated objects .
+" }
+        
+    VAR_INPUT
+	address	 : UDINT;	  { DE:"ADR of Multi State Value Object" }
+    END_VAR
+    
+    {CODE:EMBEDDED}
+END_FUNCTION
+
+FUNCTION sysBACnet_BV_PresentValue : BACnetBinaryPV
+{ DE:"It updates Present Value Property of the Binary Value Object instance.
+
+Calling the function with ADR=0 forces the update of all the defined 
+Binary objects. This feature is available since bios version 
+596.2, 423.23, 477.23, 489.16.
+
+if ADR<>0, it returns the Present Value, otherwise it returns the 
+number of updated objects. 
+" }
+        
+    VAR_INPUT
+	address	 : UDINT;	  { DE:"ADR of Binary Value Object" }
+    END_VAR
+    
+    {CODE:EMBEDDED}
+END_FUNCTION
+
+FUNCTION sysBACnet_AV_PresentValue : REAL
+{ DE:"It updates Present Value Property of the Analog Value Object instance.
+
+Calling the function with ADR=0 forces the update of all the defined 
+Analog objects and returns the number of updated objects.
+This feature is available since bios version 596.2, 423.23, 477.23, 489.16.
+
+if ADR<>0, it returns the Present Value, otherwise it returns the 
+number of updated objects. 
+" }
+        
+    VAR_INPUT
+	address	 : UDINT;	  { DE:"ADR of Analog Value Object instance" }
+    END_VAR
+    
+    {CODE:EMBEDDED}
+END_FUNCTION
+
+FUNCTION sysDBase_SetBACnetAddressess : USINT
+{ HIDDEN:ON }
+{ DE:"Complete extended database table for BACnet objects" }
+        
+    VAR_INPUT
+	offset : PVOID;	{ DE:"Physical address offset" }
+	el	 : UDINT;	  { DE:"Number of record" }
+    END_VAR
+
+    {CODE:EMBEDDED}
+END_FUNCTION
+
+FUNCTION sysBACnet_LoadDefaultsFromFile : USINT
+{ HIDDEN:ON }
+{ DE:"Load BACnet defaults from file" }
+        
+    VAR_INPUT
+	enable : BOOL;	{ DE:"Enable flag to write default values in EEPROM" }
+    END_VAR
+
+    {CODE:EMBEDDED}
+END_FUNCTION
+
+FUNCTION sysBACnet_WriteE2Par : USINT
+{ DE:"Write BACnet parameter in EEPROM
+
+For instance:
+warningsKiller := sysBACnet_WriteE2Par(ADR(<BACnet Object Field>), 
+				ADR(<variable>));
+		
+Use it in Background Task.
+" }
+        
+    VAR_INPUT
+	ptr : PVOID;	{ DE:"Physical address" }
+	ptrValue : PVOID;	{ DE:"Physical address of the variable containing the new value" }
+    END_VAR
+
+    {CODE:EMBEDDED}
+END_FUNCTION
+
+
+	(************************)
+	(*                      *)
+	(*      STRUCTURES      *)
+	(*                      *)
+	(************************)
+
+TYPE
+
+	(* OK *)
+	CharacterString : STRUCT 
+		text : STRING[ 31 ]; 
+	END_STRUCT;
+
+	(* OK *)
+	BACnetTime : STRUCT 
+		hour : USINT; { DE:"(0..23),255=unspecified" }
+		min : USINT; { DE:"(0..59),255=unspecified" }
+		sec : USINT; { DE:"(0..59),255=unspecified" }
+		hundredths : USINT; { DE:"(0..99),,255=unspecified" }
+	END_STRUCT;
+	
+	(* OK *)	
+	BACnetDate : STRUCT 
+		year : USINT; { DE:"year minus 2000,255=unspecified" } 
+		month : USINT; { DE:"(1..14) 1=Jan,13=odd month,14=even month,255=unspecified" } 
+		daymonth : USINT; { DE:"(1..32) 32=last day of month,255=unspecified" } 
+		dayweek : USINT; { DE:"(1..7) 1=Monday,7=Sunday,255=unspecified" } 
+	END_STRUCT;		
+	
+	(* OK *)	
+	BACnetDateTime : STRUCT 
+		date : BACnetDate; { DE:"Specify a date" }
+		time : BACnetTime; { DE:"Specify a hour" }
+	END_STRUCT;
+
+	(* OK *)
+	BACnetTimeStamp : STRUCT 
+		time : BACnetTime; { DE:"Time Stamp Time" }
+		sequenceNumber : UINT; { DE:"Not Used since the Device has RTC" }
+		dateTime : BACnetDateTime; { DE:"Time Stamp Date" }
+	END_STRUCT;
+	
+	(* OK *)	
+	BACnetDateRange : STRUCT 
+		startDate : BACnetDate;  { DE:"Starting Date" }
+		endDate : BACnetDate; { DE:"Ending Date" }
+	END_STRUCT;	
+	
+	(* OK *)
+	BACnetWeekNDay : STRUCT 
+		month : USINT; { DE:"(1..14) 1=Jan,13=odd month,14=even month,255=unspecified" } 
+		weekOfMonth : USINT; { DE:"1=days numbered 1-7,2=8-14,3=15-21,4=22-28,5=29-31,6=last 7 days of this month,255=any week of this month" } 
+		dayOfWeek : USINT; { DE:"(1..7) 1=Mon,7=Sun,255=any day of week" } 		
+	END_STRUCT;		
+	
+	(* OK *)	
+	BACnetCalendarEntry : STRUCT 
+		date : BACnetDate;
+		dateRange : BACnetDateRange;
+		weekNDay : BACnetWeekNDay;
+	END_STRUCT;	
+	
+	(* OK: NOTE I put max 4 events in a single day, in spec there is not indication for max *)
+	BACnetDailySchedule : STRUCT 
+		day_schedule : ARRAY[0..5] OF BACnetTimeValue;  
+	END_STRUCT;
+	
+	(* OK: NOTE I put value as UDINT type due to ANY means String,Bool,Real.... *)	
+	BACnetTimeValue : STRUCT 
+		time : BACnetTime;
+		value : UDINT;
+	END_STRUCT;	
+
+	(* OK: NOTE This struct is not BACnet native, I use it to handle BACnetSpecialEvent *)
+	BACnetCalendarPeriod : STRUCT 
+		calendarEntry : BACnetCalendarEntry;
+		calendarReference : BACnetObjectIdentifier;
+	END_STRUCT;	
+
+	(* OK: NOTE I put period as struct BACnetCalendarPeriod to handle 2 types of entry; I put max 4 events in the listOfTimeValues, in spec the is not indication for max *)
+	BACnetSpecialEvent : STRUCT 
+		period : BACnetCalendarPeriod;
+		listOfTimeValues : ARRAY[0..3] OF BACnetTimeValue;
+		eventPriority : USINT;  { DE:"Priority for event (1...16)" }
+	END_STRUCT;	
+
+  (* OK: NOTE I put propertyArrayIndex as UDINT, in spec it is Unsigned *)
+	BACnetDeviceObjectPropertyReference : STRUCT 
+		objectIdentifier : BACnetObjectIdentifier;
+		propertyIdentifier : BACnetPropertyIdentifier;
+		propertyArrayIndex : UDINT;
+		deviceIdentifier : BACnetObjectIdentifier;
+	END_STRUCT;
+	
+	(* OK *)
+	BACnetAddress : STRUCT 
+		network_number : UINT; { DE:"A value of 0 indicates the local network (0...65635)" }
+		mac_address : UDINT; { DE:"mac-address as UDINT" }
+	END_STRUCT;		
+	
+	(* OK *)
+	BACnetRecipient : STRUCT 
+		device : BACnetObjectIdentifier;
+		address : BACnetAddress;
+	END_STRUCT;		
+	
+	(* OK *)
+	BACnetDestination : STRUCT 
+		validDays : BACnetDaysOfWeek;
+		fromTime : BACnetTime;
+		toTime : BACnetTime;		
+		recipient : BACnetRecipient; 
+		processIdentifier : UDINT; 
+	  issueConfirmedNotifications : BOOL;
+	  (*transitions : BACnetEventTransitionBits;*)
+    transitions : ARRAY[0..2] OF BOOL; { DE:"position 0 for to_offnormal, position 1 for to_fault, position 2 for to_normal" } 	  
+	END_STRUCT;		
+	
+	(* OK *)
+	BACnetAddressBinding : STRUCT 
+		deviceObjectIdentifier : BACnetObjectIdentifier;
+		deviceAddress : BACnetAddress;
+	END_STRUCT;		
+
+	(* OK: NOTE null and costructedValue not implemented, used STRUCT instead of UNION *)
+	BACnetPriorityValue : STRUCT 
+	  (* choice_null : not implemented;*)
+		choice_real : REAL;
+		choice_binary : BACnetBinaryPV;
+		choice_integer : UDINT;
+	  (* choice_costructedValue : not implemented;*)		
+	END_STRUCT;
+	
+	(* OK: NOTE string lenght of 	Object_Name and Description is not in spec , I setted them at 48 and 64 *)
+	BACNET_ANALOG_VALUE : STRUCT 
+		Object_Identifier	: BACnetObjectIdentifier; { DE:"It is a unique automatically calculated numeric code used to identify the object - R CONST" }
+		Object_Name : STRING[31]; { DE:"Represent a name for the object, it should be unique within the BACnet Device - RW + E2 Option" }
+		Object_Type : BACnetObjectType; { DE:"Object type class, it is a constant value for each type of object - R CONST" }
+		Present_Value : REAL; { DE:"Indicates the current value, in engineering units, of the analog value - RW + E2 Option" }
+		Description : STRING[31]; { DE:"The content is not restricted - RW + E2 Option" }
+		(* Status_Flags : BACnetStatusFlags; { DE:"Status Flags array [0...3]" }*)
+		Status_Flags : ARRAY[ 0..3 ] OF BOOL; { DE:"Indicate the health of the object: [0] for in_alarm, [1] for fault, [2] for overridden, [3] for out_of_service - R" }		
+		Event_State : BACnetEventState; { DE:"Provide a way to determine if this object has an active event state associated with it - R (Default: EVENT_STATE_NORMAL)" }
+		Reliability : BACnetReliability; { DE:"It provides an indication of whether the Present_Value is reliable - R" }
+		Out_Of_Service : BOOL; { DE:"It is an indication whether (TRUE) or not (FALSE) the Present_Value is prevented from being modified by software local - RW + E2 Option (Default: TRUE)" } 
+		Units : BACnetEngineeringUnits; { DE:"Measurement units - RW + E2 Option (Defalut: UNITS_SQUARE_METERS)" }
+		(*Priority_Array : BACnetPriorityArray;*)
+		Priority_Array : ARRAY[0..15] OF BACnetPriorityValue; { DE:"It contains prioritized commands that are in effect for this object - R (Default: 3.402823466e+38F Max real number)" }	
+		Relinquish_Default : REAL; { DE:"It is the default value used for Present_Value when Priority_Array have NULL values - RW + E2 Option" }
+		COV_Increment : REAL; { DE:"Specify the minimum change in Present_Value that will cause a COVNotification - RW + E2 Option (Default: 1.175494351e-38F)" }
+		Time_Delay : UDINT; { DE:"Specify the minimum time period during which the Present_Value must remain outside the High_Limit and Low_Limit band before a TO-OFFNORMAL event - RW + E2 Option (Default: 0)" }
+		Notification_Class : UDINT; { DE:"Specify the notification class to be used when handling and generating event notifications - RW + E2 Option (Default:0x3FFFFF)" }
+		High_Limit : REAL; { DE:"Specify a limit that the Present_Value must exceed before an event is generated - RW + E2 Option (Default:(3.402823466e+38F)/2)" }
+		Low_Limit : REAL; { DE:"Specify a limit that the Present_Value must fall before an event is generated - RW + E2 Option (Default:-(3.402823466e+38F)/2)"}
+		Deadband : REAL; { DE:"Specify a range between the High_Limit and Low_Limit properties within which the Present_Value must remain for a TO-NORMAL event - RW + E2 Option (Default:0.0)" }
+		(*Limit_Enable : BACnetLimitEnable;*) (* OK *)
+		Limit_Enable : ARRAY[0..1] OF BOOL; { DE:"[0] for Low Limit Enabling, [1] for High Limit Enabling - RW + E2 Option (Default:FALSE)" } (* OK *)
+		(*Event_Enable : BACnetEventTransitionBits;*)
+		Event_Enable : ARRAY[0..2] OF BOOL; { DE:"[0] for to_offnormal, [1] for to_fault, [2] for to_normal - RW + E2 Option (Default:FALSE)" } 	  		
+		(*Acked_Transations : BACnetEventTransitionBits;*)
+		Acked_Transations : ARRAY[0..2] OF BOOL; { DE:"[0] for to_offnormal, [1] for to_fault, [2] for to_normal - R (Default: TRUE)" } 	  				
+		Notify_Type : BACnetNotifyType; { DE:"Define whether notifications generated by the object should be Events or Alarms - RW + E2 Option (Default: NOTIFY_ALARM)" }
+		Event_Time_Stamps : ARRAY[0..2] OF BACnetTimeStamp; { DE:"Time of the last event notifications for to_offnormal, to_fault, and to_normal events, respectively - R (Default:0xFF or 0xFFFF Max values for each type)" }
+	END_STRUCT;
+	
+	(* OK: NOTE string lenght of 	Object_Name and Description is not in spec , I setted them at 48 and 64, I setted max 16 BACnetCalendarEntry, no max indication in spec *)	
+	BACNET_CALENDAR : STRUCT 
+		Object_Identifier	: BACnetObjectIdentifier; { DE:"It is a unique automatically calculated numeric code used to identify the object - R CONST" }
+		Object_Name : STRING[31]; { DE:"Represent a name for the object, it should be unique within the BACnet Device - RW + E2 Option" }
+		Object_Type : BACnetObjectType; { DE:"Object type class, it is a constant value for each type of object - R CONST" }
+		Description : STRING[31]; { DE:"The content is not restricted - RW + E2 Option" }
+		Present_Value : BOOL; { DE:"Current value of the calendar: TRUE if the current date is in the Date_List, FALSE if it is not - R" }		
+		Date_list : ARRAY[0..15] OF BACnetCalendarEntry; { DE:"If the current date matches the calendar entry criteria, the present value is TRUE - RW + E2 Option (Default: 255)" }
+	END_STRUCT;
+
+	(* OK: NOTE string lenght of 	Object_Name, Description,Inactive_Text,Active_Text is not in spec , I setted them at 48 and 64, I setted Time_Delay and Notification_Class as UDINT (unsigned in spec) *)	
+	BACNET_BINARY_VALUE : STRUCT 
+		Object_Identifier	: BACnetObjectIdentifier; { DE:"It is a unique automatically calculated numeric code used to identify the object - R CONST" }
+		Object_Name : STRING[31]; { DE:"Represent a name for the object, it should be unique within the BACnet Device - RW + E2 Option" }
+		Object_Type : BACnetObjectType; { DE:"Object type class, it is a constant value for each type of object - R CONST" }
+		Present_Value : BACnetBinaryPV; { DE:"Indicates the logical state of the binary value - RW + E2 Option" }
+		Description : STRING[31]; { DE:"The content is not restricted - RW + E2 Option" }
+		(*Status_Flags :BACnetStatusFlags; { DE:"Status Flags array [0...3]" }*)
+		Status_Flags : ARRAY[ 0..3 ] OF BOOL; { DE:"Indicate the health of the object: [0] for in_alarm, [1] for fault, [2] for overridden, [3] for out_of_service - R" }		
+		Event_State : BACnetEventState; { DE:"Provide a way to determine if this object has an active event state associated with it - R (Default: EVENT_STATE_NORMAL)" }
+		Reliability : BACnetReliability; { DE:"It provides an indication of whether the Present_Value is reliable - R" }
+		Out_Of_Service : BOOL; { DE:"It is an indication whether (TRUE) or not (FALSE) the Present_Value is prevented from being modified by software local - RW + E2 Option (Default: TRUE)" } 
+		Inactive_Text : STRING[31]; { DE:"It characterizes the intended effect of the INACTIVE state - RW + E2 Option" }
+		Active_Text : STRING[31]; { DE:"It characterizes the intended effect of the ACTIVE state - RW + E2 Option" }		
+		Change_Of_State_Time : BACnetDateTime; { DE:"Date and time at which the most recent change of state occurred" }
+		Change_Of_State_Count : UDINT; { DE:"Number of times that the state of the Binary Value has changed since this property was most recently set to a zero value" }
+		Time_Of_State_Count_Reset : BACnetDateTime; { DE:"Date and time at which the Change_Of_State_Count property was most recently set to a zero value" }
+		Elapsed_Active_Time : UDINT; { DE:"Number of seconds that the Present_Value property has had the value ACTIVE since this property was most recently set to a zero value" }
+		Time_Of_Active_Time_Reset : BACnetDateTime; { DE:"Date and time at which the Elapsed_Active_Time property was most recently set to a zero value" }
+		Minimum_Off_Time : UDINT; { DE:"Minimum number of seconds that the Present_Value shall remain in the INACTIVE state after a write to the Present_Value property causes that property to assume the INACTIVE state" }
+		Minimum_On_Time : UDINT; { DE:"Minimum number of seconds that the Present_Value shall remain in the ACTIVE state after a write to the Present_Value property causes that property to assume the ACTIVE state" }
+		(*Priority_Array : BACnetPriorityArray;*)
+		Priority_Array : ARRAY[0..15] OF BACnetPriorityValue; { DE:"It contains prioritized commands that are in effect for this object - R (Default: BINARY_NULL or 0XFF)" }	
+		Relinquish_Default : BACnetBinaryPV; { DE:"It is the default value used for Present_Value when Priority_Array have NULL values - RW + E2 Option" }
+		Time_Delay : UDINT; { DE:"Minimum period of time in seconds during which the Present_Value must be different from the Alarm_Value property before a TO-OFFNORMAL event is generated or must remain equal to the Alarm_Value property before a TO-NORMAL event is generated - RW + E2 Option (Default: 0)" }
+		Notification_Class : UDINT; { DE:"Specify the notification class to be used when handling and generating event notifications - RW + E2 Option (Default:0x3FFFFF)" } 
+		Alarm_Value : BACnetBinaryPV; { DE:"Specify the value that the Present_Value property must have before a TOOFFNORMAL event is generated - RW + E2 Option" } 
+		(*Event_Enable : BACnetEventTransitionBits;*)
+		Event_Enable : ARRAY[0..2] OF BOOL; { DE:"position 0 for to_offnormal, position 1 for to_fault, position 2 for to_normal - RW + E2 Option (Default:FALSE)" }				
+		(*Acked_Transations : BACnetEventTransitionBits;*)
+		Acked_Transations : ARRAY[0..2] OF BOOL; { DE:"position 0 for to_offnormal, position 1 for to_fault, position 2 for to_normal - R (Default: TRUE)" }	
+		Notify_Type : BACnetNotifyType; { DE:"Define whether notifications generated by the object should be Events or Alarms - RW + E2 Option (Default: NOTIFY_ALARM)" }
+		Event_Time_Stamps : ARRAY[0..2] OF BACnetTimeStamp; { DE:"Time of the last event notifications for to_offnormal, to_fault, and to_normal events, respectively - R (Default:0xFF or 0xFFFF Max values for each type)" }
+	END_STRUCT;
+
+	(* OK: NOTE string lenght of 	Object_Name, Description is not in spec , I setted them at 48 and 64, 
+	       Where I setted UDINT was unsigned in spec, I setted 4 the size of Alarm_Values and Fault_Values *)	
+	BACNET_MULTI_STATE_VALUE : STRUCT 
+		Object_Identifier	: BACnetObjectIdentifier; { DE:"It is a unique automatically calculated numeric code used to identify the object - R CONST" }
+		Object_Name : STRING[31]; { DE:"Represent a name for the object, it should be unique within the BACnet Device - RW + E2 Option" }
+		Object_Type : BACnetObjectType; { DE:"Object type class, it is a constant value for each type of object - R CONST" }
+		Present_Value : UDINT; { DE:"Indicates the logical state of the multi-state value - RW + E2 Option" }
+		Description : STRING[31]; { DE:"The content is not restricted - RW + E2 Option" }
+		(*Status_Flags :BACnetStatusFlags; { DE:"Status Flags array [0...3]" }*)
+		Status_Flags : ARRAY[ 0..3 ] OF BOOL; { DE:"Indicate the health of the object: [0] for in_alarm, [1] for fault, [2] for overridden, [3] for out_of_service - R" }		
+		Event_State : BACnetEventState; { DE:"Provide a way to determine if this object has an active event state associated with it - R (Default: EVENT_STATE_NORMAL)" }
+		Reliability : BACnetReliability; { DE:"It provides an indication of whether the Present_Value is reliable" }
+		Out_Of_Service : BOOL; { DE:"It is an indication whether (TRUE) or not (FALSE) the Present_Value is prevented from being modified by software local - RW + E2 Option" } 
+		Number_Of_States : UDINT; { DE:"Number of states the Present_Value may have: max 5 - R" }
+		State_Text : ARRAY[0..4] OF CharacterString; { DE:"Strings representing descriptions of all possible states of the Present_Value - R" }
+		(*Priority_Array : BACnetPriorityArray;*)
+		Priority_Array : ARRAY[0..15] OF BACnetPriorityValue; { DE:"It contains prioritized commands that are in effect for this object - R (Default:MSV_NULL or 0xFFFFFFFF)" }	
+		Relinquish_Default : UDINT; { DE:"It is the default value used for Present_Value when Priority_Array have NULL values - RW + E2 Option" }
+		Time_Delay : UDINT; { DE:"Minimum period of time in seconds during which the Present_Value must be different from the Alarm_Values property before a TO-OFFNORMAL event is generated or must remain equal to the Alarm_Values property before a TO-NORMAL event is generated - RW + E2 Option" }
+		Notification_Class : UDINT; { DE:"Specify the notification class to be used when handling and generating event notifications - RW + E2 Option (Default:BACNET_MAX_INSTANCE or 0x3FFFFF)" } 
+		Alarm_Values : ARRAY[0..3] OF UDINT; { DE:"Specify any states the Present_Value must equal before a TO-OFFNORMAL event is generated - RW + E2 Option (Default:0xFFFFFFFF)" } 
+		Fault_Values : ARRAY[0..3] OF UDINT; { DE:"Specify any states the Present_Value must equal before a TO-FAULT event is generated - RW + E2 Option (Default:0xFFFFFFFF)" } 		
+		(*Event_Enable : BACnetEventTransitionBits;*)
+		Event_Enable : ARRAY[0..2] OF BOOL; { DE:"position 0 for to_offnormal, position 1 for to_fault, position 2 for to_normal - RW + E2 Option (Default:FALSE)" }			
+		(*Acked_Transations : BACnetEventTransitionBits;*)
+		Acked_Transations : ARRAY[0..2] OF BOOL; { DE:"position 0 for to_offnormal, position 1 for to_fault, position 2 for to_normal - R (Default: TRUE)" }		
+		Notify_Type : BACnetNotifyType; { DE:"Define whether notifications generated by the object should be Events or Alarms - RW + E2 Option" }
+		Event_Time_Stamps : ARRAY[0..2] OF BACnetTimeStamp; { DE:"Time of the last event notifications for to_offnormal, to_fault, and to_normal events, respectively - R (Default:0xFF or 0xFFFF Max values for each type)" }
+	END_STRUCT;	
+
+	(* OK: NOTE string lenght of 	Object_Name, Description is not in spec , I setted them at 48 and 64, 
+	       I setted Present_Value to UDINT because in spec it was ANY, same for Schedule_Default;
+	       I setted size of List_Of_Object_Property_References to 7, due to no size in spec *)	
+	BACNET_SCHEDULE : STRUCT 
+		Object_Identifier	: BACnetObjectIdentifier; { DE:"It is a unique automatically calculated numeric code used to identify the object - R CONST" }
+		Object_Name : STRING[31]; { DE:"Represent a name for the object, it should be unique within the BACnet Device - RW + E2 Option" }
+		Object_Type : BACnetObjectType; { DE:"Object type class, it is a constant value for each type of object - R CONST" }
+		Present_Value : UDINT; { DE:"Indicates the current state of the schedule - R" }
+		Description : STRING[31]; { DE:"The content is not restricted - RW + E2 Option" }
+		Effective_Period : BACnetDateRange; { DE:"Range of dates within which the Schedule object is active - RW + E2 Option (Default: 255)" }
+		Weekly_Schedule : ARRAY[0..6] OF BACnetDailySchedule; { DE:"Each elements refers to a day of the week and consists of a list of BACnetTimeValues that are (time, value) pairs, which describe the sequence of schedule actions on one day of the week when no Exception_Schedule is in effect - RW + E2 Option (Default: for VALUE 0, for other 255)" }
+		Exception_Schedule : ARRAY[0..6] OF BACnetSpecialEvent; { DE:"Describes a sequence of schedule actions that takes precedence over the normal day's behaviour on a specific day or days - RW + E2 Option (Default: for DATE and DATARANGE 255, for WEEKNDAY 0, for EVENTPRIORITY 255, for LISTOFTIMEVALUES.TIME 255 and LISTOFTIMEVALUES.VALUE 0xFFFFFFFF)" }
+		Schedule_Default : UDINT; { DE:"Default value to be used for the Present_Value property when no other scheduled value is in effect - R" }
+		List_Of_Object_Property_References : ARRAY[0..6] OF BACnetDeviceObjectPropertyReference; { DE:"Device, Object and Property Identifiers of the properties to be written with specific values at specific times on specific days - RW + E2 Option" }
+		Priority_For_Writing : USINT; { DE:"Priority for writing is in range (1...16) - RW + E2 Option" }
+		(*Status_Flags : BACnetStatusFlags;  { DE:"Status Flags array [0...3]" }*)
+		Status_Flags : ARRAY[ 0..3 ] OF BOOL; { DE:"Indicate the health of the object: [0] for in_alarm, [1] for fault, [2] for overridden, [3] for out_of_service - R" }		
+		Reliability : BACnetReliability; { DE:"It provides an indication that the properties of the schedule object are in a consistent state - R" }
+		Out_Of_Service : BOOL; { DE:"It is an indication whether (TRUE) or not (FALSE) the Present_Value is prevented from being modified by software local - R (Default: TRUE)" } 
+	END_STRUCT;		
+
+	(* OK: NOTE string lenght of 	Object_Name, Description is not in spec , I setted them at 48 and 64, 
+	       I setted many UDINT because in spec it was unsigned;
+	       I setted size of Object_List to 10, it is application dependent;
+	       I setted size of Device_Address_Binding to 2, it is application dependent; *)		
+	BACNET_DEVICE : STRUCT 
+		Object_Identifier	: BACnetObjectIdentifier; { DE:"It is a unique automatically calculated numeric code used to identify the object - R CONST + W + E2 Option" }
+		Object_Name : STRING[31]; { DE:"Represent a name for the object, it should be unique within the BACnet Device - RW + E2 Option" }
+		Object_Type : BACnetObjectType; { DE:"Object type class, it is a constant value for each type of object - R CONST" }
+		System_Status : BACnetDeviceStatus; { DE:"Current physical and logical status of the BACnet Device - RW + E2 Option" }
+		Vendor_Name : STRING[31]; { DE:"Manufacturer of the BACnet Device - RW + E2 Option" }
+		Vendor_Identifier : UINT; { DE:"Vendor identification code - RW + E2 Option (Default: 10 if SE or 708 if EW)" }
+		Model_Name : STRING[31]; { DE:"Model of the BACnet Device - R" }
+		Firmware_Revision : STRING[31]; { DE:"Version of firmware installed in the BACnet Device - R" }
+		Application_Software_Version : STRING[31]; { DE:"Version of application software installed in the machine - R" }
+		Protocol_Version : UDINT; { DE:"Version of the BACnet protocol supported by this BACnet Device: 1 - R CONST" }
+		Protocol_Revision : UDINT; { DE:"Minor revision level of the BACnet standard: 12 - R CONST" }
+		Protocol_Services_Supported : BACnetServicesSupported; { DE:"Not supported at IEC level" }
+		Protocol_Object_Types_Supported : BACnetObjectTypesSupported; { DE:"Not supported at IEC level" }
+		Object_List : ARRAY[0..9] OF BACnetObjectIdentifier; { DE:"Not supported at IEC level" }
+		Max_APDU_Length_Accepted : UDINT; { DE:"Maximum number of octets that may be contained in a single, indivisible application layer protocol data unit: 1476 - R CONST" }
+		Segmentation_Supported : BACnetSegmentation; { DE:"It indicates whether the BACnet Device supports segmentation of messages and the related type - R CONST" }
+		APDU_Timeout : UDINT; { DE:"Indicate the amount of time in ms between retransmissions of an APDU requiring ack for which no ack has been received: 3000 - R CONST" }
+		Number_Of_APDU_Retries : UDINT; { DE:"Maximum number of times that an APDU shall be retransmitted: 3 - R CONST" }
+		Device_Address_Binding : ARRAY[0..1] OF BACnetAddressBinding; { DE:"Not supported at IEC level" }
+		Database_Revision	: UDINT; { DE:"Logical revision number for the device's database - R + E2 Option" }
+	END_STRUCT;	
+	
+	(* OK: NOTE string lenght of 	Object_Name, Description is not in spec , I setted them at 48 and 64, 
+	       I setted Notification_Class UDINT because in spec it was unsigned;
+	       I setted size of Recipient_List to 4, it is application dependent; *)			       			
+	BACNET_NOTIFICATION_CLASS : STRUCT 
+		Object_Identifier	: BACnetObjectIdentifier; { DE:"It is a unique automatically calculated numeric code used to identify the object - R" }
+		Object_Name : STRING[31]; { DE:"Represent a name for the object, it should be unique within the BACnet Device - RW + E2 Option" }
+		Object_Type : BACnetObjectType; { DE:"Object type class, it is a constant value for each type of object - R CONST" }
+		Description : STRING[31]; { DE:"The content is not restricted - RW + E2 Option" }
+		Notification_Class : UDINT; { DE:"Numeric value of this notification class and shall be equal to the instance number of the Notification Class object - R" }
+		Priority : ARRAY[0..2] OF USINT; { DE:"Priority to be used for event notifications for to_offnormal,to_fault, and to_normal events, respectively - RW + E2 Option (Default:255)" }		
+		(*Ack_Required : BACnetEventTransitionBits;*)
+		Ack_Required : ARRAY[0..2] OF BOOL; { DE:"[0] for to_offnormal, [1] for to_fault, [2] for to_normal - RW + E2 Option (Default:FALSE)" }			
+		Recipient_List : ARRAY[0..3] OF BACnetDestination; { DE:"List of one or more recipient destinations to which notifications shall be sent when event-initiating objects - RW + E2 Option (Default: for Device 0xFFFFFFFF, for MAC_ADDRESS 0xFFFFFFFF, for NETWORK_NUMBER 0xFFFF, for the other 0x00 or FALSE)" }
+	END_STRUCT;		
+
+END_TYPE
+
+
+	(************************)
+	(*                      *)
+	(*      TYPEDEFS        *)
+	(*                      *)
+	(************************)
+
+TYPE
+
+	BACnetMonth : USINT;
+	BACnetDaymonth : USINT;
+	BACnetDayweek : USINT;
+	BACnetWeekOfMonth : USINT;
+	BACnetObjectIdentifier : UDINT;  (* OK *)
+	BACnetServicesSupported : UDINT; (* OK: NOTE limited to the first 32 services!!! *)
+	BACnetObjectTypesSupported : UDINT;	(* OK: NOTE there are less then 32 object type *)
+	BACnetPropertyIdentifier : UDINT; (* OK: NOTE set as UDINT and not as enum due to to huge amount of items*)
+	BACnetDaysOfWeek : USINT; { DE:"bit 0 =monday,1=tuesday,...,6=sunday" } (* OK *)	
+	(*BACnetEventTransitionBits : ARRAY[0..2] OF BOOL; { DE:"position 0 for to_offnormal, position 1 for to_fault, position 2 for to_normal" }*)  (* OK *)
+	(*BACnetStatusFlags	: ARRAY[0..3] OF BOOL;  { DE:"position 0 for in_alarm, position 1 for fault, position 2 for overridden, position 3 for out_of_service" }*) (* OK *)
+	(*BACnetPriorityArray : ARRAY[0..15] OF BACnetPriorityValue;*) (* OK *)	
+	(*BACnetLimitEnable : ARRAY[0..1] OF BOOL; { DE:"position 0 for Low Limit Enabling, position 1 for High Limit Enabling" }*) (* OK *)
+
+END_TYPE
+
+
+	(************************)
+	(*                      *)
+	(*        ENUMS         *)
+	(*                      *)
+	(************************)
+
+TYPE
+	
+	(* OK *)
+	BACnetSegmentation: (
+		SEGMENTED_BOTH := 0,
+		SEGMENTED_TRANSMIT := 1,
+		SEGMENTED_RECEIVE := 2,
+		NO_SEGMENTATION := 3
+	);
+
+	(* OK *)
+	BACnetDeviceStatus: (
+		DEVICE_OPERATIONAL := 0,
+		DEVICE_OPERATIONAL_READ_ONLY := 1,
+		DEVICE_DOWNLOAD_REQUIRED := 2,
+		DEVICE_DOWNLOAD_IN_PROGRESS := 3,
+		DEVICE_NON_OPERATIONAL := 4,
+		DEVICE_BACKUP_IN_PROGRESS := 5
+	);
+
+	(* OK *)
+	BACnetBinaryPV: (
+    BINARY_INACTIVE := 0,
+    BINARY_ACTIVE := 1
+	);
+
+	(* OK *)
+	BACnetNotifyType: ( 
+    NOTIFY_ALARM := 0,
+    NOTIFY_EVENT := 1,
+    NOTIFY_ACK_NOTIFICATION := 2
+	);
+	
+	(* OK *)
+	BACnetObjectType: ( 
+    OBJECT_ANALOG_INPUT := 0,
+    OBJECT_ANALOG_OUTPUT := 1,
+    OBJECT_ANALOG_VALUE := 2,
+    OBJECT_BINARY_INPUT := 3,
+    OBJECT_BINARY_OUTPUT := 4,
+    OBJECT_BINARY_VALUE := 5,
+    OBJECT_CALENDAR := 6,
+    OBJECT_COMMAND := 7,
+    OBJECT_DEVICE := 8,
+    OBJECT_EVENT_ENROLLMENT := 9,
+    OBJECT_FILE := 10,
+    OBJECT_GROUP := 11,
+    OBJECT_LOOP := 12,
+    OBJECT_MULTI_STATE_INPUT := 13,
+    OBJECT_MULTI_STATE_OUTPUT := 14,
+    OBJECT_NOTIFICATION_CLASS := 15,
+    OBJECT_PROGRAM := 16,
+    OBJECT_SCHEDULE := 17,
+    OBJECT_AVERAGING := 18,
+    OBJECT_MULTI_STATE_VALUE := 19,
+    OBJECT_TRENDLOG := 20,
+    OBJECT_LIFE_SAFETY_POINT := 21,
+    OBJECT_LIFE_SAFETY_ZONE := 22,
+    OBJECT_ACCUMULATOR := 23,
+    OBJECT_PULSE_CONVERTER := 24,
+    OBJECT_EVENT_LOG := 25,
+    OBJECT_GLOBAL_GROUP := 26,
+    OBJECT_TREND_LOG_MULTIPLE := 27,
+    OBJECT_LOAD_CONTROL := 28,
+    OBJECT_STRUCTURED_VIEW := 29,
+    OBJECT_ACCESS_DOOR := 30,
+    OBJECT_LIGHTING_OUTPUT := 31,
+    OBJECT_ACCESS_CREDENTIAL := 32,     
+    OBJECT_ACCESS_POINT := 33,
+    OBJECT_ACCESS_RIGHTS := 34,
+    OBJECT_ACCESS_USER := 35,
+    OBJECT_ACCESS_ZONE := 36,
+    OBJECT_CREDENTIAL_DATA_INPUT := 37, 
+    OBJECT_NETWORK_SECURITY := 38,      
+    OBJECT_BITSTRING_VALUE := 39,       
+    OBJECT_CHARACTERSTRING_VALUE := 40,
+    OBJECT_DATE_PATTERN_VALUE := 41,
+    OBJECT_DATE_VALUE := 42,
+    OBJECT_DATETIME_PATTERN_VALUE := 43,
+    OBJECT_DATETIME_VALUE := 44,
+    OBJECT_INTEGER_VALUE := 45,
+    OBJECT_LARGE_ANALOG_VALUE := 46,
+    OBJECT_OCTETSTRING_VALUE := 47,
+    OBJECT_POSITIVE_INTEGER_VALUE := 48,
+    OBJECT_TIME_PATTERN_VALUE := 49,
+    OBJECT_TIME_VALUE := 50,
+    MAX_ASHRAE_OBJECT_TYPE := 51,
+    PROPRIETARY_BACNET_OBJECT_TYPE := 128
+	);	
+		
+	(* OK *)	
+	BACnetReliability: ( 
+    RELIABILITY_NO_FAULT_DETECTED := 0,
+    RELIABILITY_NO_SENSOR := 1,
+    RELIABILITY_OVER_RANGE := 2,
+    RELIABILITY_UNDER_RANGE := 3,
+    RELIABILITY_OPEN_LOOP := 4,
+    RELIABILITY_SHORTED_LOOP := 5,
+    RELIABILITY_NO_OUTPUT := 6,
+    RELIABILITY_UNRELIABLE_OTHER := 7,
+    RELIABILITY_PROCESS_ERROR := 8,
+    RELIABILITY_MULTI_STATE_FAULT := 9,
+    RELIABILITY_CONFIGURATION_ERROR := 10,
+    RELIABILITY_MEMBER_FAULT := 11,
+    RELIABILITY_COMMUNICATION_FAILURE := 12,
+    RELIABILITY_TRIPPED := 13
+	);
+		
+	(* OK *)		
+	BACnetEventState: ( 
+		EVENT_STATE_NORMAL, 
+		EVENT_STATE_FAULT, 
+		EVENT_STATE_OFFNORMAL, 
+		EVENT_STATE_HIGH_LIMIT, 
+		EVENT_STATE_LOW_LIMIT
+	);
+
+	(* OK *)
+	BACnetEngineeringUnits: ( 
+		UNITS_SQUARE_METERS := 0, { DE:"Area" }	
+		UNITS_METERS_PER_SECOND_PER_SECOND := 166, { DE:"Acceleration" }
+		UNITS_SQUARE_CENTIMETERS := 116, 
+		UNITS_SQUARE_FEET := 1, 
+		UNITS_SQUARE_INCHES := 115, 
+		UNITS_CURRENCY1 := 105, { DE:"Currency" }
+		UNITS_CURRENCY2 := 106, 
+		UNITS_CURRENCY3 := 107, 
+		UNITS_CURRENCY4 := 108, 
+		UNITS_CURRENCY5 := 109, 
+		UNITS_CURRENCY6 := 110, 
+		UNITS_CURRENCY7 := 111, 
+		UNITS_CURRENCY8 := 112, 
+		UNITS_CURRENCY9 := 113, 
+		UNITS_CURRENCY10 := 114, 
+		UNITS_MILLIAMPERES := 2, { DE:"Electrical" }
+		UNITS_AMPERES := 3, 
+		UNITS_AMPERES_PER_METER := 167, 
+		UNITS_AMPERES_PER_SQUARE_METER := 168, 
+		UNITS_AMPERE_SQUARE_METERS := 169, 
+		UNITS_FARADS := 170, 
+		UNITS_HENRYS := 171, 
+		UNITS_OHMS := 4, 
+		UNITS_OHM_METERS := 172, 
+		UNITS_MILLIOHMS := 145, 
+		UNITS_KILOHMS := 122, 
+		UNITS_MEGOHMS := 123, 
+		UNITS_SIEMENS := 173, 
+		UNITS_SIEMENS_PER_METER := 174, 
+		UNITS_TESLAS := 175, 
+		UNITS_VOLTS := 5, 
+		UNITS_MILLIVOLTS := 124, 
+		UNITS_KILOVOLTS := 6, 
+		UNITS_MEGAVOLTS := 7, 
+		UNITS_VOLT_AMPERES := 8, 
+		UNITS_KILOVOLT_AMPERES := 9, 
+		UNITS_MEGAVOLT_AMPERES := 10, 
+		UNITS_VOLT_AMPERES_REACTIVE := 11, 
+		UNITS_KILOVOLT_AMPERES_REACTIVE := 12, 
+		UNITS_MEGAVOLT_AMPERES_REACTIVE := 13, 
+		UNITS_VOLTS_PER_DEGREE_KELVIN := 176, 
+		UNITS_VOLTS_PER_METER := 177, 
+		UNITS_DEGREES_PHASE := 14, 
+		UNITS_POWER_FACTOR := 15, 
+		UNITS_WEBERS := 178, 
+		UNITS_JOULES := 16, { DE:"Energy" }
+		UNITS_KILOJOULES := 17, 
+		UNITS_KILOJOULES_PER_KILOGRAM := 125, 
+		UNITS_MEGAJOULES := 126, 
+		UNITS_WATT_HOURS := 18, 
+		UNITS_KILOWATT_HOURS := 19, 
+		UNITS_MEGAWATT_HOURS := 146, 
+		UNITS_BTUS := 20, 
+		UNITS_KILO_BTUS := 147, 
+		UNITS_MEGA_BTUS := 148, 
+		UNITS_THERMS := 21, 
+		UNITS_TON_HOURS := 22, 
+		UNITS_JOULES_PER_KILOGRAM_DRY_AIR := 23, { DE:"Enthalpy" }
+		UNITS_KILOJOULES_PER_KILOGRAM_DRY_AIR := 149, 
+		UNITS_MEGAJOULES_PER_KILOGRAM_DRY_AIR := 150, 
+		UNITS_BTUS_PER_POUND_DRY_AIR := 24, 
+		UNITS_BTUS_PER_POUND := 117, 
+		UNITS_JOULES_PER_DEGREE_KELVIN := 127, { DE:"Entropy" }
+		UNITS_KILOJOULES_PER_DEGREE_KELVIN := 151, 
+		UNITS_MEGAJOULES_PER_DEGREE_KELVIN := 152, 
+		UNITS_JOULES_PER_KILOGRAM_DEGREE_KELVIN := 128, 
+		UNITS_NEWTON := 153, { DE:"Force" }
+		UNITS_CYCLES_PER_HOUR := 25, { DE:"Frequency" }
+		UNITS_CYCLES_PER_MINUTE := 26, 
+		UNITS_HERTZ := 27, 
+		UNITS_KILOHERTZ := 129, 
+		UNITS_MEGAHERTZ := 130, 
+		UNITS_PER_HOUR := 131, 
+		UNITS_GRAMS_OF_WATER_PER_KILOGRAM_DRY_AIR := 28, { DE:"Humidity" }
+		UNITS_PERCENT_RELATIVE_HUMIDITY := 29, 
+		UNITS_MILLIMETERS := 30, { DE:"Length" }
+		UNITS_CENTIMETERS := 118, 
+		UNITS_METERS := 31, 
+		UNITS_INCHES := 32, 
+		UNITS_FEET := 33, 
+		UNITS_CANDELAS := 179, { DE:"Light" }
+		UNITS_CANDELAS_PER_SQUARE_METER := 180, 
+		UNITS_WATTS_PER_SQUARE_FOOT := 34, 
+		UNITS_WATTS_PER_SQUARE_METER := 35, 
+		UNITS_LUMENS := 36, 
+		UNITS_LUXES := 37, 
+		UNITS_FOOT_CANDLES := 38, 
+		UNITS_KILOGRAMS := 39, { DE:"Mass" }
+		UNITS_POUNDS_MASS := 40, 
+		UNITS_TONS := 41, 
+		UNITS_GRAMS_PER_SECOND := 154, { DE:"Mass Flow" }
+		UNITS_GRAMS_PER_MINUTE := 155, 
+		UNITS_KILOGRAMS_PER_SECOND := 42, 
+		UNITS_KILOGRAMS_PER_MINUTE := 43, 
+		UNITS_KILOGRAMS_PER_HOUR := 44, 
+		UNITS_POUNDS_MASS_PER_SECOND := 119, 
+		UNITS_POUNDS_MASS_PER_MINUTE := 45, 
+		UNITS_POUNDS_MASS_PER_HOUR := 46, 
+		UNITS_TONS_PER_HOUR := 156, 
+		UNITS_MILLIWATTS := 132, { DE:"Power" }
+		UNITS_WATTS := 47, 
+		UNITS_KILOWATTS := 48, 
+		UNITS_MEGAWATTS := 49, 
+		UNITS_BTUS_PER_HOUR := 50, 
+		UNITS_KILO_BTUS_PER_HOUR := 157, 
+		UNITS_HORSEPOWER := 51, 
+		UNITS_TONS_REFRIGERATION := 52, 
+		UNITS_PASCALS := 53, { DE:"Pressure" }
+		UNITS_HECTOPASCALS := 133, 
+		UNITS_KILOPASCALS := 54, 
+		UNITS_MILLIBARS := 134, 
+		UNITS_BARS := 55, 
+		UNITS_POUNDS_FORCE_PER_SQUARE_INCH := 56, 
+		UNITS_CENTIMETERS_OF_WATER := 57, 
+		UNITS_INCHES_OF_WATER := 58, 
+		UNITS_MILLIMETERS_OF_MERCURY := 59, 
+		UNITS_CENTIMETERS_OF_MERCURY := 60, 
+		UNITS_INCHES_OF_MERCURY := 61, 
+		UNITS_DEGREES_CELSIUS := 62, { DE:"Temperature" }
+		UNITS_DEGREES_KELVIN := 63, 
+		UNITS_DEGREES_KELVIN_PER_HOUR := 181, 
+		UNITS_DEGREES_KELVIN_PER_MINUTE := 182, 
+		UNITS_DEGREES_FAHRENHEIT := 64, 
+		UNITS_DEGREE_DAYS_CELSIUS := 65, 
+		UNITS_DEGREE_DAYS_FAHRENHEIT := 66, 
+		UNITS_DELTA_DEGREES_FAHRENHEIT := 120, 
+		UNITS_DELTA_DEGREES_KELVIN := 121, 
+		UNITS_YEARS := 67, { DE:"Time" }
+		UNITS_MONTHS := 68, 
+		UNITS_WEEKS := 69, 
+		UNITS_DAYS := 70, 
+		UNITS_HOURS := 71, 
+		UNITS_MINUTES := 72, 
+		UNITS_SECONDS := 73, 
+		UNITS_HUNDREDTHS_SECONDS := 158, 
+		UNITS_MILLISECONDS := 159, 
+		UNITS_NEWTON_METERS := 160, { DE:"Torque" }
+		UNITS_MILLIMETERS_PER_SECOND := 161, { DE:"Velocity" }
+		UNITS_MILLIMETERS_PER_MINUTE := 162, 
+		UNITS_METERS_PER_SECOND := 74, 
+		UNITS_METERS_PER_MINUTE := 163, 
+		UNITS_METERS_PER_HOUR := 164, 
+		UNITS_KILOMETERS_PER_HOUR := 75, 
+		UNITS_FEET_PER_SECOND := 76, 
+		UNITS_FEET_PER_MINUTE := 77, 
+		UNITS_MILES_PER_HOUR := 78, 
+		UNITS_CUBIC_FEET := 79, { DE:"Volume" }
+		UNITS_CUBIC_METERS := 80, 
+		UNITS_IMPERIAL_GALLONS := 81, 
+		UNITS_LITERS := 82, 
+		UNITS_US_GALLONS := 83, 
+		UNITS_CUBIC_FEET_PER_SECOND := 142, { DE:"Volumetric Flow" }
+		UNITS_CUBIC_FEET_PER_MINUTE := 84, 
+		UNITS_CUBIC_METERS_PER_SECOND := 85, 
+		UNITS_CUBIC_METERS_PER_MINUTE := 165, 
+		UNITS_CUBIC_METERS_PER_HOUR := 135, 
+		UNITS_IMPERIAL_GALLONS_PER_MINUTE := 86, 
+		UNITS_LITERS_PER_SECOND := 87, 
+		UNITS_LITERS_PER_MINUTE := 88, 
+		UNITS_LITERS_PER_HOUR := 136, 
+		UNITS_US_GALLONS_PER_MINUTE := 89, 
+		UNITS_DEGREES_ANGULAR := 90, { DE:"Other" }
+		UNITS_DEGREES_CELSIUS_PER_HOUR := 91, 
+		UNITS_DEGREES_CELSIUS_PER_MINUTE := 92, 
+		UNITS_DEGREES_FAHRENHEIT_PER_HOUR := 93, 
+		UNITS_DEGREES_FAHRENHEIT_PER_MINUTE := 94, 
+		UNITS_JOULE_SECONDS := 183, 
+		UNITS_KILOGRAMS_PER_CUBIC_METER := 186, 
+		UNITS_KW_HOURS_PER_SQUARE_METER := 137, 
+		UNITS_KW_HOURS_PER_SQUARE_FOOT := 138, 
+		UNITS_MEGAJOULES_PER_SQUARE_METER := 139, 
+		UNITS_MEGAJOULES_PER_SQUARE_FOOT := 140, 
+		UNITS_NO_UNITS := 95, 
+		UNITS_NEWTON_SECONDS := 187, 
+		UNITS_NEWTONS_PER_METER := 188, 
+		UNITS_PARTS_PER_MILLION := 96, 
+		UNITS_PARTS_PER_BILLION := 97, 
+		UNITS_PERCENT := 98, 
+		UNITS_PERCENT_OBSCURATION_PER_FOOT := 143, 
+		UNITS_PERCENT_OBSCURATION_PER_METER := 144, 
+		UNITS_PERCENT_PER_SECOND := 99, 
+		UNITS_PER_MINUTE := 100, 
+		UNITS_PER_SECOND := 101, 
+		UNITS_PSI_PER_DEGREE_FAHRENHEIT := 102, 
+		UNITS_RADIANS := 103, 
+		UNITS_RADIANS_PER_SECOND := 184, 
+		UNITS_REVOLUTIONS_PER_MINUTE := 104, 
+		UNITS_SQUARE_METERS_PER_NEWTON := 185, 
+		UNITS_WATTS_PER_METER_PER_DEGREE_KELVIN := 189, 
+		UNITS_WATTS_PER_SQUARE_METER_DEGREE_KELVIN := 141
+	);
+
+END_TYPE
+
+{ ALLOCATE:sysBACnet_AV }
+{ ALLOCATE:sysBACnet_Ca }
+{ ALLOCATE:sysBACnet_Sc }
+{ ALLOCATE:sysBACnet_NC }
+{ ALLOCATE:sysBACnet_BV }
+{ ALLOCATE:sysBACnet_MV }
+{ ALLOCATE:sysBACnet_De }
+{ ALLOCATE:sysBACnetFileStatus }
+
+VAR_GLOBAL 
+
+	{G:"BACnet Objects"}
+	sysBACnet_AV AT %MB2100.0	: ARRAY[ 0..255 ] OF BACNET_ANALOG_VALUE;
+	{ DE:"Analog Value Object" }	
+
+	sysBACnet_Ca AT %MB2200.0	: ARRAY[ 0..3 ] OF BACNET_CALENDAR;
+	{ DE:"Calendar Object" }	
+	
+	sysBACnet_Sc AT %MB2300.0	: ARRAY[ 0..15 ] OF BACNET_SCHEDULE;
+	{ DE:"Schedule Object" }	
+	
+	sysBACnet_NC AT %MB2400.0	: ARRAY[ 0..15 ] OF BACNET_NOTIFICATION_CLASS;
+	{ DE:"Notification Class Object" }			
+	
+	sysBACnet_BV AT %MB2500.0	: ARRAY[ 0..255 ] OF BACNET_BINARY_VALUE;
+	{ DE:"Binary Value Object" }			
+	
+	sysBACnet_MV AT %MB2600.0	: ARRAY[ 0..31 ] OF BACNET_MULTI_STATE_VALUE;
+	{ DE:"Multi State Value Object" }			
+	
+	sysBACnet_De AT %MB2700.0	: BACNET_DEVICE;	
+	{ DE:"Device Object" }				
+	
+	{G:"System Parameters EEPROM RAM image"}                                                  					
+	sysLoadBACnetE2Defaults   AT %MX100.252 : BOOL; { DE:  "Enable flag to write default values in EEPROM" }  	
+	Port_BACnet_PI            AT %MX100.254 : UINT; { DE:  "BACnet/IP Port number" }  		
+	MaxMaster_BACnet_MSTP     AT %MW100.377  :UINT; { DE:  "BACnet MS/TP max-master, if less than 1 or greater then 127 is managed as 127" }
+	
+	{G:"BACnet file handling"}                                                 				
+	sysBACnetFileStatus	AT %MB2800.0	: USINT;			
+	{ DE: "Status of operation on BACnet file
+	0	=	command completed        
+	1	=	at least one element has its address not in DataBase
+	2	=	at least one element has not be written (write fail)
+	3	=	at least one element has its type not handled
+	255	=	file not present
+"}	
+
+	{G:"Device Management"}
+	sysBACnet_ReinitDevice    	AT %MB3110.0	: USINT;	{ DE:"ReinitializeDevice-B: 
+	0=Idle, 
+	1=WARMSTART, 
+	2=COLDSTART;
+	
+	it is set 1 or 2 by DM-RD-B command and must be set to 0 by PLC application" }	
+
+	{G:"BACnet counters"}
+	sysBACnet_IpLastSource		AT %MB5003.0	: DWORD;	{ DE:"Source IP address of last BACnet received message. Each part of the IP is stored in the DWORD starting from the MSB using format: IP4 	IP3 	IP2 	IP1" }	
+	sysBACnet_IpMsgCounter		AT %MB5004.0	: UDINT;	{ DE:"BACnet IP received message counter" }	
+	sysBACnet_MsTpMsgCounter	AT %MB5005.0	: UDINT;	{ DE:"BACnet MSTP Token, Poll For Master or Reply To Poll For Master received message counter" }	
+
+END_VAR	

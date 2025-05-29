@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- #DEFINE PREFIX gns1 -->
+<devicetemplate>
+	<deviceinfo caption="gns1" name="gns1" version="0.0" icon="img\application.ico" deviceid="gns1" devicetype="application" PLCApplicationID="gns1">
+		<description>gns1 Application</description>
+		<protocols><protocol>M172P_596p13_appl</protocol></protocols>
+	</deviceinfo>
+	<plcconfig>
+		<hmi>
+			<tree name="treeCommissioning">
+				<node name="PREFIX" caption="gns1" icon="%CATALOG%\Applications\img\application.ico" datalink="PREFIX" captionedit="false" menu="menuAppPLC"><node name="PREFIX_menu1000" caption="Eprom_podves" STDGRIDICONS="" data="../../config/values" window="maingrid"/></node>
+			</tree>
+		</hmi>
+		<templatedata>
+			<PREFIX/>
+		</templatedata>
+		<extensions>
+		</extensions>
+		<datadef version="1.0">
+			<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+				<xs:element name="PREFIX">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="insertableDevice">
+								<xs:sequence>
+								</xs:sequence>
+								<xs:attribute name="oncreatenode" type="xs:string" fixed="configurator.OnCreateDeviceChild"/>
+								<xs:attribute name="onloadnode" type="xs:string" fixed="configurator.OnLoadDeviceChild"/>
+								<xs:attribute name="ondeletenode" type="xs:string" fixed="configurator.OnDeleteDeviceChild"/>
+								<xs:attribute name="PLCProject" type="xs:string" fixed=""/>
+								<xs:attribute name="noAutoGenCaption" type="xs:boolean" fixed="true"/>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:schema>
+		</datadef>
+		<cfgSettings><item name="newAccessLevelFormat">true</item></cfgSettings></plcconfig>
+	<deviceconfig>
+		<hmi>
+			<tree name="tree1">
+				<node name="PREFIX" caption="gns1" icon="%CATALOG%\Applications\img\application.ico" datalink="PREFIX" captionedit="false" menu="menuAppPLC"><node name="PREFIX_menu1000" caption="Eprom_podves" STDGRIDICONS="" data="../../config/values" window="maingrid"/></node>
+			</tree>
+		</hmi>
+		<templatedata>
+			<PREFIX/>
+		</templatedata>
+		<extensions>
+			<eventhandler event="OnLoadTemplate">configurator.OnLoadDeviceTemplate</eventhandler>
+		</extensions>
+		<datadef version="1.0">
+			<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+				<xs:element name="PREFIX">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="insertableDevice">
+								<xs:sequence>
+								</xs:sequence>
+								<xs:attribute name="oncreatenode" type="xs:string" fixed="configurator.OnCreateDeviceChild"/>
+								<xs:attribute name="onloadnode" type="xs:string" fixed="configurator.OnLoadDeviceChild"/>
+								<xs:attribute name="ondeletenode" type="xs:string" fixed="configurator.OnDeleteDeviceChild"/>
+								<xs:attribute name="PLCProject" type="xs:string" fixed="gns1.RSM"/>
+								<xs:attribute name="HMIProject" type="xs:string" fixed="HMIRemote\gns1.RSM"/>
+								<xs:attribute name="HMIRemoteProject" type="xs:string" fixed="HMIRemote\Download\gns1.BIN"/>
+								<xs:attribute name="noAutoGenCaption" type="xs:boolean" fixed="true"/>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:schema>
+		</datadef>
+		<parameters><par ipa="0" name="ep_iCfgPodves1" descr="Рівень підвісу датчика 4..20 в резервуарі2" typetarg="short" typepar="short" scale="1" form="" offs="0" um="" readonly="false" defval="0" accesslevel="0"><protocol name="Modbus" commaddr="16384" commsubindex="0"/><menu id="1000" order="0"/><option dataBlock="MW101.0" typeIEC="INT" parType="eeprom"/><option name="typeIEC">INT</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="16384" commsubindex="0"/></par><par ipa="1" name="ep_iCfgPodves2" descr="Рівень підвісу датчика 4..20 в резервуарі2" typetarg="short" typepar="short" scale="1" form="" offs="0" um="" readonly="false" defval="0" accesslevel="0"><protocol name="Modbus" commaddr="16385" commsubindex="0"/><menu id="1000" order="1"/><option dataBlock="MW101.1" typeIEC="INT" parType="eeprom"/><option name="typeIEC">INT</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="16385" commsubindex="0"/></par><par ipa="2" name="ep_iTank_Lvl_min" descr="мін рівень води в резервуарах" typetarg="unsignedShort" typepar="unsignedShort" scale="1" form="" offs="0" um="" readonly="false" defval="0" accesslevel="0"><protocol name="Modbus" commaddr="16386" commsubindex="0"/><menu id="1000" order="2"/><option dataBlock="MW101.2" typeIEC="INT" parType="eeprom"/><option name="typeIEC">INT</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="16386" commsubindex="0"/></par><par ipa="3" name="ep_iTank_Lvl_max" descr="макс рівень води в резервуарах" typetarg="unsignedShort" typepar="unsignedShort" scale="1" form="" offs="0" um="" readonly="false" defval="0" accesslevel="0"><protocol name="Modbus" commaddr="16387" commsubindex="0"/><menu id="1000" order="3"/><option dataBlock="MW101.3" typeIEC="INT" parType="eeprom"/><option name="typeIEC">INT</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="16387" commsubindex="0"/></par><par ipa="4" name="ep_iTask_day" descr="установка тиску з насосної - день (без коми)" typetarg="unsignedShort" typepar="unsignedShort" scale="1" form="" offs="0" um="" readonly="false" defval="0" accesslevel="0"><protocol name="Modbus" commaddr="16388" commsubindex="0"/><menu id="1000" order="4"/><option dataBlock="MW101.4" typeIEC="INT" parType="eeprom"/><option name="typeIEC">INT</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="16388" commsubindex="0"/></par><par ipa="5" name="ep_iTask_night" descr="установка тиску з насосної - ніч (без коми)" typetarg="short" typepar="short" scale="1" form="" offs="0" um="" readonly="false" defval="0" accesslevel="0"><protocol name="Modbus" commaddr="16389" commsubindex="0"/><menu id="1000" order="5"/><option dataBlock="MW101.5" typeIEC="INT" parType="eeprom"/><option name="typeIEC">INT</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="16389" commsubindex="0"/></par><par ipa="6" name="ep_iAreaTank1" descr="установка площі резервуару 1" typetarg="short" typepar="short" scale="1" form="" offs="0" um="" readonly="false" defval="1296" accesslevel="0"><protocol name="Modbus" commaddr="16390" commsubindex="0"/><menu id="1000" order="6"/><option dataBlock="MW101.6" typeIEC="INT" parType="eeprom"/><option name="typeIEC">INT</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="16390" commsubindex="0"/></par><par ipa="7" name="ep_iAreaTank2" descr="установка площі резервуару 2" typetarg="short" typepar="short" scale="1" form="" offs="0" um="" readonly="false" defval="1296" accesslevel="0"><protocol name="Modbus" commaddr="16391" commsubindex="0"/><menu id="1000" order="7"/><option dataBlock="MW101.7" typeIEC="INT" parType="eeprom"/><option name="typeIEC">INT</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="16391" commsubindex="0"/></par><par ipa="8" name="ep_iDay_begin" descr="Початок дня (години 0-24)" typetarg="unsignedChar" typepar="unsignedChar" scale="1" form="" offs="0" um="" readonly="false" defval="6" accesslevel="0"><protocol name="Modbus" commaddr="16392" commsubindex="0"/><menu id="1000" order="8"/><option dataBlock="MW101.8" typeIEC="INT" parType="eeprom"/><option name="typeIEC">INT</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="16392" commsubindex="0"/></par><par ipa="9" name="ep_iDay_end" descr="Кінець дня(години 0-24)" typetarg="unsignedChar" typepar="unsignedChar" scale="1" form="" offs="0" um="" readonly="false" defval="23" accesslevel="0"><protocol name="Modbus" commaddr="16393" commsubindex="0"/><menu id="1000" order="9"/><option dataBlock="MW101.9" typeIEC="INT" parType="eeprom"/><option name="typeIEC">INT</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="16393" commsubindex="0"/></par><par ipa="5000" name="Tank1_lvl" descr="Тиск на виході вітка 1" typetarg="short" typepar="short" scale="1" form="" offs="0" um="" readonly="true" defval="" accesslevel="0"><protocol name="Modbus" commaddr="8960" commsubindex="0"/><option dataBlock="MW110.0" typeIEC="INT" parType="status"/><option name="typeIEC">INT</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="8960" commsubindex="0"/></par><par ipa="5001" name="Tank2_lvl" descr="Тиск на виході вітка 2" typetarg="short" typepar="short" scale="1" form="" offs="0" um="" readonly="true" defval="" accesslevel="0"><protocol name="Modbus" commaddr="8961" commsubindex="0"/><option dataBlock="MW110.1" typeIEC="INT" parType="status"/><option name="typeIEC">INT</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="8961" commsubindex="0"/></par><par ipa="5003" name="Task_Pump1" descr="Поточне завдання насос1" typetarg="short" typepar="short" scale="1" form="" offs="0" um="" readonly="true" defval="" accesslevel="0"><protocol name="Modbus" commaddr="8962" commsubindex="0"/><option dataBlock="MW110.2" typeIEC="INT" parType="status"/><option name="typeIEC">INT</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="8962" commsubindex="0"/></par><par ipa="5004" name="Out_Flow1" descr="Вихідний потік вітка 1" typetarg="short" typepar="short" scale="1" form="" offs="0" um="" readonly="true" defval="" accesslevel="0"><protocol name="Modbus" commaddr="8963" commsubindex="0"/><option dataBlock="MW110.3" typeIEC="INT" parType="status"/><option name="typeIEC">INT</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="8963" commsubindex="0"/></par><par ipa="5005" name="Out_Flow2" descr="Вихідний потік вітка 2" typetarg="short" typepar="short" scale="1" form="" offs="0" um="" readonly="true" defval="" accesslevel="0"><protocol name="Modbus" commaddr="8964" commsubindex="0"/><option dataBlock="MW110.4" typeIEC="INT" parType="status"/><option name="typeIEC">INT</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="8964" commsubindex="0"/></par><par ipa="5006" name="Alarms" descr="Стани цифрових входів" typetarg="unsignedShort" typepar="unsignedShort" scale="1" form="" offs="0" um="" readonly="true" defval="" accesslevel="0"><protocol name="Modbus" commaddr="8965" commsubindex="0"/><option dataBlock="MW110.5" typeIEC="WORD" parType="status"/><option name="typeIEC">WORD</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="8965" commsubindex="0"/></par><par ipa="5008" name="Current_motor2" descr="Струм Ф2 Данфос" typetarg="short" typepar="short" scale="1" form="" offs="0" um="" readonly="true" defval="" accesslevel="0"><protocol name="Modbus" commaddr="8966" commsubindex="0"/><option dataBlock="MW110.6" typeIEC="INT" parType="status"/><option name="typeIEC">INT</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="8966" commsubindex="0"/></par><par ipa="5013" name="Pressure_out1" descr="тиск в місто вітка1" typetarg="short" typepar="short" scale="1" form="" offs="0" um="" readonly="true" defval="" accesslevel="0"><protocol name="Modbus" commaddr="8967" commsubindex="0"/><option dataBlock="MW110.7" typeIEC="INT" parType="status"/><option name="typeIEC">INT</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="8967" commsubindex="0"/></par><par ipa="5009" name="Freq_Pump1" descr="Частота м1" typetarg="short" typepar="short" scale="1" form="" offs="0" um="" readonly="true" defval="" accesslevel="0"><protocol name="Modbus" commaddr="8968" commsubindex="0"/><option dataBlock="MW110.8" typeIEC="INT" parType="status"/><option name="typeIEC">INT</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="8968" commsubindex="0"/></par><par ipa="5002" name="Current_motor1" descr="Струм м1" typetarg="short" typepar="short" scale="1" form="" offs="0" um="" readonly="true" defval="" accesslevel="0"><protocol name="Modbus" commaddr="8969" commsubindex="0"/><option dataBlock="MW110.9" typeIEC="INT" parType="status"/><option name="typeIEC">INT</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="8969" commsubindex="0"/></par><par ipa="5007" name="Voltage_1" descr="Напруга м1" typetarg="short" typepar="short" scale="1" form="" offs="0" um="" readonly="true" defval="" accesslevel="0"><protocol name="Modbus" commaddr="8970" commsubindex="0"/><option dataBlock="MW110.10" typeIEC="INT" parType="status"/><option name="typeIEC">INT</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="8970" commsubindex="0"/></par><par ipa="5010" name="SW_motor1" descr="Слово стану" typetarg="short" typepar="short" scale="1" form="" offs="0" um="" readonly="true" defval="" accesslevel="0"><protocol name="Modbus" commaddr="8971" commsubindex="0"/><option dataBlock="MW110.11" typeIEC="WORD" parType="status"/><option name="typeIEC">WORD</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="8971" commsubindex="0"/></par><par ipa="5011" name="Power_m1" descr="Потужність м1, Кв" typetarg="float" typepar="float" scale="1" form="" offs="0" um="" readonly="true" defval="" accesslevel="0"><protocol name="Modbus" commaddr="8972" commsubindex="0"/><option dataBlock="MW110.12" typeIEC="INT" parType="status"/><option name="typeIEC">INT</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="8972" commsubindex="0"/></par><par ipa="5012" name="Pressure_out1_cool" descr="" typetarg="short" typepar="short" scale="1" form="" offs="0" um="" readonly="true" defval="" accesslevel="0"><protocol name="Modbus" commaddr="8974" commsubindex="0"/><option dataBlock="MW110.13" typeIEC="INT" parType="status"/><option name="typeIEC">INT</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="8974" commsubindex="0"/></par><par ipa="5014" name="In_Flow1" descr="" typetarg="short" typepar="short" scale="1" form="" offs="0" um="" readonly="true" defval="" accesslevel="0" aggregable="false"><protocol name="Modbus" commaddr="8975" commsubindex="0"/><option dataBlock="MW110.14" typeIEC="REAL" parType="status"/><option name="typeIEC">REAL</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="8975" commsubindex="0"/></par><par ipa="5015" name="b_auto_d_n" descr="" typetarg="boolean" typepar="boolean" scale="1" form="" offs="0" um="" readonly="false" defval="0" accesslevel="0"><protocol name="Modbus" commaddr="8976" commsubindex="0"/><option dataBlock="MW110.16" typeIEC="INT" parType="status"/><option name="typeIEC">INT</option><option name="softscope">0</option><option name="dbScale">1</option><option name="dbOffset">0</option><protocol name="CanOpen" commaddr="8976" commsubindex="0"/></par></parameters>
+		<enums><enum id="10101"><elem value="0" descr="0=NTC(NK103)"/><elem value="1" descr="1=DI"/><elem value="2" descr="2=NTC(103AT)"/><elem value="3" descr="3=4÷20mA"/><elem value="4" descr="4=0÷10V"/><elem value="5" descr="5=0÷5V(Ratiometric)"/><elem value="6" descr="6=PT1000"/><elem value="7" descr="7=hO(NTC)"/><elem value="8" descr="8=daO(PT1000)"/><elem value="9" descr="9=PTC"/><elem value="10" descr="10=0÷5V"/><elem value="11" descr="11=0÷20mA"/></enum><enum id="10003"><elem value="0" descr="0=Current modulation"/><elem value="1" descr="1=Current ON/OFF"/><elem value="2" descr="2=Voltage modulation"/><elem value="3" descr="3=PWM mode"/></enum></enums>
+		<redefPars><redefPar ipa="10004" defval="3"/><redefPar ipa="10005" defval="3"/><redefPar ipa="10006" defval="3"/><redefPar ipa="10007" defval="3"/><redefPar ipa="10008" defval="1"/><redefPar ipa="10009" defval="1"/><redefPar ipa="10354" defval="1"/><redefPar ipa="10355" defval="1"/><redefPar ipa="10339" defval="0"/><redefPar ipa="10397" defval="1000"/><redefPar ipa="10340" defval="0"/><redefPar ipa="10341" defval="1000"/><redefPar ipa="10342" defval="0"/><redefPar ipa="10343" defval="10000"/><redefPar ipa="10344" defval="0"/><redefPar ipa="10345" defval="10000"/><redefPar ipa="10044" defval="192"/><redefPar ipa="10045" defval="168"/><redefPar ipa="10046" defval="5"/><redefPar ipa="10047" defval="5"/><redefPar ipa="10048" defval="192"/><redefPar ipa="10049" defval="168"/><redefPar ipa="10050" defval="5"/><redefPar ipa="10051" defval="1"/><redefPar ipa="10023" defval="0"/><redefPar ipa="10024" defval="0"/><redefPar ipa="10020" defval="3"/><redefPar ipa="10021" defval="8"/><redefPar ipa="10022" defval="1"/><redefPar ipa="10025" defval="1"/><redefPar ipa="10027" defval="4"/><redefPar ipa="10028" defval="3"/><redefPar ipa="10029" defval="8"/><redefPar ipa="10030" defval="1"/><redefPar ipa="10031" defval="0"/><redefPar ipa="10032" defval="0"/><redefPar ipa="10043" defval="502"/><redefPar ipa="10039" defval="0"/><redefPar ipa="10035" defval="4"/><redefPar ipa="10036" defval="3"/><redefPar ipa="10037" defval="8"/><redefPar ipa="10038" defval="1"/><redefPar ipa="10040" defval="0"/><redefPar ipa="10041" defval="65535"/><redefPar ipa="10042" defval="80"/><redefPar ipa="10383" defval="0"/><redefPar ipa="10382" defval="0"/><redefPar ipa="10378" defval="10"/><redefPar ipa="10379" defval="3"/><redefPar ipa="10380" defval="8"/><redefPar ipa="10381" defval="1"/><redefPar ipa="10025" defval="125"/><redefPar ipa="10026" defval="2"/><redefPar ipa="10020" defval="3"/><redefPar ipa="10024" defval="0"/><redefPar ipa="10021" defval="8"/><redefPar ipa="10022" defval="1"/><redefPar ipa="10023" defval="0"/></redefPars>
+		<settings><item name="newAccessLevelFormat">true</item></settings><fieldVars>
+			<fieldVar dataBlock="IX10.0">
+				<name>i_rnpp</name>
+				<type>BOOL</type>
+				<inout>in</inout>
+				<description/>
+			</fieldVar>
+			<fieldVar dataBlock="IW11.0">
+				<name>INVT_BUS_Volage</name>
+				<type>INT</type>
+				<inout>in</inout>
+				<description>3002H Range: 0~1200V</description>
+			</fieldVar>
+			<fieldVar dataBlock="IW11.1">
+				<name>INVT_SETING_FREQ</name>
+				<type>INT</type>
+				<inout>in</inout>
+				<description>3001H Range: 0.00Hz~P00.03</description>
+			</fieldVar>
+			<fieldVar dataBlock="IW11.2">
+				<name>flow_temp</name>
+				<type>INT</type>
+				<inout>in</inout>
+				<description/>
+			</fieldVar>
+			<fieldVar dataBlock="IX10.1">
+				<name>i_filtr1</name>
+				<type>BOOL</type>
+				<inout>in</inout>
+				<description/>
+			</fieldVar>
+			<fieldVar dataBlock="IX10.2">
+				<name>i_filtr2</name>
+				<type>BOOL</type>
+				<inout>in</inout>
+				<description/>
+			</fieldVar>
+			<fieldVar dataBlock="IX10.3">
+				<name>i_filtr3</name>
+				<type>BOOL</type>
+				<inout>in</inout>
+				<description/>
+			</fieldVar>
+			<fieldVar dataBlock="IX10.4">
+				<name>i_filtr4</name>
+				<type>BOOL</type>
+				<inout>in</inout>
+				<description/>
+			</fieldVar>
+			<fieldVar dataBlock="IX10.5">
+				<name>i_filtr5</name>
+				<type>BOOL</type>
+				<inout>in</inout>
+				<description/>
+			</fieldVar>
+			<fieldVar dataBlock="IX10.6">
+				<name>i_filtr6</name>
+				<type>BOOL</type>
+				<inout>in</inout>
+				<description/>
+			</fieldVar>
+			<fieldVar dataBlock="IX10.7">
+				<name>i_filtr7</name>
+				<type>BOOL</type>
+				<inout>in</inout>
+				<description/>
+			</fieldVar>
+			<fieldVar dataBlock="IX10.8">
+				<name>i_filtr8</name>
+				<type>BOOL</type>
+				<inout>in</inout>
+				<description/>
+			</fieldVar>
+		</fieldVars>
+		<BACnetsNotPublished/></deviceconfig>
+</devicetemplate>

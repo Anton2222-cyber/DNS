@@ -1,0 +1,681 @@
+  * {
+            box-sizing: border-box;
+        }
+
+        .row::after {
+            content: "";
+            clear: both;
+            display: block;
+        }
+
+        [class*="col-"] {
+            float: left;
+            padding: 10px;
+        }
+
+        /* For desktop: */
+        .col-1 {
+            width: 8.33%;
+        }
+
+        .col-2 {
+            width: 16.66%;
+        }
+
+        .col-3 {
+            width: 25%;
+        }
+
+        .col-4 {
+            width: 33.33%;
+        }
+
+        .col-5 {
+            width: 41.66%;
+        }
+
+        .col-6 {
+            width: 50%;
+        }
+
+        .col-7 {
+            width: 58.33%;
+        }
+
+        .col-8 {
+            width: 66.66%;
+        }
+
+        .col-9 {
+            width: 75%;
+        }
+
+        .col-10 {
+            width: 83.33%;
+        }
+
+        .col-11 {
+            width: 91.66%;
+        }
+
+        .col-12 {
+            width: 100%;
+        }
+
+        @media only screen and (max-width: 600px) {
+            /* For mobile phones: */
+            [class*="col-"] {
+                width: 100%;
+            }
+        }
+
+        html, body {
+	background-color: RGB(255,255,255);
+	padding: 0px;
+	margin: 0px;
+   
+    /*overflow-y: visible;*/  
+    /*overflow-x: hidden;*/
+}
+
+       
+       .ApplicationIconDesktop
+{
+  background-color:#3DCD58;
+  height:50px;
+  width:50px;
+  float:left;
+  text-align:center;
+  margin-left:5px;
+
+}
+
+#ConnectedIconDesktop
+{
+  width:30px;
+height:30px;
+margin-top:5px;
+float:left;
+    margin-left:10%;
+
+}
+
+#ConnectedIconDesktopDummy
+  {
+  width:30px;
+height:30px;
+margin-top:5px;
+float:left;
+    margin-left:10%;
+
+}     
+       
+
+        .devicename {
+            color: #3DCD58;
+            font-family: Bodoni MT;
+            font-size: 25px;
+            margin-top:5px;
+            margin-left:10px;
+            float:left;
+        }
+
+        .ipaddress {
+            padding: 0;
+            margin: 0;
+            float:left;
+        }
+
+        ul.ipaddress
+        {
+            margin-top:2px;  
+            margin-left:10px;          
+        }
+
+        .ipaddress li {
+                list-style-type: none;
+                font-size:14px;
+                
+            }
+
+        .RefreshData {
+           max-width:350px;
+           margin-left:10%;
+           border:1px solid gray;
+           padding:10px;
+           float:left;
+           margin-top:5px;
+        }
+
+
+
+         .LeftPart {
+            background-color: #e2e2e2;
+            height: 835px;
+            position: relative;
+           
+        }
+
+
+            .LeftPart p {
+                font-size: 10px;
+            }           
+
+
+            .LeftPart ul {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+            }
+
+                .LeftPart ul li {                   
+                    padding: 8px;
+                    margin-bottom: 12px;
+                    background-color: White;
+                    color: Gray;
+                    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+                    font-size: 15px;
+                    cursor:pointer;
+                }
+
+                .DeskTopLiElements{
+                     
+                    color: Gray; 
+                    text-transform:uppercase;
+                    text-decoration:none;                  
+                }
+
+
+        .greenCircle {
+            width: 20px;
+            height: 20px;
+            border-radius: 25px;
+            display: inline-block;
+            background: green;
+            margin-right:5px;
+        }
+
+        .greyCircle {
+            width: 20px;
+            height: 20px;
+            border-radius: 25px;
+            background: LightGray;
+            display: inline-block;
+            margin-right:5px;
+        }
+
+      /*Site template CSS for mobile and tablets*/
+      #tabletheader
+{
+  background-color:#3DCD58;
+
+}
+  #mobileApplicationIconGreen
+{
+  width:25px;
+  height:25px;
+  float:left;
+  margin-left:15px;
+  margin-top:5px;
+
+}
+
+#mobileConnectedStatus
+{
+  margin-top:15px; 
+  background-color:#e2e2e2;
+  padding:10px;
+
+}
+
+
+#imgConnectedStatusMobile
+{
+  width:25px;
+  height:30px;
+  float:left;
+  margin-left:20px;
+  margin-top:3px;
+}
+
+#imgConnectedStatusMobileDummy
+{
+  width:25px;
+  height:30px;
+  float:left;
+  margin-left:20px;
+  margin-top:3px;
+}
+
+.mobileMenuElements
+{
+  width:15px;
+  height:15px;
+  float:left;
+  margin-top:21px;
+
+}
+
+.mobileOpenNav
+{
+  font-size:30px;
+  cursor:pointer;
+  color:white;
+  margin-left: 10px;
+}
+
+#mobileHeader
+{
+  display:inline-block;
+  margin-left:25px;
+  color:white;
+  font-size:25px;
+}
+
+#selectedMobileElement
+{
+  color:white;
+}
+
+.sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: white;
+            color: Black;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 15px;
+            border: 1px solid gray;
+        }
+
+            .sidenav ul {
+                list-style-type: none;
+            }
+
+
+            .sidenav a {
+                padding: 20px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 16px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidenav a:hover, .offcanvas a:focus {
+                    color: Black;
+                }
+
+            .sidenav .closebtn {
+                position: absolute;
+                top: -7px;
+                right: 15px;
+                font-size: 30px;
+                margin-left: 50px;
+                color:green;
+            }
+
+           
+
+/*
+    div.scrollmenu {
+    background-color: #e2e2e2;
+    overflow: auto;
+    white-space: nowrap;
+}
+    
+    div.scrollmenu a {
+    display: inline-block;
+    color: Gray;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+}
+
+div.scrollmenu a:hover {
+   text-decoration:underline;
+}
+
+div.scrollmenu .activeTablet {
+   text-decoration:none;
+border-bottom: 4px solid #3DCD58;
+color:#3DCD58;
+}
+
+div.scrollmenu .activeMobile {
+   text-decoration:none;
+border-bottom: 4px solid White;
+color:White;
+
+}*/
+
+ .Mobiledevicename {
+            color: #3DCD58;
+            font-family: Bodoni MT;
+            font-size: 24px; 
+            margin-left:10px;                       
+        }
+
+ .mobileList li a{
+     font-size:15px;
+ }
+
+
+  #mobileCompanyName
+{
+   padding:10px;
+   border: 1px solid transparent;
+   background-color:#3DCD58;
+   border-radius:25px;
+   text-align:center; 
+   color:white;
+   width:220px;  
+
+}    
+    
+#divBreadCrum
+{
+  list-style-type:none;
+}
+
+#divBreadCrumTablet
+{
+  list-style-type:none;
+}
+
+#divBreadCrumMobile
+{
+  list-style-type:none;
+}
+
+.arrow-down {
+  width: 0; 
+  height: 0; 
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  
+  border-top: 12px solid #FFF;
+  
+  position:relative;
+  top:45%;
+}
+     
+
+ #ListofMenuElementsMobile li{
+     margin-top:8%;
+     padding:3%;
+     border:1px solid Lightgray;
+     width:90%
+ }
+
+      /*End of site template CSS for mobile and tablets*/
+
+        /*End of site template CSS*/
+
+           @media only screen and (max-width: 600px) {
+          
+             [class*="col-"] {
+            float: left;
+            padding:1px;           
+            }            
+           
+             html,body
+             {
+                 font-family: 'Helvetica'
+             }
+
+              #divLeftpart,#deskTopHeader,#deskTopLeftbar
+           {
+               display:none;               
+           }  
+
+           .Mobiledevicename
+             {
+               display:none;
+             }            
+            
+
+               .sidenav .closebtn {
+                  color:white;
+              }
+
+                #mobileConnectedStatus
+                {
+                 margin-top:130px;            
+
+                }
+
+                #mobileApplicationIconGreen
+                {
+                    display:none;
+                }
+
+                 .mobileList li a{
+                             font-size:12px;
+                             font-weight:bold;
+                    }
+
+                 #mobileHeader
+                 {
+                     display:none;
+                 }
+
+                 #selectedMobileElement
+                 {
+                     margin-left:20px;
+                     font-size:20px;                    
+                     position:absolute;
+                     top:10px;
+                 }
+
+                 div.scrollmenu a {
+                       color: white;    
+                    }
+
+                   div.scrollmenu {
+                background-color: #3DCD58;               
+                }
+				
+				 .menuSmallDevices
+             {
+                 display:block;
+             }   
+             
+             .closeIconSmallDevices
+             {
+                 display:block;
+             }  
+             
+               #Elements,#mobileCompanyName
+			{
+               display:block;
+            }   
+               
+               .sidenav 
+                {
+                    padding-top:0px;
+                } 
+
+                #mobileConnectedStatus
+                {
+                 margin-top:0px;            
+
+                }
+
+                 #imgMobileSplash
+               {
+                   display:block;
+               }  
+                 
+                 #desktopBreadCrum
+               {
+                   display:none;
+               }  
+                 
+               #divTabletBreadCrum
+               {
+                   display:none;
+               }  
+               
+               #divMobileBreadCrum
+               {
+                   display:block;
+               } 
+               
+               .arrow-down {
+  width: 0; 
+  height: 0; 
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  
+  border-top: 10px solid #FFF;
+  
+  position:relative;
+  top:45%;
+  margin-right:15px;
+
+}             
+                               
+        }
+
+            @media screen and (max-width: 1023px) and (min-width: 601px) {
+          
+             [class*="col-"] {
+            float: left;
+            padding:1px;
+           
+        }
+
+           html,body
+             {
+                 font-family: 'Helvetica'
+             }
+
+              #divLeftpart,#deskTopHeader,#deskTopLeftbar
+           {
+               display:none;               
+           }  
+
+             #divMobileAndTabletMenu,#tablet
+           {
+               display:block;               
+           }
+
+              #mobileApplicationIconGreen
+             {
+                display:block;
+             }
+
+              #mobileApplicationWhiteIcon
+             {
+                display:none;
+             }
+
+  .menuSmallDevices
+             {
+                 display:block;
+             }   
+             
+             .closeIconSmallDevices
+             {
+                 display:block;
+             }   
+             
+               #Elements
+			{
+               display:block;
+            } 
+               
+                 #mobileCompanyName
+               {
+                   display:block;
+               } 
+                 
+                 #imgMobileSplash
+               {
+                   display:none;
+               }  
+                 
+               #desktopBreadCrum,#divMobileBreadCrum
+               {
+                   display:none;
+               } 
+               
+                #divTabletBreadCrum
+               {
+                   display:block;
+               } 	  	      			 
+
+
+                  #ListofMenuElementsMobile
+                  {
+                      width:60%;
+                      margin-left:20%;
+                  }
+
+                #ListofMenuElementsMobile li{
+                    margin-top:8%;
+                    padding:3%;
+                    border:1px solid Lightgray;
+                    width:90%
+                 }
+             
+        }
+
+              @media only screen and (min-width: 1024px) {
+                     
+
+           #divMobileAndTabletMenu,#tablet,#Elements
+           {
+               display:none;
+           }
+
+           html,body
+             {
+                 font-family: 'Arial Unicode MS'
+             }
+           
+
+           	 .menuSmallDevices
+             {
+                 display:none;
+             }   
+             
+             .closeIconSmallDevices
+             {
+                 display:none;
+             }      	   
+           
+              #mobileCompanyName
+               {
+                   display:none;
+               }  
+              
+               #imgMobileSplash
+               {
+                   display:none;
+               }  
+              
+              #deskTopSubMenu
+              {
+                  display:block;
+              } 
+              
+              #desktopBreadCrum
+               {
+                   display:block;
+               }  
+              
+               #divTabletBreadCrum,#divMobileBreadCrum
+               {
+                   display:none;
+               } 	 
+               
+                #pageBody > table.table {
+                    width: 83%;
+                }
+        }

@@ -1,0 +1,346 @@
+ html, body {
+	overflow-x: hidden;
+}
+
+
+ #ImageMiddilePart
+{
+  //background-color: #f2f2f2;
+}
+
+ #NameOfTheDevice
+{
+  height:21px;  
+  font-weight:lighter;
+  font-size:15px;
+  text-align:left;
+
+}
+
+ #PlcImage
+{
+  height:auto;
+  width:100%;
+}
+
+ #imgClose
+{
+  width:20px;
+  height:20px;
+  cursor:pointer;
+  float:right;
+  margin-right:10%;
+ 
+}
+
+ .imgGraph
+{
+  width:20px;
+  height:20px;
+  cursor:pointer;  
+}
+
+
+ .imgGraphMobile
+{
+  width:20px;
+  height:20px;
+  cursor:pointer;  
+}
+
+
+       
+
+         .arrow-left {
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            border-right: 10px solid Grey;
+        }
+
+        .arrow-right {
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            border-left: 10px solid Grey;
+        }
+
+        #ElementDetails {           
+            border: 1px solid Lightgray;
+            border-bottom: none;
+            height: 840px;           
+        }
+            #elementName {
+            color: #c2c2a3;
+        }
+         
+      
+
+          #flotcontainer {
+            width: 85%;
+            height: 400px;
+        }
+
+           #variableContainer {
+                           width: 15%;
+           
+        }       
+
+            /*to add*/
+       .ui-autocomplete {
+z-index: 2150000000;  
+}
+      
+
+
+           .fullscreen-modal .modal-dialog {
+  margin-top: 5%;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .fullscreen-modal .modal-dialog {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .fullscreen-modal .modal-dialog {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .fullscreen-modal .modal-dialog {
+     width: 1170px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .fullscreen-modal .modal-dialog {
+     width: 1600px;
+  }
+}
+
+
+#ElementDetails
+{
+    overflow-y:auto;
+}
+
+
+ #lstVariables
+ {
+     margin-bottom:15%;
+ }
+
+
+  #lstVariables   td
+          {
+            
+             padding-top:15px;              
+          }
+
+   #lstMobilevariablesList
+ {
+     margin-bottom:15%;
+ }
+
+ #lstMobilevariablesList  td
+          {
+            padding-top:15px;                       
+          }
+
+ #listOfAddedvariablesMobile  td
+          {
+            padding-top:15px;                       
+          }
+      
+  /*End of page specific CSS desktop*/
+   
+
+    /*Media queries*/
+     
+    
+        @media only screen and (max-width: 600px) {
+          
+             [class*="col-"] {
+            float: left;
+            padding:1px;           
+            }
+
+            html, body {
+            overflow-y: auto;
+            }
+
+
+          #divLeftpart,#ImageMiddilePart,#myModal,#ElementDetails
+           {
+               display:none;               
+           }           
+         
+           .imgGraph
+           {
+             display:none;   
+           }
+
+           .imgGraphMobile
+           {
+               display:inline;   
+           }         
+          
+             #flotcontainerMobile {
+            width: 100%;
+            height: 250px;
+        }
+             
+             #OptionDD
+           {
+               display:none;
+           }               
+           
+              #lstMobilevariablesList
+              {
+                  overflow-y:auto;
+              }             
+              
+        }
+
+@media only screen and (max-width: 600px) and (orientation : landscape){
+     #lstMobilevariablesList
+              {
+                  height:140%;
+                  overflow-y:auto;
+              }   
+              
+}
+
+
+        @media screen and (max-width: 1023px) and (min-width: 601px) {
+          
+             [class*="col-"] {
+            float: left;
+            padding:1px;
+           
+        }         
+           
+			
+            #mobileVariablesList,#divMobileRecognizer,#mobileGraphPlot
+           {
+               display:none;               
+           }           
+
+            #PlcImage
+            {
+                margin-left:5%;
+              
+            }
+            
+            #NameOfTheDevice
+            {
+                height:50%;  
+                font-weight:lighter;
+                font-size:120%;
+                margin-left:5%;
+            }
+            
+
+              #ElementDetails {           
+            border: 1px solid Lightgray;
+            border-bottom: none;
+            height: 100%;           
+        }             
+
+              #dummyDiv
+              {
+                 width: 5%;
+              }
+             
+
+            .col-6
+            {
+                 width: 65%;
+            }
+
+            .col-2
+             {
+                 width: 30%;
+            }
+            
+            /*.WidthThirtyPercent
+            {
+                margin-right: 5%;
+            }*/
+            
+             .WidthSeventyPercent
+          {
+              width:35%;
+          }           
+              
+           .imgGraph
+           {
+             display:inline;   
+           }
+
+           .imgGraphMobile
+           {
+               display:none;   
+           }  
+           
+             #flotcontainer {
+            width: 75%;
+            height: 300px;
+        }            
+             #variableContainer {
+                           width: 25%;
+           
+        }
+
+             #OptionDD
+           {
+               display:none;
+           } 
+              
+        }
+
+        @media only screen and (min-width: 1024px) {
+                     
+
+           #mobileVariablesList,#divMobileRecognizer,#mobileGraphPlot
+           {
+               display:none;
+           }
+
+
+           #ImageMiddilePart,#ElementDetails,#dummyDiv
+           {
+               display:block;               
+           }
+
+             .imgGraph
+           {
+             display:inline;   
+           }
+
+           .imgGraphMobile
+           {
+               display:none;   
+           } 
+           
+           #OptionDD
+           {
+               display:none;
+           } 
+           
+          
+        }
+
+      
+      

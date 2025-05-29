@@ -1,0 +1,119 @@
+﻿	(******************************)
+	(*                            *)
+	(*     EXPORTED VARIABLES     *)
+	(*                            *)
+	(******************************)
+
+        VAR_GLOBAL
+	{G:"EEPROM_Parameters"}
+ep_iCfgPodves1 AT %MW101.0 : INT;	{ DE:"Рівень підвісу датчика 4..20 в резервуарі2" }
+ep_iCfgPodves2 AT %MW101.1 : INT;	{ DE:"Рівень підвісу датчика 4..20 в резервуарі2" }
+ep_iTank_Lvl_min AT %MW101.2 : INT;	{ DE:"мін рівень води в резервуарах" }
+ep_iTank_Lvl_max AT %MW101.3 : INT;	{ DE:"макс рівень води в резервуарах" }
+ep_iTask_day AT %MW101.4 : INT;	{ DE:"установка тиску з насосної - день (без коми)" }
+ep_iTask_night AT %MW101.5 : INT;	{ DE:"установка тиску з насосної - ніч (без коми)" }
+ep_iAreaTank1 AT %MW101.6 : INT;	{ DE:"установка площі резервуару 1" }
+ep_iAreaTank2 AT %MW101.7 : INT;	{ DE:"установка площі резервуару 2" }
+ep_iDay_begin AT %MW101.8 : INT;	{ DE:"Початок дня (години 0-24)" }
+ep_iDay_end AT %MW101.9 : INT;	{ DE:"Кінець дня(години 0-24)" }
+ep_iCfgPodves3 AT %MW101.10 : INT;
+ep_iCfgPodves4 AT %MW101.11 : INT;
+ep_iCfgPodves5 AT %MW101.12 : INT;
+ep_iCfgPodves6 AT %MW101.13 : INT;
+ep_iAreaTank3 AT %MW101.14 : INT;
+ep_iAreaTank4 AT %MW101.15 : INT;
+ep_iAreaTank5 AT %MW101.16 : INT;
+ep_iAreaTank6 AT %MW101.17 : INT;
+	{G:"Status_variables"}
+Tank1_lvl AT %MW110.0 : INT;	{ DE:"Рівень резервуару 1" }
+Tank2_lvl AT %MW110.1 : INT;	{ DE:"Рівень резервуару 2" }
+Task_Pump1 AT %MW110.2 : INT;	{ DE:"Поточне завдання насос1" }
+Out_Flow1 AT %MW110.3 : INT;	{ DE:"Вихідний потік НС3 вітка 1 (4..20мА)" }
+Out_Flow2 AT %MW110.4 : INT;	{ DE:"Вихідний потік НС3 вітка 2  (4..20мА)" }
+Alarms_Tank AT %MW110.5 : WORD;	{ DE:"Стани цифрових входів" }
+Current_motor2 AT %MW110.6 : INT;	{ DE:"Струм Ф2 Данфос" }
+Pressure_out1 AT %MW110.7 : INT;	{ DE:"тиск в місто вітка1" }
+Freq_Pump1 AT %MW110.8 : INT;	{ DE:"Частота м1" }
+Current_motor1 AT %MW110.9 : INT;	{ DE:"Струм м1" }
+Voltage_1 AT %MW110.10 : INT;	{ DE:"Напруга м1" }
+SW_motor1 AT %MW110.11 : WORD;	{ DE:"Слово стану" }
+Power_m1 AT %MW110.12 : INT;	{ DE:"Потужність м1, Кв" }
+Pressure_out1_cool AT %MW110.13 : INT;
+In_Flow1 AT %MW110.14 : REAL;
+b_auto_d_n AT %MW110.16 : INT := 0;
+Tank3_lvl AT %MW110.17 : INT;	{ DE:"Рівень резервуару 3" }
+Tank4_lvl AT %MW110.18 : INT;	{ DE:"Рівень резервуару 4" }
+Tank5_lvl AT %MW110.19 : INT := 0;	{ DE:"Рівень резервуару 5" }
+Tank6_lvl AT %MW110.20 : INT := 0;	{ DE:"Рівень резервуару 6" }
+Alarms_Filtr AT %MW110.21 : WORD;
+Pressure_out_danf1 AT %MW110.22 : DINT;
+Current_motor_danf1 AT %MW110.24 : DINT;
+Voltage_danf1 AT %MW110.26 : DINT;
+Freq_Pump_danf1 AT %MW110.28 : INT;
+SW_motor_danf1 AT %MW110.29 : WORD := 0;
+Power_danf1 AT %MW110.30 : DINT;
+Pressure_out_danf2 AT %MW110.32 : DINT;
+Current_motor_danf2 AT %MW110.34 : DINT;
+Voltage_danf2 AT %MW110.36 : DINT := 0;
+Freq_Pump_danf2 AT %MW110.38 : INT := 0;
+SW_motor_danf2 AT %MW110.39 : WORD := 0;
+Power_danf2 AT %MW110.40 : DINT := 0;
+Out_Flow_NS2_1 AT %MW110.42 : REAL;
+Out_Flow_NS2_2 AT %MW110.44 : REAL;
+Pressure_out_NS2_1 AT %MW110.46 : REAL;
+Pressure_out_NS2_2 AT %MW110.48 : REAL := 0;
+LVL_Rez_SZ AT %MW110.50 : REAL := 0;
+UVR_Sensor_1 AT %MW110.52 : REAL := 0;
+UVR_Sensor_2 AT %MW110.54 : REAL := 0;
+UVR_Const_1 AT %MW110.56 : REAL := 0;
+UVR_Const_2 AT %MW110.58 : REAL := 0;
+UVR_Flow_1 AT %MW110.60 : REAL := 0;
+UVR_Flow_2 AT %MW110.62 : REAL := 0;
+UVR_Counter_1 AT %MW110.64 : REAL := 0;
+UVR_Counter_2 AT %MW110.66 : REAL := 0;
+UVR_Flow_All AT %MW110.68 : REAL := 0;
+UVR_Counter_All AT %MW110.70 : REAL := 0;
+	{G:"IO_Mapping"}
+i_abc_Tank1_lvl AT %IW1.0 : INT;	{ DE:"AIL1 analogue input" }
+i_abc_Tank2_lvl AT %IW1.1 : INT;	{ DE:"AIL2 analogue input" }
+i_abc_Tank3_lvl AT %IW1.2 : INT;	{ DE:"AIL3 analogue input" }
+i_abc_Tank4_lvl AT %IW1.3 : INT;	{ DE:"AIL4 analogue input" }
+i_abc_Tank5_lvl AT %IW1.4 : INT;	{ DE:"AIL5 analogue input" }
+i_abc_Tank6_lvl AT %IW1.5 : INT;	{ DE:"AIL6 analogue input" }
+i_abc_Flow1 AT %IW1.6 : INT;	{ DE:"AIL7 analogue input" }
+i_abc_Flow2 AT %IW1.7 : INT;	{ DE:"AIL8 analogue input" }
+i_tank1_min AT %IX0.0 : BOOL;	{ DE:"DIL1 digital input" }
+i_tank1_max AT %IX0.1 : BOOL;	{ DE:"DIL2 digital input" }
+i_tank2_min AT %IX0.2 : BOOL;	{ DE:"DIL3 digital input" }
+i_tank2_max AT %IX0.3 : BOOL;	{ DE:"DIL4 digital input" }
+i_tank3_min AT %IX0.4 : BOOL;	{ DE:"DIL5 digital input" }
+i_tank3_max AT %IX0.5 : BOOL;	{ DE:"DIL6 digital input" }
+i_tank4_min AT %IX0.6 : BOOL;	{ DE:"DIL7 digital input" }
+i_tank4_max AT %IX0.7 : BOOL;	{ DE:"DIL8 digital input" }
+b_day_night AT %QX1.0 : BOOL;	{ DE:"DOL1 digital output" }
+i_rnpp AT %IX10.0 : BOOL;
+INVT_BUS_Volage AT %IW11.0 : INT;	{ DE:"3002H Range: 0~1200V" }
+INVT_SETING_FREQ AT %IW11.1 : INT;	{ DE:"3001H Range: 0.00Hz~P00.03" }
+flow_temp AT %IW11.2 : INT;
+i_tank5_min AT %IX10.1 : BOOL;
+i_tank5_max AT %IX10.2 : BOOL;
+i_tank6_min AT %IX10.3 : BOOL;
+i_tank6_max AT %IX10.4 : BOOL;
+i_filtr1 AT %IX10.5 : BOOL;
+i_filtr2 AT %IX10.6 : BOOL;
+i_filtr3 AT %IX10.7 : BOOL;
+i_filtr4 AT %IX10.8 : BOOL;
+i_filtr5 AT %IX10.9 : BOOL;
+i_filtr6 AT %IX10.10 : BOOL;
+i_filtr7 AT %IX10.11 : BOOL;
+i_filtr8 AT %IX10.12 : BOOL;
+i_filtr9 AT %IX10.13 : BOOL;
+i_filtr10 AT %IX10.14 : BOOL;
+i_filtr11 AT %IX10.15 : BOOL;
+i_filtr12 AT %IX10.16 : BOOL;
+rasp_305 AT %IW11.3 : INT;
+rasp_307 AT %IW11.4 : INT;
+rasp_306 AT %IW11.5 : INT;
+rasp_308 AT %IW11.6 : INT;
+	END_VAR
+

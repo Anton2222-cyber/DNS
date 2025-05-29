@@ -1,0 +1,177 @@
+html, body {
+	background-color: RGB(255,255,255);
+	padding: 0px;
+	margin: 0px;
+}
+
+.title {
+	font: bold 30px Arial,sans-serif;
+	text-align: center;
+	color: #71787f;
+}
+
+.table {
+	width: 100%;
+	font: normal 14px Arial,sans-serif;
+	margin-bottom: 30px;
+	border-collapse: collapse;
+	border: 1px solid #b4b7bb;
+}
+
+.table th {
+	color: #4c536c;
+	text-align: left;
+}
+
+.table tr {
+	height: 40px;
+}
+
+.table td {
+	border-top: 1px solid #b4b7bb;
+	border-bottom: 1px solid #b4b7bb;
+	background-color: white;
+	padding: 5px;
+}
+
+.sectiontitle {
+	font: bold 20px Arial,sans-serif;
+	margin-bottom: 15px;
+}
+
+.pagebody {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+
+
+/* ----------------- gestione menu con tab ----------------- */
+li.tabmenu {
+	float: left;
+	display: block;
+	position: relative;
+}
+
+li.tabmenu > a {
+	display: block;
+	width: 140px;
+	height: 28px;
+	font: bold 24px Arial,sans-serif;
+	color: RGB(255,255,255);
+	padding-left: 15px;
+	padding-top: 6px;
+	margin-right: 5px;
+	border-top-left-radius: 15px 15px;
+	border-top-right-radius: 15px 15px;
+	text-decoration: none;
+}
+
+li.tabmenu > a[href="#"] {
+	cursor: default;
+}
+
+li.tabmenu_on > a {
+	color: RGB(61,205,88);
+	background-color: white;
+}
+
+li.tabmenu_on:hover > a { 
+	color: #BCBCBC;
+}
+
+li.tabmenu_off > a {
+	background-color: #98999b;
+}
+
+li.tabmenu_off:hover > a { 
+	background-color: #bcbcbc; 
+	color: white;
+}
+
+ul.menu {
+	margin: 0px;
+	background-color: RGB(61,205,88); /* colore di sfondo del tab */
+	border-bottom: 1px solid RGB(61,205,88);
+	padding-left: 10px;
+	padding-top: 7px;
+	height: 33px;
+}
+
+#imgLogo {
+	position: absolute;
+	top: 0px; 
+	right: 0px;
+}
+
+.menubottom {
+	height: 27px;
+	border-bottom: 2px solid RGB(61,205,88);
+	color: RGB(61,205,88);
+	font: bold 18px Arial,sans-serif;
+	padding-left: 25px;
+	padding-top: 10px;
+}
+
+
+
+/* ----------------- gestione sottomenu a tendina ----------------- */
+ul.submenu {
+	display: none;
+	padding: 0px;
+	margin: 0px;
+	border: 1px solid #bcbcbc;
+	background-color: RGB(61,205,88);
+}
+
+li.tabmenu:hover > ul.submenu {
+	display: block;
+	position: absolute;
+	width: 155px;
+	left: 0px;
+	border-top: 0;
+}
+
+ul.submenu  > li {
+	display: block;
+	position: relative;
+}
+
+ul.submenu > li > a {
+	display: block;
+	height: 20px;
+	padding: 5px;
+	color: white;
+	font: bold 13px Arial,sans-serif;
+	text-decoration: none;
+}
+
+ul.submenu > li > a[href="#"] {
+	cursor: default;
+}
+
+ul.submenu > li:hover > a {
+	background-color: #bcbcbc;
+	color: white;
+}
+
+ul.submenu > li > ul.submenu {
+/*	display: none; */
+	display: block;
+	position: absolute;
+	left: 149px;
+	top: 15px;
+	width: 5px;
+	height: 5px;
+	overflow: hidden;
+}
+
+ul.submenu > li:hover > ul.submenu {
+	display: block;
+	position: absolute;
+	width: 155px;
+	left: 155px;
+	top: 0px;
+	height: auto;
+	overflow: visible;
+}

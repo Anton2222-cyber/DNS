@@ -1,0 +1,1589 @@
+***********************************************************************
+*
+*	CODE GENERATION LISTING FOR: gns1
+*	COMPILER VERSION: 5.20.0.36
+*
+***********************************************************************
+
+**************************************************
+	List function block: TON
+**************************************************
+
+FUNCTION_BLOCK TON
+
+	{ DE:"<HTML>The TON block produces a delayed output Q of the input IN. The delay time is expressed in milliseconds on the PT input.</br></br>
+<img src= tonscheme.png>
+<ul>
+<li>if IN is FALSE Q is false</li>
+<li>Q becomes TRUE as IN remains TRUE for PT milliseconds</li>
+<li>Q remains TRUE until IN remains TRUE</li>
+</ul>" }
+
+        VAR_INPUT
+IN : BOOL;	{ DE:"Timer input source" }
+PT : UDINT;	{ DE:"Preset time value (ms)" }
+	END_VAR
+
+        VAR_OUTPUT
+Q : BOOL;	{ DE:"Timer output" }
+ET : UDINT;	{ DE:"Timer current value (ms)" }
+	END_VAR
+
+        VAR_EXTERNAL
+	{G:"System_Timers"}
+sysTimer AT %MD0.0 : UDINT;	{ DE:"System timer [ms]" }
+	END_VAR
+
+        VAR
+timStart : UDINT;	{ DE:"Time value at start of counting" }
+	END_VAR
+
+END_FUNCTION_BLOCK
+
+060344C0  55                            push ebp
+060344C1  8B EB                         mov ebp, ebx
+060344C3  57                            push edi
+
+#0		{SRC:TON}
+#1		
+#2			(*	Check if in counting	*)
+#3		
+#4			LD		IN
+(*) UNDEF
+060344C4  33 C0                         xor eax, eax
+060344C6  8A 45 04                      mov al, 4[ebp]
+
+#5			JMPCN	lReset
+(-) BOOL
+060344C9  84 C0                         test al, al
+060344CB  90 74 61 90 90 90             je 0603452FH
+
+#6		
+#7			(*	Check if Q is TRUE *)
+#8			LD		Q
+(*) UNDEF
+060344D1  33 C0                         xor eax, eax
+060344D3  8A 45 09                      mov al, 9[ebp]
+
+#9			RETC
+#10			
+(-) BOOL
+060344D6  84 C0                         test al, al
+060344D8  90 75 6A 90 90 90             jne 06034545H
+
+#11			(*	Check if already in counting *)
+#12			LD		timStart
+(*) UNDEF
+060344DE  8B 45 00                      mov eax, [ebp]
+
+#13			EQ		0
+(*) UDINT
+060344E1  3D 00 00 00 00                cmp eax, 0
+060344E6  0F 94 C0                      sete al
+060344E9  25 FF 00 00 00                and eax, 0FFh
+
+#14			JMPCN	lUpdate
+(-) BOOL
+060344EE  84 C0                         test al, al
+060344F0  90 74 0C 90 90 90             je 060344FFH
+
+#15		
+#16			(*	Start of counting *)
+#17			LD		sysTimer
+(*) UNDEF
+060344F6  8B 05 CC CC CC CC             mov eax, [CCCCCCCCH] ; %M0+0
+
+#18			ST		timStart
+(*) UDINT
+060344FC  89 45 00                      mov [ebp], eax
+
+#19			
+#20		lUpdate:
+#21		
+#22			(*	Update timer and check if time elapsed *)
+#23			LD		sysTimer
+(*) UNDEF
+060344FF  8B 05 CC CC CC CC             mov eax, [CCCCCCCCH] ; %M0+0
+
+#24			SUB		timStart
+(*) UDINT
+06034505  2B 45 00                      sub eax, [ebp]
+
+#25			ST		ET
+(*) UDINT
+06034508  89 45 0A                      mov 10[ebp], eax
+
+#26			GE		PT
+(*) UDINT
+0603450B  3B 45 05                      cmp eax, [ebp+5]
+0603450E  0F 93 C0                      setae al
+06034511  25 FF 00 00 00                and eax, 0FFh
+
+#27			ST		Q
+(*) BOOL
+06034516  84 C0                         test al, al
+06034518  0F 95 45 09                   setne 9[ebp]
+
+#28			RETCN
+#29		
+(-) BOOL
+0603451C  84 C0                         test al, al
+0603451E  90 74 24 90 90 90             je 06034545H
+
+#30			(*	Limit actual time value *)
+#31			LD		PT
+(*) UNDEF
+06034524  8B 45 05                      mov eax, 5[ebp]
+
+#32			ST		ET
+(*) UDINT
+06034527  89 45 0A                      mov 10[ebp], eax
+
+#33			RET
+#34		
+(-) UDINT
+0603452A  EB 19 90 90 90                jmp 06034545H
+
+#35		lReset:
+#36		
+#37			(*	Reset status *)
+#38			LD		0
+(*) UNDEF
+0603452F  B8 00 00 00 00                mov eax, 00H
+
+#39			ST		ET
+(*) USINT
+06034534  89 45 0A                      mov 10[ebp], eax
+
+#40			ST		timStart
+(*) UDINT
+06034537  89 45 00                      mov [ebp], eax
+
+#41			LD		FALSE
+(*) UNDEF
+0603453A  B8 00 00 00 00                mov eax, 00H
+
+#42			ST		Q
+(*) BOOL
+0603453F  84 C0                         test al, al
+06034541  0F 95 45 09                   setne 9[ebp]
+
+06034545  5F                            pop edi
+06034546  5D                            pop ebp
+
+06034547  C3                            ret
+
+
+Frame allocation:
+
+	0000       : VAR timStart
+	0004 bit  0: VAR IN
+	0005       : VAR PT
+	0009 bit  0: VAR Q
+	000A       : VAR ET
+
+END_FUNCTION_BLOCK
+**************************************************
+	List program: Pr_Boot
+**************************************************
+
+PROGRAM Pr_Boot
+
+END_PROGRAM
+
+06034550  55                            push ebp
+06034551  8B EC                         mov ebp, esp
+06034553  60                            pushad
+
+#0		{SRC:Pr_Boot}
+#1		(*$WAITSWITCH$*)
+#2		
+#3			(* iCfgPidvisRez1:= ep_iCfgPodves1; *)
+#4			MOVE		ep_iCfgPodves1,iCfgPidvisRez1	{LNXT:1|2|-1}
+(*) UDINT
+06034554  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; %M101+0
+0603455B  66 89 05 CC CC CC CC          mov [CCCCCCCCH], ax ; $$DATA$$+118
+
+#5		
+#6			(* iCfgPidvisRez2:= ep_iCfgPodves2; *)
+#7			MOVE		ep_iCfgPodves2,iCfgPidvisRez2	{LNXT:2|4|-1}
+(*) INT
+06034562  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; %M101+2
+06034569  66 89 05 CC CC CC CC          mov [CCCCCCCCH], ax ; $$DATA$$+124
+
+#8		
+#9			(* i_Area_Tank1 := ep_iAreaTank1; *)
+#10			MOVE		ep_iAreaTank1,i_Area_Tank1	{LNXT:4|5|-1}
+(*) INT
+06034570  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; %M101+12
+06034577  66 89 05 CC CC CC CC          mov [CCCCCCCCH], ax ; $$DATA$$+120
+
+#11		
+#12			(* i_Area_Tank2 := ep_iAreaTank2; *)
+#13			MOVE		ep_iAreaTank2,i_Area_Tank2	{LNXT:5|7|-1}
+(*) INT
+0603457E  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; %M101+14
+06034585  66 89 05 CC CC CC CC          mov [CCCCCCCCH], ax ; $$DATA$$+126
+
+#14		
+#15			(* iDay_begin:=ep_iDay_begin; *)
+#16			MOVE		ep_iDay_begin,iDay_begin	{LNXT:7|8|-1}
+(*) INT
+0603458C  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; %M101+16
+06034593  66 89 05 CC CC CC CC          mov [CCCCCCCCH], ax ; $$DATA$$+140
+
+#17		
+#18			(* iDay_end:= ep_iDay_end; *)
+#19			MOVE		ep_iDay_end,iDay_end	{LNXT:8|1|-1}
+(*) INT
+0603459A  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; %M101+18
+060345A1  66 89 05 CC CC CC CC          mov [CCCCCCCCH], ax ; $$DATA$$+138
+
+060345A8  61                            popad
+060345A9  5D                            pop ebp
+
+060345AA  C3                            ret
+
+END_PROGRAM
+
+
+**************************************************
+	Target variable image generation
+**************************************************
+
+
+*** INPUT:
+060345AB  C3                            ret
+
+
+*** OUTPUT:
+060345AC  C3                            ret
+
+
+
+**************************************************
+	Task Boot init code
+**************************************************
+
+060345AD  55                            push ebp
+060345AE  8B EC                         mov ebp, esp
+
+060345B0  8B E5                         mov esp, ebp
+060345B2  5D                            pop ebp
+
+060345B3  C3                            ret
+
+**************************************************
+	List program: InitParDB
+**************************************************
+
+PROGRAM InitParDB
+
+        VAR
+warningsKiller : USINT;
+dummyCrc32 : UDINT;
+	END_VAR
+
+END_PROGRAM
+
+060345C0  55                            push ebp
+060345C1  8B EC                         mov ebp, esp
+060345C3  60                            pushad
+
+#0		{SRC:InitParDB}
+#1		(*$WAITSWITCH$*)
+#2		
+#3			(* dummyCrc32 := 3101491307; *)
+#4			MOVE		3101491307,dummyCrc32	{LNXT:3|5|-1}
+(*) UDINT
+060345C4  B8 6B 00 DD B8                mov eax, B8DD006BH
+060345C9  89 05 CC CC CC CC             mov [CCCCCCCCH], eax ; $$DATA$$+112
+
+#5		
+#6			(* warningsKiller := sysDBase_SetExtTable( ADR( $$ParDB ), $$ParDBLength ); *)
+#7			ADR		$$ParDB	{LNXT:5|3|-1}
+(*) UDINT
+060345CF  B8 CC CC CC CC                mov eax, CCCCCCCCH ; $$CODE$$+240
+
+#8			sysDBase_SetExtTable		$$ParDBLength	{LNXT:5|3|-1}
+(*) @USINT
+060345D4  68 1A 00 00 00                push 26
+060345D9  8B C8                         mov ecx, eax
+060345DB  51                            push ecx
+060345DC  B9 CC CC CC CC                mov ecx, CCCCCCCCH ; sysDBase_SetExtTable
+060345E1  FF D1                         call ecx
+060345E3  81 C4 08 00 00 00             add esp, 8
+
+#9			ST		warningsKiller	{LNXT:5|3|-1}
+(*) USINT
+060345E9  88 05 CC CC CC CC             mov [CCCCCCCCH], al ; $$DATA$$+111
+
+060345EF  61                            popad
+060345F0  5D                            pop ebp
+
+060345F1  C3                            ret
+
+END_PROGRAM
+
+
+**************************************************
+	Target variable image generation
+**************************************************
+
+
+*** INPUT:
+060345F2  C3                            ret
+
+
+*** OUTPUT:
+060345F3  C3                            ret
+
+
+
+**************************************************
+	Task Serv init code
+**************************************************
+
+060345F4  55                            push ebp
+060345F5  8B EC                         mov ebp, esp
+
+060345F7  8B E5                         mov esp, ebp
+060345F9  5D                            pop ebp
+
+060345FA  C3                            ret
+
+**************************************************
+	List program: Pres_Freq_Flow
+**************************************************
+
+PROGRAM Pres_Freq_Flow
+
+        VAR
+ton_start_up : TON;
+	END_VAR
+
+END_PROGRAM
+
+06034610  55                            push ebp
+06034611  8B EC                         mov ebp, esp
+06034613  60                            pushad
+
+#0		{SRC:Pres_Freq_Flow}
+#1		(*$WAITSWITCH$*)
+#2		
+#3			(* Tank1_lvl := to_int(to_real(i_abc_Tank1_lvl+iCfgPidvisRez1) * i_Area_Tank1/100); *)
+#4			LD		i_abc_Tank1_lvl	{LNXT:2|3|-1}
+(*) UNDEF
+06034614  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; $$DATA$$+116
+
+#5			ADD		iCfgPidvisRez1	{LNXT:2|3|-1}
+(*) INT
+0603461B  0F BF 0D CC CC CC CC          movsx ecx, word ptr [CCCCCCCCH] ; $$DATA$$+118
+06034622  03 C1                         add eax, ecx
+
+#6			to_real	{LNXT:2|3|-1}
+(*) INT
+06034624  50                            push eax
+06034625  DB 04 24                      fild dword ptr [esp]
+06034628  58                            pop eax
+
+#7			MUL		i_Area_Tank1	{LNXT:2|3|-1}
+(*) REAL
+06034629  0F BF 0D CC CC CC CC          movsx ecx, word ptr [CCCCCCCCH] ; $$DATA$$+120
+06034630  51                            push ecx
+06034631  DB 04 24                      fild dword ptr [esp]
+06034634  D9 1C 24                      fstp dword ptr [esp]
+06034637  59                            pop ecx
+06034638  51                            push ecx
+06034639  D8 0C 24                      fmul dword ptr [esp]
+0603463C  81 C4 04 00 00 00             add esp, 4
+
+#8			DIV		100	{LNXT:2|3|-1}
+(*) REAL
+06034642  68 64 00 00 00                push 100
+06034647  DA 34 24                      fidiv [esp]
+0603464A  81 C4 04 00 00 00             add esp, 4
+
+#9			to_int	{LNXT:2|3|-1}
+(*) REAL
+06034650  81 EC 08 00 00 00             sub esp, 8
+06034656  DF 3C 24                      fistp qword ptr [esp]
+06034659  58                            pop eax
+0603465A  81 C4 04 00 00 00             add esp, 4
+
+#10			ST		Tank1_lvl	{LNXT:2|3|-1}
+(*) INT
+06034660  66 89 05 CC CC CC CC          mov [CCCCCCCCH], ax ; %M110+0
+
+#11		
+#12			(* Tank2_lvl := to_int(to_real(i_abc_Tank2_lvl + iCfgPidvisRez2) * i_Area_Tank2/100); *)
+#13			LD		i_abc_Tank2_lvl	{LNXT:3|5|-1}
+(*) UNDEF
+06034667  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; $$DATA$$+122
+
+#14			ADD		iCfgPidvisRez2	{LNXT:3|5|-1}
+(*) INT
+0603466E  0F BF 0D CC CC CC CC          movsx ecx, word ptr [CCCCCCCCH] ; $$DATA$$+124
+06034675  03 C1                         add eax, ecx
+
+#15			to_real	{LNXT:3|5|-1}
+(*) INT
+06034677  50                            push eax
+06034678  DB 04 24                      fild dword ptr [esp]
+0603467B  58                            pop eax
+
+#16			MUL		i_Area_Tank2	{LNXT:3|5|-1}
+(*) REAL
+0603467C  0F BF 0D CC CC CC CC          movsx ecx, word ptr [CCCCCCCCH] ; $$DATA$$+126
+06034683  51                            push ecx
+06034684  DB 04 24                      fild dword ptr [esp]
+06034687  D9 1C 24                      fstp dword ptr [esp]
+0603468A  59                            pop ecx
+0603468B  51                            push ecx
+0603468C  D8 0C 24                      fmul dword ptr [esp]
+0603468F  81 C4 04 00 00 00             add esp, 4
+
+#17			DIV		100	{LNXT:3|5|-1}
+(*) REAL
+06034695  68 64 00 00 00                push 100
+0603469A  DA 34 24                      fidiv [esp]
+0603469D  81 C4 04 00 00 00             add esp, 4
+
+#18			to_int	{LNXT:3|5|-1}
+(*) REAL
+060346A3  81 EC 08 00 00 00             sub esp, 8
+060346A9  DF 3C 24                      fistp qword ptr [esp]
+060346AC  58                            pop eax
+060346AD  81 C4 04 00 00 00             add esp, 4
+
+#19			ST		Tank2_lvl	{LNXT:3|5|-1}
+(*) INT
+060346B3  66 89 05 CC CC CC CC          mov [CCCCCCCCH], ax ; %M110+2
+
+#20		
+#21			(* Out_Flow1 := to_int(to_real(i_abc_Flow1) * 0.15); *)
+#22			LDP0		i_abc_Flow1	{LNXT:5|6|-1}
+(*) INT
+#23			to_real	{LNXT:5|6|-1}
+(*) INT
+060346BA  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; $$DATA$$+128
+060346C1  50                            push eax
+060346C2  DB 04 24                      fild dword ptr [esp]
+060346C5  58                            pop eax
+
+#24			MUL		0.15	{LNXT:5|6|-1}
+(*) REAL
+060346C6  D8 0D CC CC CC CC             fmul dword ptr [CCCCCCCCH] ; $$CODE$$+17584
+
+#25			to_int	{LNXT:5|6|-1}
+(*) REAL
+060346CC  81 EC 08 00 00 00             sub esp, 8
+060346D2  DF 3C 24                      fistp qword ptr [esp]
+060346D5  58                            pop eax
+060346D6  81 C4 04 00 00 00             add esp, 4
+
+#26			ST		Out_Flow1	{LNXT:5|6|-1}
+(*) INT
+060346DC  66 89 05 CC CC CC CC          mov [CCCCCCCCH], ax ; %M110+6
+
+#27		
+#28			(* Out_Flow2 := to_int(to_real(i_abc_Flow2) * 0.15); *)
+#29			LDP0		i_abc_Flow2	{LNXT:6|8|-1}
+(*) INT
+#30			to_real	{LNXT:6|8|-1}
+(*) INT
+060346E3  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; $$DATA$$+130
+060346EA  50                            push eax
+060346EB  DB 04 24                      fild dword ptr [esp]
+060346EE  58                            pop eax
+
+#31			MUL		0.15	{LNXT:6|8|-1}
+(*) REAL
+060346EF  D8 0D CC CC CC CC             fmul dword ptr [CCCCCCCCH] ; $$CODE$$+17584
+
+#32			to_int	{LNXT:6|8|-1}
+(*) REAL
+060346F5  81 EC 08 00 00 00             sub esp, 8
+060346FB  DF 3C 24                      fistp qword ptr [esp]
+060346FE  58                            pop eax
+060346FF  81 C4 04 00 00 00             add esp, 4
+
+#33			ST		Out_Flow2	{LNXT:6|8|-1}
+(*) INT
+06034705  66 89 05 CC CC CC CC          mov [CCCCCCCCH], ax ; %M110+8
+
+#34		
+#35			(* Pressure_out1_cool := to_int(to_real(Pressure_out1-200))*2; *)
+#36			LD		Pressure_out1	{LNXT:8|2|-1}
+(*) UNDEF
+0603470C  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; %M110+14
+
+#37			SUB		200	{LNXT:8|2|-1}
+(*) INT
+06034713  2D C8 00 00 00                sub eax, 200
+
+#38			to_real	{LNXT:8|2|-1}
+(*) INT
+06034718  50                            push eax
+06034719  DB 04 24                      fild dword ptr [esp]
+0603471C  58                            pop eax
+
+#39			to_int	{LNXT:8|2|-1}
+(*) REAL
+0603471D  81 EC 08 00 00 00             sub esp, 8
+06034723  DF 3C 24                      fistp qword ptr [esp]
+06034726  58                            pop eax
+06034727  81 C4 04 00 00 00             add esp, 4
+
+#40			MUL		2	{LNXT:8|2|-1}
+(*) INT
+0603472D  B9 02 00 00 00                mov ecx, 2
+06034732  F7 E9                         imul ecx
+
+#41			ST		Pressure_out1_cool	{LNXT:8|2|-1}
+(*) INT
+06034734  66 89 05 CC CC CC CC          mov [CCCCCCCCH], ax ; %M110+26
+
+END_PROGRAM
+**************************************************
+	List program: Auto_sv
+**************************************************
+
+PROGRAM Auto_sv
+
+        VAR
+level : INT;
+level_temp : INT;
+Ton_lvl : TON;
+Ton_lvl2 : TON;
+Ton_lvl3 : TON;
+Ton_lvl4 : TON;
+Ton_lvl_temp : TON;
+Ton_Lvl_stan : BOOL;
+Time_System : DINT;
+	END_VAR
+
+END_PROGRAM
+
+#0		{SRC:Auto_sv}
+#1		(*$WAITSWITCH$*)
+#2		
+#3			(* level:=Tank1_lvl + Tank2_lvl; *)
+#4			LD		Tank1_lvl	{LNXT:1|3|-1}
+(*) UNDEF
+0603473B  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; %M110+0
+
+#5			ADD		Tank2_lvl	{LNXT:1|3|-1}
+(*) INT
+06034742  0F BF 0D CC CC CC CC          movsx ecx, word ptr [CCCCCCCCH] ; %M110+2
+06034749  03 C1                         add eax, ecx
+
+#6			ST		level	{LNXT:1|3|-1}
+(*) INT
+0603474B  66 89 05 CC CC CC CC          mov [CCCCCCCCH], ax ; $$DATA$$+12
+
+#7		
+#8		
+#9			(* IF i_Sv_Auto > 0 *)
+#10			LD		i_Sv_Auto	{LNXT:3|-1|-1}
+(*) UNDEF
+06034752  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; $$DATA$$+14
+
+#11			GT		0	{LNXT:3|-1|-1}
+(*) INT
+06034759  3D 00 00 00 00                cmp eax, 0
+0603475E  0F 9F C0                      setg al
+06034761  25 FF 00 00 00                and eax, 0FFh
+
+#12			JMPCN	$label0	{LNXT:3|4|1}
+(-) BOOL
+06034766  84 C0                         test al, al
+06034768  0F 84 D0 02 00 00             je 06034A3EH
+
+#13		
+#14			(* THEN *)
+#15		
+#16		
+#17				(* IF level >= ep_iTank_Lvl_max *)
+#18				LD		level	{LNXT:4|-1|-1}
+(*) UNDEF
+0603476E  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; $$DATA$$+12
+
+#19				GE		ep_iTank_Lvl_max	{LNXT:4|-1|-1}
+(*) INT
+06034775  0F BF 0D CC CC CC CC          movsx ecx, word ptr [CCCCCCCCH] ; %M101+6
+0603477C  3B C1                         cmp eax, ecx
+0603477E  0F 9D C0                      setge al
+06034781  25 FF 00 00 00                and eax, 0FFh
+
+#20				JMPCN	$label1	{LNXT:4|5|17}
+(-) BOOL
+06034786  84 C0                         test al, al
+06034788  0F 84 D5 00 00 00             je 06034863H
+
+#21		
+#22				(* THEN *)
+#23		
+#24					(* level_temp:=level; *)
+#25					MOVE		level,level_temp	{LNXT:5|6|-1}
+(*) BOOL
+0603478E  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; $$DATA$$+12
+06034795  66 89 05 CC CC CC CC          mov [CCCCCCCCH], ax ; $$DATA$$+16
+
+#26		
+#27					(* Ton_lvl_temp *)
+#28					MOVE		True,Ton_lvl_temp.IN	{LNXT:6|-1|-1}
+(*) INT
+0603479C  B8 01 00 00 00                mov eax, 01H
+060347A1  84 C0                         test al, al
+060347A3  0F 95 05 CC CC CC CC          setne [CCCCCCCCH] ; $$DATA$$+22
+
+#29					MOVE		3000,Ton_lvl_temp.PT	{LNXT:6|-1|-1}
+(*) BOOL
+060347AA  B8 B8 0B 00 00                mov eax, 0BB8H
+060347AF  89 05 CC CC CC CC             mov [CCCCCCCCH], eax ; $$DATA$$+23
+
+#30					CAL		Ton_lvl_temp	{LNXT:6|7|-1}
+(*) UDINT
+060347B5  50                            push eax
+060347B6  BB CC CC CC CC                mov ebx, CCCCCCCCH ; $$DATA$$+18
+060347BB  E8 00 FD FF FF                call 060344C0H ; $$CODE$$+17600
+060347C0  58                            pop eax
+
+#31		
+#32		
+#33					(* IF Ton_lvl_temp.Q) and level>=level_temp *)
+#34					LD		level	{LNXT:7|-1|-1}
+(*) UNDEF
+060347C1  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; $$DATA$$+12
+
+#35					GE		level_temp	{LNXT:7|-1|-1}
+(*) INT
+060347C8  0F BF 0D CC CC CC CC          movsx ecx, word ptr [CCCCCCCCH] ; $$DATA$$+16
+060347CF  3B C1                         cmp eax, ecx
+060347D1  0F 9D C0                      setge al
+060347D4  25 FF 00 00 00                and eax, 0FFh
+
+#36					AND		Ton_lvl_temp.Q	{LNXT:7|-1|-1}
+(*) BOOL
+060347D9  33 C9                         xor ecx, ecx
+060347DB  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; $$DATA$$+27
+060347E1  23 C1                         and eax, ecx
+
+#37					JMPCN	$label2	{LNXT:7|8|17}
+(-) BOOL
+060347E3  84 C0                         test al, al
+060347E5  90 74 7B 90 90 90             je 06034863H
+
+#38		
+#39					(* THEN *)
+#40		
+#41						(* sv2_start := FALSE; *)
+#42						MOVE		FALSE,sv2_start	{LNXT:8|9|-1}
+(*) BOOL
+060347EB  B8 00 00 00 00                mov eax, 00H
+060347F0  84 C0                         test al, al
+060347F2  0F 95 05 CC CC CC CC          setne [CCCCCCCCH] ; $$DATA$$+40
+
+#43		
+#44						(* sv3_start := FALSE; *)
+#45						MOVE		FALSE,sv3_start	{LNXT:9|10|-1}
+(*) BOOL
+060347F9  B8 00 00 00 00                mov eax, 00H
+060347FE  84 C0                         test al, al
+06034800  0F 95 05 CC CC CC CC          setne [CCCCCCCCH] ; $$DATA$$+41
+
+#46		
+#47						(* sv4_start := FALSE; *)
+#48						MOVE		FALSE,sv4_start	{LNXT:10|11|-1}
+(*) BOOL
+06034807  B8 00 00 00 00                mov eax, 00H
+0603480C  84 C0                         test al, al
+0603480E  0F 95 05 CC CC CC CC          setne [CCCCCCCCH] ; $$DATA$$+42
+
+#49		
+#50						(* Ton_lvl *)
+#51						MOVE		False,Ton_lvl.IN	{LNXT:11|-1|-1}
+(*) BOOL
+06034815  B8 00 00 00 00                mov eax, 00H
+0603481A  84 C0                         test al, al
+0603481C  0F 95 05 CC CC CC CC          setne [CCCCCCCCH] ; $$DATA$$+48
+
+#52						CAL		Ton_lvl	{LNXT:11|12|-1}
+(*) BOOL
+06034823  50                            push eax
+06034824  BB CC CC CC CC                mov ebx, CCCCCCCCH ; $$DATA$$+44
+06034829  E8 92 FC FF FF                call 060344C0H ; $$CODE$$+17600
+0603482E  58                            pop eax
+
+#53		
+#54						(* Ton_lvl2 *)
+#55						MOVE		False,Ton_lvl2.IN	{LNXT:12|-1|-1}
+(*) BOOL
+0603482F  B8 00 00 00 00                mov eax, 00H
+06034834  84 C0                         test al, al
+06034836  0F 95 05 CC CC CC CC          setne [CCCCCCCCH] ; $$DATA$$+70
+
+#56						CAL		Ton_lvl2	{LNXT:12|13|-1}
+(*) BOOL
+0603483D  50                            push eax
+0603483E  BB CC CC CC CC                mov ebx, CCCCCCCCH ; $$DATA$$+66
+06034843  E8 78 FC FF FF                call 060344C0H ; $$CODE$$+17600
+06034848  58                            pop eax
+
+#57		
+#58						(* Ton_lvl4 *)
+#59						MOVE		False,Ton_lvl4.IN	{LNXT:13|-1|-1}
+(*) BOOL
+06034849  B8 00 00 00 00                mov eax, 00H
+0603484E  84 C0                         test al, al
+06034850  0F 95 05 CC CC CC CC          setne [CCCCCCCCH] ; $$DATA$$+92
+
+#60						CAL		Ton_lvl4	{LNXT:13|17|-1}
+(*) BOOL
+06034857  50                            push eax
+06034858  BB CC CC CC CC                mov ebx, CCCCCCCCH ; $$DATA$$+88
+0603485D  E8 5E FC FF FF                call 060344C0H ; $$CODE$$+17600
+06034862  58                            pop eax
+
+#61		
+#62		$label2:
+#63					(* END_IF *)
+#64		
+#65		$label1:
+#66				(* END_IF *)
+#67		
+#68		
+#69				(* IF level <= ep_iTank_Lvl_min and sv5_start *)
+#70				LD		level	{LNXT:17|-1|-1}
+(*) UNDEF
+06034863  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; $$DATA$$+12
+
+#71				LE		ep_iTank_Lvl_min	{LNXT:17|-1|-1}
+(*) INT
+0603486A  0F BF 0D CC CC CC CC          movsx ecx, word ptr [CCCCCCCCH] ; %M101+4
+06034871  3B C1                         cmp eax, ecx
+06034873  0F 9E C0                      setle al
+06034876  25 FF 00 00 00                and eax, 0FFh
+
+#72				AND		sv5_start	{LNXT:17|-1|-1}
+(*) BOOL
+0603487B  33 C9                         xor ecx, ecx
+0603487D  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; $$DATA$$+43
+06034883  23 C1                         and eax, ecx
+
+#73				JMPCN	$label3	{LNXT:17|18|1}
+(-) BOOL
+06034885  84 C0                         test al, al
+06034887  0F 84 B1 01 00 00             je 06034A3EH
+
+#74		
+#75				(* THEN *)
+#76		
+#77					(* Ton_lvl_temp *)
+#78					MOVE		FALSE,Ton_lvl_temp.IN	{LNXT:18|-1|-1}
+(*) BOOL
+0603488D  B8 00 00 00 00                mov eax, 00H
+06034892  84 C0                         test al, al
+06034894  0F 95 05 CC CC CC CC          setne [CCCCCCCCH] ; $$DATA$$+22
+
+#79					CAL		Ton_lvl_temp	{LNXT:18|19|-1}
+(*) BOOL
+0603489B  50                            push eax
+0603489C  BB CC CC CC CC                mov ebx, CCCCCCCCH ; $$DATA$$+18
+060348A1  E8 1A FC FF FF                call 060344C0H ; $$CODE$$+17600
+060348A6  58                            pop eax
+
+#80		
+#81					(* level_temp:=level; *)
+#82					MOVE		level,level_temp	{LNXT:19|20|-1}
+(*) BOOL
+060348A7  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; $$DATA$$+12
+060348AE  66 89 05 CC CC CC CC          mov [CCCCCCCCH], ax ; $$DATA$$+16
+
+#83		
+#84					(* Ton_lvl *)
+#85					MOVE		True,Ton_lvl.IN	{LNXT:20|-1|-1}
+(*) INT
+060348B5  B8 01 00 00 00                mov eax, 01H
+060348BA  84 C0                         test al, al
+060348BC  0F 95 05 CC CC CC CC          setne [CCCCCCCCH] ; $$DATA$$+48
+
+#86					MOVE		3000,Ton_lvl.PT	{LNXT:20|-1|-1}
+(*) BOOL
+060348C3  B8 B8 0B 00 00                mov eax, 0BB8H
+060348C8  89 05 CC CC CC CC             mov [CCCCCCCCH], eax ; $$DATA$$+49
+
+#87					CAL		Ton_lvl	{LNXT:20|21|-1}
+(*) UDINT
+060348CE  50                            push eax
+060348CF  BB CC CC CC CC                mov ebx, CCCCCCCCH ; $$DATA$$+44
+060348D4  E8 E7 FB FF FF                call 060344C0H ; $$CODE$$+17600
+060348D9  58                            pop eax
+
+#88		
+#89		
+#90					(* IF Ton_lvl.Q) and level<=level_temp *)
+#91					LD		level	{LNXT:21|-1|-1}
+(*) UNDEF
+060348DA  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; $$DATA$$+12
+
+#92					LE		level_temp	{LNXT:21|-1|-1}
+(*) INT
+060348E1  0F BF 0D CC CC CC CC          movsx ecx, word ptr [CCCCCCCCH] ; $$DATA$$+16
+060348E8  3B C1                         cmp eax, ecx
+060348EA  0F 9E C0                      setle al
+060348ED  25 FF 00 00 00                and eax, 0FFh
+
+#93					AND		Ton_lvl.Q	{LNXT:21|-1|-1}
+(*) BOOL
+060348F2  33 C9                         xor ecx, ecx
+060348F4  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; $$DATA$$+53
+060348FA  23 C1                         and eax, ecx
+
+#94					JMPCN	$label4	{LNXT:21|22|25}
+(-) BOOL
+060348FC  84 C0                         test al, al
+060348FE  90 74 11 90 90 90             je 06034912H
+
+#95		
+#96					(* THEN *)
+#97		
+#98						(* sv2_start := true; *)
+#99						MOVE		true,sv2_start	{LNXT:22|25|-1}
+(*) BOOL
+06034904  B8 01 00 00 00                mov eax, 01H
+06034909  84 C0                         test al, al
+0603490B  0F 95 05 CC CC CC CC          setne [CCCCCCCCH] ; $$DATA$$+40
+
+#100		
+#101		$label4:
+#102					(* END_IF *)
+#103		
+#104		
+#105					(* IF level <= ep_iTank_Lvl_min and sv5_start and sv2_start *)
+#106					LD		level	{LNXT:25|-1|-1}
+(*) UNDEF
+06034912  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; $$DATA$$+12
+
+#107					LE		ep_iTank_Lvl_min	{LNXT:25|-1|-1}
+(*) INT
+06034919  0F BF 0D CC CC CC CC          movsx ecx, word ptr [CCCCCCCCH] ; %M101+4
+06034920  3B C1                         cmp eax, ecx
+06034922  0F 9E C0                      setle al
+06034925  25 FF 00 00 00                and eax, 0FFh
+
+#108					AND		sv5_start	{LNXT:25|-1|-1}
+(*) BOOL
+0603492A  33 C9                         xor ecx, ecx
+0603492C  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; $$DATA$$+43
+06034932  23 C1                         and eax, ecx
+
+#109					AND		sv2_start	{LNXT:25|-1|-1}
+(*) BOOL
+06034934  33 C9                         xor ecx, ecx
+06034936  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; $$DATA$$+40
+0603493C  23 C1                         and eax, ecx
+
+#110					JMPCN	$label5	{LNXT:25|26|1}
+(-) BOOL
+0603493E  84 C0                         test al, al
+06034940  0F 84 F8 00 00 00             je 06034A3EH
+
+#111		
+#112					(* THEN *)
+#113		
+#114						(* Ton_lvl2 *)
+#115						MOVE		true,Ton_lvl2.IN	{LNXT:26|-1|-1}
+(*) BOOL
+06034946  B8 01 00 00 00                mov eax, 01H
+0603494B  84 C0                         test al, al
+0603494D  0F 95 05 CC CC CC CC          setne [CCCCCCCCH] ; $$DATA$$+70
+
+#116						MOVE		5000,Ton_lvl2.PT	{LNXT:26|-1|-1}
+(*) BOOL
+06034954  B8 88 13 00 00                mov eax, 1388H
+06034959  89 05 CC CC CC CC             mov [CCCCCCCCH], eax ; $$DATA$$+71
+
+#117						CAL		Ton_lvl2	{LNXT:26|27|-1}
+(*) UDINT
+0603495F  50                            push eax
+06034960  BB CC CC CC CC                mov ebx, CCCCCCCCH ; $$DATA$$+66
+06034965  E8 56 FB FF FF                call 060344C0H ; $$CODE$$+17600
+0603496A  58                            pop eax
+
+#118		
+#119		
+#120						(* IF Ton_lvl2.Q *)
+#121						LD		Ton_lvl2.Q	{LNXT:27|-1|-1}
+(*) UNDEF
+0603496B  33 C0                         xor eax, eax
+0603496D  8A 05 CC CC CC CC             mov al, [CCCCCCCCH] ; $$DATA$$+75
+
+#122						JMPCN	$label6	{LNXT:27|28|32}
+(-) BOOL
+06034973  84 C0                         test al, al
+06034975  90 74 2B 90 90 90             je 060349A3H
+
+#123		
+#124						(* THEN *)
+#125		
+#126							(* sv4_start := true; *)
+#127							MOVE		true,sv4_start	{LNXT:28|29|-1}
+(*) BOOL
+0603497B  B8 01 00 00 00                mov eax, 01H
+06034980  84 C0                         test al, al
+06034982  0F 95 05 CC CC CC CC          setne [CCCCCCCCH] ; $$DATA$$+42
+
+#128		
+#129							(* Ton_lvl2 *)
+#130							MOVE		False,Ton_lvl2.IN	{LNXT:29|-1|-1}
+(*) BOOL
+06034989  B8 00 00 00 00                mov eax, 00H
+0603498E  84 C0                         test al, al
+06034990  0F 95 05 CC CC CC CC          setne [CCCCCCCCH] ; $$DATA$$+70
+
+#131							CAL		Ton_lvl2	{LNXT:29|32|-1}
+(*) BOOL
+06034997  50                            push eax
+06034998  BB CC CC CC CC                mov ebx, CCCCCCCCH ; $$DATA$$+66
+0603499D  E8 1E FB FF FF                call 060344C0H ; $$CODE$$+17600
+060349A2  58                            pop eax
+
+#132		
+#133		$label6:
+#134						(* END_IF *)
+#135		
+#136		
+#137						(* IF level <= ep_iTank_Lvl_min and sv5_start and sv2_start and sv4_start *)
+#138						LD		level	{LNXT:32|-1|-1}
+(*) UNDEF
+060349A3  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; $$DATA$$+12
+
+#139						LE		ep_iTank_Lvl_min	{LNXT:32|-1|-1}
+(*) INT
+060349AA  0F BF 0D CC CC CC CC          movsx ecx, word ptr [CCCCCCCCH] ; %M101+4
+060349B1  3B C1                         cmp eax, ecx
+060349B3  0F 9E C0                      setle al
+060349B6  25 FF 00 00 00                and eax, 0FFh
+
+#140						AND		sv5_start	{LNXT:32|-1|-1}
+(*) BOOL
+060349BB  33 C9                         xor ecx, ecx
+060349BD  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; $$DATA$$+43
+060349C3  23 C1                         and eax, ecx
+
+#141						AND		sv2_start	{LNXT:32|-1|-1}
+(*) BOOL
+060349C5  33 C9                         xor ecx, ecx
+060349C7  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; $$DATA$$+40
+060349CD  23 C1                         and eax, ecx
+
+#142						AND		sv4_start	{LNXT:32|-1|-1}
+(*) BOOL
+060349CF  33 C9                         xor ecx, ecx
+060349D1  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; $$DATA$$+42
+060349D7  23 C1                         and eax, ecx
+
+#143						JMPCN	$label7	{LNXT:32|33|1}
+(-) BOOL
+060349D9  84 C0                         test al, al
+060349DB  90 74 60 90 90 90             je 06034A3EH
+
+#144		
+#145						(* THEN *)
+#146		
+#147							(* Ton_lvl4 *)
+#148							MOVE		true,Ton_lvl4.IN	{LNXT:33|-1|-1}
+(*) BOOL
+060349E1  B8 01 00 00 00                mov eax, 01H
+060349E6  84 C0                         test al, al
+060349E8  0F 95 05 CC CC CC CC          setne [CCCCCCCCH] ; $$DATA$$+92
+
+#149							MOVE		5000,Ton_lvl4.PT	{LNXT:33|-1|-1}
+(*) BOOL
+060349EF  B8 88 13 00 00                mov eax, 1388H
+060349F4  89 05 CC CC CC CC             mov [CCCCCCCCH], eax ; $$DATA$$+93
+
+#150							CAL		Ton_lvl4	{LNXT:33|34|-1}
+(*) UDINT
+060349FA  50                            push eax
+060349FB  BB CC CC CC CC                mov ebx, CCCCCCCCH ; $$DATA$$+88
+06034A00  E8 BB FA FF FF                call 060344C0H ; $$CODE$$+17600
+06034A05  58                            pop eax
+
+#151		
+#152		
+#153							(* IF Ton_lvl4.Q *)
+#154							LD		Ton_lvl4.Q	{LNXT:34|-1|-1}
+(*) UNDEF
+06034A06  33 C0                         xor eax, eax
+06034A08  8A 05 CC CC CC CC             mov al, [CCCCCCCCH] ; $$DATA$$+97
+
+#155							JMPCN	$label8	{LNXT:34|35|1}
+(-) BOOL
+06034A0E  84 C0                         test al, al
+06034A10  90 74 2B 90 90 90             je 06034A3EH
+
+#156		
+#157							(* THEN *)
+#158		
+#159								(* sv3_start := true; *)
+#160								MOVE		true,sv3_start	{LNXT:35|36|-1}
+(*) BOOL
+06034A16  B8 01 00 00 00                mov eax, 01H
+06034A1B  84 C0                         test al, al
+06034A1D  0F 95 05 CC CC CC CC          setne [CCCCCCCCH] ; $$DATA$$+41
+
+#161		
+#162								(* Ton_lvl4 *)
+#163								MOVE		False,Ton_lvl4.IN	{LNXT:36|-1|-1}
+(*) BOOL
+06034A24  B8 00 00 00 00                mov eax, 00H
+06034A29  84 C0                         test al, al
+06034A2B  0F 95 05 CC CC CC CC          setne [CCCCCCCCH] ; $$DATA$$+92
+
+#164								CAL		Ton_lvl4	{LNXT:36|1|-1}
+(*) BOOL
+06034A32  50                            push eax
+06034A33  BB CC CC CC CC                mov ebx, CCCCCCCCH ; $$DATA$$+88
+06034A38  E8 83 FA FF FF                call 060344C0H ; $$CODE$$+17600
+06034A3D  58                            pop eax
+
+END_PROGRAM
+**************************************************
+	List program: pr_Alarms
+**************************************************
+
+PROGRAM pr_Alarms
+
+END_PROGRAM
+
+#0		{SRC:pr_Alarms}
+#1		(*$WAITSWITCH$*)
+#2		
+#3			(* Alarms.0 := i_tank1_min; *)
+#4			MOVE		i_tank1_min,Alarms.0	{LNXT:1|2|-1}
+(*) UDINT
+06034A3E  33 C0                         xor eax, eax
+06034A40  8A 05 CC CC CC CC             mov al, [CCCCCCCCH] ; $$DATA$$+110
+06034A46  84 C0                         test al, al
+06034A48  90 75 11 90 90 90             jne 00000014H@
+06034A4E  66 0F BA 35 CC CC CC CC 00    btr word ptr [CCCCCCCCH], 0 ; %M110+10
+06034A57  EB 0C 90 90 90                jmp 0000000EH@
+06034A5C  66 0F BA 2D CC CC CC CC 00    bts word ptr [CCCCCCCCH], 0 ; %M110+10
+
+#5		
+#6			(* Alarms.1 := i_tank1_max; *)
+#7			MOVE		i_tank1_max,Alarms.1	{LNXT:2|3|-1}
+(*) BOOL
+06034A65  33 C0                         xor eax, eax
+06034A67  8A 05 CC CC CC CC             mov al, [CCCCCCCCH] ; $$DATA$$+132
+06034A6D  84 C0                         test al, al
+06034A6F  90 75 11 90 90 90             jne 00000014H@
+06034A75  66 0F BA 35 CC CC CC CC 01    btr word ptr [CCCCCCCCH], 1 ; %M110+10
+06034A7E  EB 0C 90 90 90                jmp 0000000EH@
+06034A83  66 0F BA 2D CC CC CC CC 01    bts word ptr [CCCCCCCCH], 1 ; %M110+10
+
+#8		
+#9			(* Alarms.2 := i_tank2_min; *)
+#10			MOVE		i_tank2_min,Alarms.2	{LNXT:3|4|-1}
+(*) BOOL
+06034A8C  33 C0                         xor eax, eax
+06034A8E  8A 05 CC CC CC CC             mov al, [CCCCCCCCH] ; $$DATA$$+133
+06034A94  84 C0                         test al, al
+06034A96  90 75 11 90 90 90             jne 00000014H@
+06034A9C  66 0F BA 35 CC CC CC CC 02    btr word ptr [CCCCCCCCH], 2 ; %M110+10
+06034AA5  EB 0C 90 90 90                jmp 0000000EH@
+06034AAA  66 0F BA 2D CC CC CC CC 02    bts word ptr [CCCCCCCCH], 2 ; %M110+10
+
+#11		
+#12			(* Alarms.3 := i_tank2_max; *)
+#13			MOVE		i_tank2_max,Alarms.3	{LNXT:4|5|-1}
+(*) BOOL
+06034AB3  33 C0                         xor eax, eax
+06034AB5  8A 05 CC CC CC CC             mov al, [CCCCCCCCH] ; $$DATA$$+134
+06034ABB  84 C0                         test al, al
+06034ABD  90 75 11 90 90 90             jne 00000014H@
+06034AC3  66 0F BA 35 CC CC CC CC 03    btr word ptr [CCCCCCCCH], 3 ; %M110+10
+06034ACC  EB 0C 90 90 90                jmp 0000000EH@
+06034AD1  66 0F BA 2D CC CC CC CC 03    bts word ptr [CCCCCCCCH], 3 ; %M110+10
+
+#14		
+#15			(* Alarms.4 := i_filtr1; *)
+#16			MOVE		i_filtr1,Alarms.4	{LNXT:5|6|-1}
+(*) BOOL
+06034ADA  33 C0                         xor eax, eax
+06034ADC  8A 05 CC CC CC CC             mov al, [CCCCCCCCH] ; %I10+1
+06034AE2  84 C0                         test al, al
+06034AE4  90 75 11 90 90 90             jne 00000014H@
+06034AEA  66 0F BA 35 CC CC CC CC 04    btr word ptr [CCCCCCCCH], 4 ; %M110+10
+06034AF3  EB 0C 90 90 90                jmp 0000000EH@
+06034AF8  66 0F BA 2D CC CC CC CC 04    bts word ptr [CCCCCCCCH], 4 ; %M110+10
+
+#17		
+#18			(* Alarms.5 := i_filtr2; *)
+#19			MOVE		i_filtr2,Alarms.5	{LNXT:6|7|-1}
+(*) BOOL
+06034B01  33 C0                         xor eax, eax
+06034B03  8A 05 CC CC CC CC             mov al, [CCCCCCCCH] ; %I10+2
+06034B09  84 C0                         test al, al
+06034B0B  90 75 11 90 90 90             jne 00000014H@
+06034B11  66 0F BA 35 CC CC CC CC 05    btr word ptr [CCCCCCCCH], 5 ; %M110+10
+06034B1A  EB 0C 90 90 90                jmp 0000000EH@
+06034B1F  66 0F BA 2D CC CC CC CC 05    bts word ptr [CCCCCCCCH], 5 ; %M110+10
+
+#20		
+#21			(* Alarms.6 := i_filtr3; *)
+#22			MOVE		i_filtr3,Alarms.6	{LNXT:7|8|-1}
+(*) BOOL
+06034B28  33 C0                         xor eax, eax
+06034B2A  8A 05 CC CC CC CC             mov al, [CCCCCCCCH] ; %I10+3
+06034B30  84 C0                         test al, al
+06034B32  90 75 11 90 90 90             jne 00000014H@
+06034B38  66 0F BA 35 CC CC CC CC 06    btr word ptr [CCCCCCCCH], 6 ; %M110+10
+06034B41  EB 0C 90 90 90                jmp 0000000EH@
+06034B46  66 0F BA 2D CC CC CC CC 06    bts word ptr [CCCCCCCCH], 6 ; %M110+10
+
+#23		
+#24			(* Alarms.7 := i_filtr4; *)
+#25			MOVE		i_filtr4,Alarms.7	{LNXT:8|9|-1}
+(*) BOOL
+06034B4F  33 C0                         xor eax, eax
+06034B51  8A 05 CC CC CC CC             mov al, [CCCCCCCCH] ; %I10+4
+06034B57  84 C0                         test al, al
+06034B59  90 75 11 90 90 90             jne 00000014H@
+06034B5F  66 0F BA 35 CC CC CC CC 07    btr word ptr [CCCCCCCCH], 7 ; %M110+10
+06034B68  EB 0C 90 90 90                jmp 0000000EH@
+06034B6D  66 0F BA 2D CC CC CC CC 07    bts word ptr [CCCCCCCCH], 7 ; %M110+10
+
+#26		
+#27			(* Alarms.8 := i_filtr5; *)
+#28			MOVE		i_filtr5,Alarms.8	{LNXT:9|10|-1}
+(*) BOOL
+06034B76  33 C0                         xor eax, eax
+06034B78  8A 05 CC CC CC CC             mov al, [CCCCCCCCH] ; %I10+5
+06034B7E  84 C0                         test al, al
+06034B80  90 75 11 90 90 90             jne 00000014H@
+06034B86  66 0F BA 35 CC CC CC CC 08    btr word ptr [CCCCCCCCH], 8 ; %M110+10
+06034B8F  EB 0C 90 90 90                jmp 0000000EH@
+06034B94  66 0F BA 2D CC CC CC CC 08    bts word ptr [CCCCCCCCH], 8 ; %M110+10
+
+#29		
+#30			(* Alarms.9 := i_filtr6; *)
+#31			MOVE		i_filtr6,Alarms.9	{LNXT:10|11|-1}
+(*) BOOL
+06034B9D  33 C0                         xor eax, eax
+06034B9F  8A 05 CC CC CC CC             mov al, [CCCCCCCCH] ; %I10+6
+06034BA5  84 C0                         test al, al
+06034BA7  90 75 11 90 90 90             jne 00000014H@
+06034BAD  66 0F BA 35 CC CC CC CC 09    btr word ptr [CCCCCCCCH], 9 ; %M110+10
+06034BB6  EB 0C 90 90 90                jmp 0000000EH@
+06034BBB  66 0F BA 2D CC CC CC CC 09    bts word ptr [CCCCCCCCH], 9 ; %M110+10
+
+#32		
+#33			(* Alarms.10 := i_filtr7; *)
+#34			MOVE		i_filtr7,Alarms.10	{LNXT:11|12|-1}
+(*) BOOL
+06034BC4  33 C0                         xor eax, eax
+06034BC6  8A 05 CC CC CC CC             mov al, [CCCCCCCCH] ; %I10+7
+06034BCC  84 C0                         test al, al
+06034BCE  90 75 11 90 90 90             jne 00000014H@
+06034BD4  66 0F BA 35 CC CC CC CC 0A    btr word ptr [CCCCCCCCH], 10 ; %M110+10
+06034BDD  EB 0C 90 90 90                jmp 0000000EH@
+06034BE2  66 0F BA 2D CC CC CC CC 0A    bts word ptr [CCCCCCCCH], 10 ; %M110+10
+
+#35		
+#36			(* Alarms.11 := i_filtr8; *)
+#37			MOVE		i_filtr8,Alarms.11	{LNXT:12|13|-1}
+(*) BOOL
+06034BEB  33 C0                         xor eax, eax
+06034BED  8A 05 CC CC CC CC             mov al, [CCCCCCCCH] ; %I10+8
+06034BF3  84 C0                         test al, al
+06034BF5  90 75 11 90 90 90             jne 00000014H@
+06034BFB  66 0F BA 35 CC CC CC CC 0B    btr word ptr [CCCCCCCCH], 11 ; %M110+10
+06034C04  EB 0C 90 90 90                jmp 0000000EH@
+06034C09  66 0F BA 2D CC CC CC CC 0B    bts word ptr [CCCCCCCCH], 11 ; %M110+10
+
+#38		
+#39			(* Alarms.12 :=i_rnpp; *)
+#40			MOVE		i_rnpp,Alarms.12	{LNXT:13|14|-1}
+(*) BOOL
+06034C12  33 C0                         xor eax, eax
+06034C14  8A 05 CC CC CC CC             mov al, [CCCCCCCCH] ; %I10+0
+06034C1A  84 C0                         test al, al
+06034C1C  90 75 11 90 90 90             jne 00000014H@
+06034C22  66 0F BA 35 CC CC CC CC 0C    btr word ptr [CCCCCCCCH], 12 ; %M110+10
+06034C2B  EB 0C 90 90 90                jmp 0000000EH@
+06034C30  66 0F BA 2D CC CC CC CC 0C    bts word ptr [CCCCCCCCH], 12 ; %M110+10
+
+#41		
+#42		
+#43			(* IF i_abc_Tank1_lvl <0 or i_abc_Tank1_lvl > 25000 *)
+#44			LD		i_abc_Tank1_lvl	{LNXT:14|-1|-1}
+(*) UNDEF
+06034C39  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; $$DATA$$+116
+
+#45			GT		25000	{LNXT:14|-1|-1}
+(*) INT
+06034C40  3D A8 61 00 00                cmp eax, 25000
+06034C45  0F 9F C0                      setg al
+06034C48  25 FF 00 00 00                and eax, 0FFh
+
+#46			OR(		i_abc_Tank1_lvl	{LNXT:14|-1|-1}
+(*) BOOL
+06034C4D  50                            push eax
+06034C4E  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; $$DATA$$+116
+
+#47			LT		0	{LNXT:14|-1|-1}
+(*) INT
+06034C55  3D 00 00 00 00                cmp eax, 0
+06034C5A  0F 9C C0                      setl al
+06034C5D  25 FF 00 00 00                and eax, 0FFh
+
+#48			)	{LNXT:14|-1|-1}
+(*) BOOL
+06034C62  8B C8                         mov ecx, eax
+06034C64  58                            pop eax
+06034C65  0B C1                         or eax, ecx
+
+#49			JMPCN	$label0	{LNXT:14|15|17}
+(-) BOOL
+06034C67  84 C0                         test al, al
+06034C69  90 74 2C 90 90 90             je 06034C98H
+
+#50		
+#51			(* THEN *)
+#52		
+#53				(* Alarms.13 := true; *)
+#54				MOVE		true,Alarms.13	{LNXT:15|20|-1}
+(*) BOOL
+06034C6F  B8 01 00 00 00                mov eax, 01H
+06034C74  84 C0                         test al, al
+06034C76  90 75 11 90 90 90             jne 00000014H@
+06034C7C  66 0F BA 35 CC CC CC CC 0D    btr word ptr [CCCCCCCCH], 13 ; %M110+10
+06034C85  EB 0C 90 90 90                jmp 0000000EH@
+06034C8A  66 0F BA 2D CC CC CC CC 0D    bts word ptr [CCCCCCCCH], 13 ; %M110+10
+
+#55				JMP		$label1	{LNXT:14|15|17}
+(-) WORD
+06034C93  EB 27 90 90 90                jmp 06034CBCH
+
+#56		$label0:
+#57		
+#58			(* ELSE *)
+#59		
+#60				(* Alarms.13 := False; *)
+#61				MOVE		False,Alarms.13	{LNXT:17|20|-1}
+(*) WORD
+06034C98  B8 00 00 00 00                mov eax, 00H
+06034C9D  84 C0                         test al, al
+06034C9F  90 75 11 90 90 90             jne 00000014H@
+06034CA5  66 0F BA 35 CC CC CC CC 0D    btr word ptr [CCCCCCCCH], 13 ; %M110+10
+06034CAE  EB 0C 90 90 90                jmp 0000000EH@
+06034CB3  66 0F BA 2D CC CC CC CC 0D    bts word ptr [CCCCCCCCH], 13 ; %M110+10
+
+#62		
+#63		$label1:
+#64			(* END_IF *)
+#65		
+#66		
+#67			(* IF i_abc_Tank1_lvl <0 or i_abc_Tank1_lvl > 25000 *)
+#68			LD		i_abc_Tank1_lvl	{LNXT:20|-1|-1}
+(*) UNDEF
+06034CBC  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; $$DATA$$+116
+
+#69			GT		25000	{LNXT:20|-1|-1}
+(*) INT
+06034CC3  3D A8 61 00 00                cmp eax, 25000
+06034CC8  0F 9F C0                      setg al
+06034CCB  25 FF 00 00 00                and eax, 0FFh
+
+#70			OR(		i_abc_Tank1_lvl	{LNXT:20|-1|-1}
+(*) BOOL
+06034CD0  50                            push eax
+06034CD1  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; $$DATA$$+116
+
+#71			LT		0	{LNXT:20|-1|-1}
+(*) INT
+06034CD8  3D 00 00 00 00                cmp eax, 0
+06034CDD  0F 9C C0                      setl al
+06034CE0  25 FF 00 00 00                and eax, 0FFh
+
+#72			)	{LNXT:20|-1|-1}
+(*) BOOL
+06034CE5  8B C8                         mov ecx, eax
+06034CE7  58                            pop eax
+06034CE8  0B C1                         or eax, ecx
+
+#73			JMPCN	$label2	{LNXT:20|21|23}
+(-) BOOL
+06034CEA  84 C0                         test al, al
+06034CEC  90 74 2C 90 90 90             je 06034D1BH
+
+#74		
+#75			(* THEN *)
+#76		
+#77				(* Alarms.14 := true; *)
+#78				MOVE		true,Alarms.14	{LNXT:21|1|-1}
+(*) BOOL
+06034CF2  B8 01 00 00 00                mov eax, 01H
+06034CF7  84 C0                         test al, al
+06034CF9  90 75 11 90 90 90             jne 00000014H@
+06034CFF  66 0F BA 35 CC CC CC CC 0E    btr word ptr [CCCCCCCCH], 14 ; %M110+10
+06034D08  EB 0C 90 90 90                jmp 0000000EH@
+06034D0D  66 0F BA 2D CC CC CC CC 0E    bts word ptr [CCCCCCCCH], 14 ; %M110+10
+
+#79				JMP		$label3	{LNXT:20|21|23}
+(-) WORD
+06034D16  EB 27 90 90 90                jmp 06034D3FH
+
+#80		$label2:
+#81		
+#82			(* ELSE *)
+#83		
+#84				(* Alarms.14 := False; *)
+#85				MOVE		False,Alarms.14	{LNXT:23|1|-1}
+(*) WORD
+06034D1B  B8 00 00 00 00                mov eax, 00H
+06034D20  84 C0                         test al, al
+06034D22  90 75 11 90 90 90             jne 00000014H@
+06034D28  66 0F BA 35 CC CC CC CC 0E    btr word ptr [CCCCCCCCH], 14 ; %M110+10
+06034D31  EB 0C 90 90 90                jmp 0000000EH@
+06034D36  66 0F BA 2D CC CC CC CC 0E    bts word ptr [CCCCCCCCH], 14 ; %M110+10
+
+END_PROGRAM
+**************************************************
+	List program: pr_auto_ns
+**************************************************
+
+PROGRAM pr_auto_ns
+
+        VAR
+i_time_hours : INT;
+	END_VAR
+
+END_PROGRAM
+
+#0		{SRC:pr_auto_ns}
+#1		(*$WAITSWITCH$*)
+#2		
+#3			(* i_time_hours := sysClock.hours; *)
+#4			MOVE		sysClock.hours,i_time_hours	{LNXT:1|3|-1}
+(*) UDINT
+06034D3F  33 C0                         xor eax, eax
+06034D41  8A 05 CC CC CC CC             mov al, [CCCCCCCCH] ; %M1+2
+06034D47  66 89 05 CC CC CC CC          mov [CCCCCCCCH], ax ; $$DATA$$+136
+
+#5		
+#6		
+#7			(* IF i_time_hours >= iDay_begin and i_time_hours<=iDay_end *)
+#8			LD		i_time_hours	{LNXT:3|-1|-1}
+(*) UNDEF
+06034D4E  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; $$DATA$$+136
+
+#9			LE		iDay_end	{LNXT:3|-1|-1}
+(*) INT
+06034D55  0F BF 0D CC CC CC CC          movsx ecx, word ptr [CCCCCCCCH] ; $$DATA$$+138
+06034D5C  3B C1                         cmp eax, ecx
+06034D5E  0F 9E C0                      setle al
+06034D61  25 FF 00 00 00                and eax, 0FFh
+
+#10			AND(		i_time_hours	{LNXT:3|-1|-1}
+(*) BOOL
+06034D66  50                            push eax
+06034D67  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; $$DATA$$+136
+
+#11			GE		iDay_begin	{LNXT:3|-1|-1}
+(*) INT
+06034D6E  0F BF 0D CC CC CC CC          movsx ecx, word ptr [CCCCCCCCH] ; $$DATA$$+140
+06034D75  3B C1                         cmp eax, ecx
+06034D77  0F 9D C0                      setge al
+06034D7A  25 FF 00 00 00                and eax, 0FFh
+
+#12			)	{LNXT:3|-1|-1}
+(*) BOOL
+06034D7F  8B C8                         mov ecx, eax
+06034D81  58                            pop eax
+06034D82  23 C1                         and eax, ecx
+
+#13			JMPCN	$label0	{LNXT:3|4|6}
+(-) BOOL
+06034D84  84 C0                         test al, al
+06034D86  90 74 14 90 90 90             je 06034D9DH
+
+#14		
+#15			(* THEN *)
+#16		
+#17				(* b_auto_d_n := TRUE; *)
+#18				MOVE		TRUE,b_auto_d_n	{LNXT:4|1|-1}
+(*) BOOL
+06034D8C  B8 01 00 00 00                mov eax, 01H
+06034D91  66 89 05 CC CC CC CC          mov [CCCCCCCCH], ax ; %M110+32
+
+#19				JMP		$label1	{LNXT:3|4|6}
+(-) INT
+06034D98  EB 0F 90 90 90                jmp 06034DA9H
+
+#20		$label0:
+#21		
+#22			(* ELSE *)
+#23		
+#24				(* b_auto_d_n := FALSE; *)
+#25				MOVE		FALSE,b_auto_d_n	{LNXT:6|1|-1}
+(*) INT
+06034D9D  B8 00 00 00 00                mov eax, 00H
+06034DA2  66 89 05 CC CC CC CC          mov [CCCCCCCCH], ax ; %M110+32
+
+06034DA9  61                            popad
+06034DAA  5D                            pop ebp
+
+06034DAB  C3                            ret
+
+END_PROGRAM
+
+
+**************************************************
+	Target variable image generation
+**************************************************
+
+
+*** INPUT:
+06034DAC  66 8B 0D CC CC CC CC          mov cx, [CCCCCCCCH] ; %I1+12
+06034DB3  66 89 0D CC CC CC CC          mov [CCCCCCCCH], cx ; $$DATA$$+14
+
+06034DBA  66 8B 0D CC CC CC CC          mov cx, [CCCCCCCCH] ; %I1+0
+06034DC1  66 89 0D CC CC CC CC          mov [CCCCCCCCH], cx ; $$DATA$$+116
+
+06034DC8  66 8B 0D CC CC CC CC          mov cx, [CCCCCCCCH] ; %I1+2
+06034DCF  66 89 0D CC CC CC CC          mov [CCCCCCCCH], cx ; $$DATA$$+122
+
+06034DD6  66 8B 0D CC CC CC CC          mov cx, [CCCCCCCCH] ; %I1+4
+06034DDD  66 89 0D CC CC CC CC          mov [CCCCCCCCH], cx ; $$DATA$$+128
+
+06034DE4  66 8B 0D CC CC CC CC          mov cx, [CCCCCCCCH] ; %I1+6
+06034DEB  66 89 0D CC CC CC CC          mov [CCCCCCCCH], cx ; $$DATA$$+130
+
+06034DF2  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; %I0+2
+06034DF8  88 0D CC CC CC CC             mov [CCCCCCCCH], cl ; $$DATA$$+110
+
+06034DFE  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; %I0+3
+06034E04  88 0D CC CC CC CC             mov [CCCCCCCCH], cl ; $$DATA$$+132
+
+06034E0A  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; %I0+4
+06034E10  88 0D CC CC CC CC             mov [CCCCCCCCH], cl ; $$DATA$$+133
+
+06034E16  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; %I0+5
+06034E1C  88 0D CC CC CC CC             mov [CCCCCCCCH], cl ; $$DATA$$+134
+
+06034E22  C3                            ret
+
+
+*** OUTPUT:
+06034E23  C3                            ret
+
+
+
+**************************************************
+	Task Timed init code
+**************************************************
+
+06034E24  55                            push ebp
+06034E25  8B EC                         mov ebp, esp
+
+06034E27  8B E5                         mov esp, ebp
+06034E29  5D                            pop ebp
+
+06034E2A  C3                            ret
+
+
+
+**************************************************
+	Global init code
+**************************************************
+
+06034E40  55                            push ebp
+06034E41  8B EC                         mov ebp, esp
+
+Var init: V:EMBEDDEDELEMENTS:$$POUCBARRAY$$BOOT = 0
+06034E43  B9 CC CC CC CC                mov ecx, CCCCCCCCH ; $$DATA$$+180
+06034E48  89 0D CC CC CC CC             mov [CCCCCCCCH], ecx ; $$DATA$$+144
+
+Var init: V:EMBEDDEDELEMENTS:$$POUCBARRAY$$SERV = 0
+06034E4E  B9 CC CC CC CC                mov ecx, CCCCCCCCH ; $$DATA$$+186
+06034E53  89 0D CC CC CC CC             mov [CCCCCCCCH], ecx ; $$DATA$$+152
+
+Var init: V:EMBEDDEDELEMENTS:$$POUCBARRAY$$TIMED = 0
+06034E59  B9 CC CC CC CC                mov ecx, CCCCCCCCH ; $$DATA$$+192
+06034E5E  89 0D CC CC CC CC             mov [CCCCCCCCH], ecx ; $$DATA$$+160
+06034E64  B9 CC CC CC CC                mov ecx, CCCCCCCCH ; $$DATA$$+198
+06034E69  89 0D CC CC CC CC             mov [CCCCCCCCH], ecx ; $$DATA$$+160
+06034E6F  B9 CC CC CC CC                mov ecx, CCCCCCCCH ; $$DATA$$+204
+06034E74  89 0D CC CC CC CC             mov [CCCCCCCCH], ecx ; $$DATA$$+160
+06034E7A  B9 CC CC CC CC                mov ecx, CCCCCCCCH ; $$DATA$$+210
+06034E7F  89 0D CC CC CC CC             mov [CCCCCCCCH], ecx ; $$DATA$$+160
+
+06034E85  8B E5                         mov esp, ebp
+06034E87  5D                            pop ebp
+
+06034E88  C3                            ret
+
+
+
+**************************************************
+	Global RETAIN init code
+**************************************************
+
+06034E89  55                            push ebp
+06034E8A  8B EC                         mov ebp, esp
+
+06034E8C  8B E5                         mov esp, ebp
+06034E8E  5D                            pop ebp
+
+06034E8F  C3                            ret
+
+
+
+**************************************************
+	Task $$VirtualTables init code
+**************************************************
+
+06034E90  55                            push ebp
+06034E91  8B EC                         mov ebp, esp
+
+06034E93  8B E5                         mov esp, ebp
+06034E95  5D                            pop ebp
+
+06034E96  C3                            ret
+
+
+
+********************************************
+MEMORY MAP
+********************************************
+
+Code area type:          		       main code
+Start code area:          		0000000006030000h
+End code area:            		0000000006035560h
+Code size:                		00005560h
+
+Start local data area:    		0000000005FB0000h
+End local data area:      		0000000005FB00D8h
+Local data size:          		000000D8h
+
+Start retentive data area:		0000000000000000h
+End retentive data area:  		0000000000000000h
+Retentive data size:      		00000000h
+
+Start bit data area:      		0000000000000000h
+End bit data area:        		0000000000000000h
+Bit data size:            		00000000h
+
+
+
+********************************************
+CODE ID:                                4194A33E
+DEBUG MEMO ID:                          000034F7
+FULL MEMO ID:                           0000A890
+RELOCATION ADDR:                        0000000006030000
+********************************************
