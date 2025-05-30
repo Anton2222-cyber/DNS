@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <plcProject caseSensitive="false" extendedIdNames="false" useCustomWorkspace="true" debugMode="false" extcheck="true" SFCControl="false" strictPointerCheck="false" strictInitValuesCheck="false" verboseWarningMode="false" iecTypeConversionRules="false" PNContactsOnEachNetwork="false" LocalVarsFBAccess="false" strictEnumsCheck="false" copyWarningThreshold="0" version="2.11" useLD2="true" useXPLCFiles="false" useFBMethods="false" customSortOfProjectTree="false" autoDerefPointers="false">
 	<image>DNS.imgx</image>
-	<commSettings>Modbus:1,1000,M#COM:4,38400,N,8,1,H</commSettings>
+	<commSettings>ModbusTCP:255,1000,M6#TCPIP:10.10.10.157/502,5000</commSettings>
 	<sources>
 		<main>
 			<resources>
@@ -63038,13 +63038,21 @@ HAOgUMvO52nzV8Kpw2xPH31hkpuiTcI+bixx9BFzpJnUBKBQ+85XbztQ+ql7bH8f/WfqmbpN
 		{G:"Status_variables"}
 	UVR_Flow_2 AT %MW110.62 : REAL := 0;
 		{G:"Status_variables"}
-	UVR_Counter_1 AT %MW110.64 : REAL := 0;
+	UVR_Counter_1_int AT %MW110.64 : REAL := 0;
 		{G:"Status_variables"}
-	UVR_Counter_2 AT %MW110.66 : REAL := 0;
+	UVR_Counter_2_int AT %MW110.66 : REAL := 0;
 		{G:"Status_variables"}
 	UVR_Flow_All AT %MW110.68 : REAL := 0;
 		{G:"Status_variables"}
-	UVR_Counter_All AT %MW110.70 : REAL := 0;
+	UVR_Counter_All_int AT %MW110.70 : REAL := 0;
+		{G:"Status_variables"}
+	UVR_Counter_1_float AT %MW110.72 : REAL := 0;
+		{G:"Status_variables"}
+	UVR_Counter_2_float AT %MW110.74 : REAL := 0;
+		{G:"Status_variables"}
+	UVR_Counter_All_float AT %MW110.76 : REAL := 0;
+		{G:"Status_variables"}
+	Plug AT %MW110.78 : REAL := 0;
 		{G:"IO_Mapping"}
 	i_abc_Tank1_lvl AT %IW1.0 : INT;  {DE:"AIL1 analogue input"}
 		{G:"IO_Mapping"}
@@ -63134,8 +63142,8 @@ HAOgUMvO52nzV8Kpw2xPH31hkpuiTcI+bixx9BFzpJnUBKBQ+85XbztQ+ql7bH8f/WfqmbpN
 				<![CDATA[(* Automatically generated, do not edit! *)
 
 VAR_GLOBAL CONSTANT
-$$ParDB : ARRAY[ 0..2375 ] OF USINT; { HIDDEN:ON } { INIT:"DNS.PLK+0" }
-$$ParDBLength  : DWORD := 66; { HIDDEN:ON }
+$$ParDB : ARRAY[ 0..2519 ] OF USINT; { HIDDEN:ON } { INIT:"DNS.PLK+0" }
+$$ParDBLength  : DWORD := 70; { HIDDEN:ON }
 END_VAR
 
 PROGRAM InitParDB WITH Serv;
@@ -63148,7 +63156,7 @@ PROGRAM InitParDB
 		dummyCrc32: UDINT;
 	END_VAR
 
-	dummyCrc32 := 3115158171;
+	dummyCrc32 := 428776436;
 
 	warningsKiller := sysDBase_SetExtTable( ADR( $$ParDB ), $$ParDBLength );
 
@@ -63179,7 +63187,7 @@ END_PROGRAM
 			</src>
 		</aux>
 		<workspace>
-			<root name="DNS" nextID="3447">
+			<root name="DNS" nextID="3632">
 				<GlobalVars name="Global_vars" id="11"/>
 				<Pou name="Auto_sv" id="2"/>
 				<Pou name="Pres_Freq_Flow" id="15"/>
@@ -63211,7 +63219,7 @@ END_PROGRAM
 	<resources>
 		<configuration template="EWApplication.pct" version="8">
 			<data>
-				<project_config nextID="104">
+				<project_config nextID="117">
 					<datacomment/>
 					<persistentVariables/>
 				</project_config>
@@ -65968,7 +65976,7 @@ END_PROGRAM
 								<ipa>5038</ipa>
 								<address>9013</address>
 								<name>UVR_Sensor_1</name>
-								<typepar>3</typepar>
+								<typepar>4</typepar>
 								<typetarg>REAL</typetarg>
 								<value>0</value>
 								<min/>
@@ -66017,7 +66025,7 @@ END_PROGRAM
 								<ipa>5039</ipa>
 								<address>9015</address>
 								<name>UVR_Sensor_2</name>
-								<typepar>3</typepar>
+								<typepar>4</typepar>
 								<typetarg>REAL</typetarg>
 								<value>0</value>
 								<min/>
@@ -66066,7 +66074,7 @@ END_PROGRAM
 								<ipa>5040</ipa>
 								<address>9017</address>
 								<name>UVR_Const_1</name>
-								<typepar>3</typepar>
+								<typepar>4</typepar>
 								<typetarg>REAL</typetarg>
 								<value>0</value>
 								<min/>
@@ -66115,7 +66123,7 @@ END_PROGRAM
 								<ipa>5041</ipa>
 								<address>9019</address>
 								<name>UVR_Const_2</name>
-								<typepar>3</typepar>
+								<typepar>4</typepar>
 								<typetarg>REAL</typetarg>
 								<value>0</value>
 								<min/>
@@ -66164,7 +66172,7 @@ END_PROGRAM
 								<ipa>5042</ipa>
 								<address>9021</address>
 								<name>UVR_Flow_1</name>
-								<typepar>3</typepar>
+								<typepar>4</typepar>
 								<typetarg>REAL</typetarg>
 								<value>0</value>
 								<min/>
@@ -66213,7 +66221,7 @@ END_PROGRAM
 								<ipa>5043</ipa>
 								<address>9023</address>
 								<name>UVR_Flow_2</name>
-								<typepar>3</typepar>
+								<typepar>4</typepar>
 								<typetarg>REAL</typetarg>
 								<value>0</value>
 								<min/>
@@ -66261,8 +66269,8 @@ END_PROGRAM
 							<param>
 								<ipa>5044</ipa>
 								<address>9025</address>
-								<name>UVR_Counter_1</name>
-								<typepar>3</typepar>
+								<name>UVR_Counter_1_int</name>
+								<typepar>4</typepar>
 								<typetarg>REAL</typetarg>
 								<value>0</value>
 								<min/>
@@ -66310,8 +66318,8 @@ END_PROGRAM
 							<param>
 								<ipa>5045</ipa>
 								<address>9027</address>
-								<name>UVR_Counter_2</name>
-								<typepar>3</typepar>
+								<name>UVR_Counter_2_int</name>
+								<typepar>4</typepar>
 								<typetarg>REAL</typetarg>
 								<value>0</value>
 								<min/>
@@ -66360,7 +66368,7 @@ END_PROGRAM
 								<ipa>5046</ipa>
 								<address>9029</address>
 								<name>UVR_Flow_All</name>
-								<typepar>3</typepar>
+								<typepar>4</typepar>
 								<typetarg>REAL</typetarg>
 								<value>0</value>
 								<min/>
@@ -66408,8 +66416,8 @@ END_PROGRAM
 							<param>
 								<ipa>5047</ipa>
 								<address>9031</address>
-								<name>UVR_Counter_All</name>
-								<typepar>3</typepar>
+								<name>UVR_Counter_All_int</name>
+								<typepar>4</typepar>
 								<typetarg>REAL</typetarg>
 								<value>0</value>
 								<min/>
@@ -66427,6 +66435,202 @@ END_PROGRAM
 								<shortname/>
 								<size>31</size>
 								<dataBlock>MW110.70</dataBlock>
+								<label/>
+								<translation/>
+								<visibility>0</visibility>
+								<clientType>0</clientType>
+								<descriptioncode>CUS40000</descriptioncode>
+								<descriptioncode_language/>
+								<progressive/>
+								<category>1</category>
+								<groups/>
+								<groups_language/>
+								<complemented>1</complemented>
+								<measurementunit>num</measurementunit>
+								<measurementunit_language>en-GB</measurementunit_language>
+								<existence>FIX(1)</existence>
+								<type>0</type>
+								<writesequence/>
+								<softscope>0</softscope>
+								<iotype/>
+								<iolabel/>
+								<wizard/>
+								<wizardgroup/>
+								<installeraccesslevel>0</installeraccesslevel>
+								<autogeneratedfrombusconfig>0</autogeneratedfrombusconfig>
+								<groupscode/>
+								<measurementunitcode>FIX(VMU00020)</measurementunitcode>
+								<TelevisIdentificationPar>0</TelevisIdentificationPar>
+							</param>
+							<param>
+								<ipa>5048</ipa>
+								<address>9033</address>
+								<name>UVR_Counter_1_float</name>
+								<typepar>4</typepar>
+								<typetarg>REAL</typetarg>
+								<value>0</value>
+								<min/>
+								<max/>
+								<ipamin/>
+								<ipamax/>
+								<scale>1</scale>
+								<offs>0</offs>
+								<um/>
+								<description/>
+								<note/>
+								<form/>
+								<accesslevel>3</accesslevel>
+								<readonly>0</readonly>
+								<shortname/>
+								<size>31</size>
+								<dataBlock>MW110.72</dataBlock>
+								<label/>
+								<translation/>
+								<visibility>0</visibility>
+								<clientType>0</clientType>
+								<descriptioncode>CUS40000</descriptioncode>
+								<descriptioncode_language/>
+								<progressive/>
+								<category>1</category>
+								<groups/>
+								<groups_language/>
+								<complemented>1</complemented>
+								<measurementunit>num</measurementunit>
+								<measurementunit_language>en-GB</measurementunit_language>
+								<existence>FIX(1)</existence>
+								<type>0</type>
+								<writesequence/>
+								<softscope>0</softscope>
+								<iotype/>
+								<iolabel/>
+								<wizard/>
+								<wizardgroup/>
+								<installeraccesslevel>0</installeraccesslevel>
+								<autogeneratedfrombusconfig>0</autogeneratedfrombusconfig>
+								<groupscode/>
+								<measurementunitcode>FIX(VMU00020)</measurementunitcode>
+								<TelevisIdentificationPar>0</TelevisIdentificationPar>
+							</param>
+							<param>
+								<ipa>5049</ipa>
+								<address>9035</address>
+								<name>UVR_Counter_2_float</name>
+								<typepar>4</typepar>
+								<typetarg>REAL</typetarg>
+								<value>0</value>
+								<min/>
+								<max/>
+								<ipamin/>
+								<ipamax/>
+								<scale>1</scale>
+								<offs>0</offs>
+								<um/>
+								<description/>
+								<note/>
+								<form/>
+								<accesslevel>3</accesslevel>
+								<readonly>0</readonly>
+								<shortname/>
+								<size>31</size>
+								<dataBlock>MW110.74</dataBlock>
+								<label/>
+								<translation/>
+								<visibility>0</visibility>
+								<clientType>0</clientType>
+								<descriptioncode>CUS40000</descriptioncode>
+								<descriptioncode_language/>
+								<progressive/>
+								<category>1</category>
+								<groups/>
+								<groups_language/>
+								<complemented>1</complemented>
+								<measurementunit>num</measurementunit>
+								<measurementunit_language>en-GB</measurementunit_language>
+								<existence>FIX(1)</existence>
+								<type>0</type>
+								<writesequence/>
+								<softscope>0</softscope>
+								<iotype/>
+								<iolabel/>
+								<wizard/>
+								<wizardgroup/>
+								<installeraccesslevel>0</installeraccesslevel>
+								<autogeneratedfrombusconfig>0</autogeneratedfrombusconfig>
+								<groupscode/>
+								<measurementunitcode>FIX(VMU00020)</measurementunitcode>
+								<TelevisIdentificationPar>0</TelevisIdentificationPar>
+							</param>
+							<param>
+								<ipa>5050</ipa>
+								<address>9037</address>
+								<name>UVR_Counter_All_float</name>
+								<typepar>4</typepar>
+								<typetarg>REAL</typetarg>
+								<value>0</value>
+								<min/>
+								<max/>
+								<ipamin/>
+								<ipamax/>
+								<scale>1</scale>
+								<offs>0</offs>
+								<um/>
+								<description/>
+								<note/>
+								<form/>
+								<accesslevel>3</accesslevel>
+								<readonly>0</readonly>
+								<shortname/>
+								<size>31</size>
+								<dataBlock>MW110.76</dataBlock>
+								<label/>
+								<translation/>
+								<visibility>0</visibility>
+								<clientType>0</clientType>
+								<descriptioncode>CUS40000</descriptioncode>
+								<descriptioncode_language/>
+								<progressive/>
+								<category>1</category>
+								<groups/>
+								<groups_language/>
+								<complemented>1</complemented>
+								<measurementunit>num</measurementunit>
+								<measurementunit_language>en-GB</measurementunit_language>
+								<existence>FIX(1)</existence>
+								<type>0</type>
+								<writesequence/>
+								<softscope>0</softscope>
+								<iotype/>
+								<iolabel/>
+								<wizard/>
+								<wizardgroup/>
+								<installeraccesslevel>0</installeraccesslevel>
+								<autogeneratedfrombusconfig>0</autogeneratedfrombusconfig>
+								<groupscode/>
+								<measurementunitcode>FIX(VMU00020)</measurementunitcode>
+								<TelevisIdentificationPar>0</TelevisIdentificationPar>
+							</param>
+							<param>
+								<ipa>5051</ipa>
+								<address>9039</address>
+								<name>Plug</name>
+								<typepar>4</typepar>
+								<typetarg>REAL</typetarg>
+								<value>0</value>
+								<min/>
+								<max/>
+								<ipamin/>
+								<ipamax/>
+								<scale>1</scale>
+								<offs>0</offs>
+								<um/>
+								<description/>
+								<note/>
+								<form/>
+								<accesslevel>3</accesslevel>
+								<readonly>0</readonly>
+								<shortname/>
+								<size>31</size>
+								<dataBlock>MW110.78</dataBlock>
 								<label/>
 								<translation/>
 								<visibility>0</visibility>
@@ -68003,259 +68207,16 @@ END_PROGRAM
 						</GenericRTU>
 						<GenericRTU template="ModbusGeneric\GenericNode\GenericRTU.pct" version="4" uniqueID="90" caption="UVR" name="Generic Modbus">
 							<GenericRTU_config>
-								<modbusAddress>7</modbusAddress>
+								<modbusAddress>3</modbusAddress>
 								<nodeNumber>3</nodeNumber>
 								<ip/>
 								<nodeID>1</nodeID>
 								<minPollTime>10</minPollTime>
 								<sendParams/>
-								<wordsOrder>0</wordsOrder>
+								<wordsOrder>2</wordsOrder>
 								<addressType>modbus</addressType>
 							</GenericRTU_config>
-							<FC03 template="ModbusGeneric\Messages\FC03.pct" version="2" uniqueID="93" caption="Modbus FC-03_20" name="Modbus FC-03">
-								<FC_config>
-									<block>input</block>
-									<funcode>3</funcode>
-									<type>word</type>
-									<startAddress>45823</startAddress>
-									<pollTime>0</pollTime>
-									<tmo>1000</tmo>
-									<FC_images_in>
-										<FC_image>
-											<label>UVR_Sensor_2</label>
-											<type>REAL</type>
-											<description/>
-											<dataBlock>MW110.54</dataBlock>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45823"/>
-										</FC_image>
-										<FC_image>
-											<label/>
-											<type/>
-											<description/>
-											<dataBlock/>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45824"/>
-										</FC_image>
-									</FC_images_in>
-									<turnAround>10</turnAround>
-								</FC_config>
-							</FC03>
-							<FC03 template="ModbusGeneric\Messages\FC03.pct" version="2" uniqueID="94" caption="Modbus FC-03_21" name="Modbus FC-03">
-								<FC_config>
-									<block>input</block>
-									<funcode>3</funcode>
-									<type>word</type>
-									<startAddress>45825</startAddress>
-									<pollTime>0</pollTime>
-									<tmo>1000</tmo>
-									<FC_images_in>
-										<FC_image>
-											<label>UVR_Sensor_2</label>
-											<type>REAL</type>
-											<description/>
-											<dataBlock>MW110.54</dataBlock>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45825"/>
-										</FC_image>
-										<FC_image>
-											<label/>
-											<type/>
-											<description/>
-											<dataBlock/>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45826"/>
-										</FC_image>
-									</FC_images_in>
-									<turnAround>10</turnAround>
-								</FC_config>
-							</FC03>
-							<FC03 template="ModbusGeneric\Messages\FC03.pct" version="2" uniqueID="95" caption="Modbus FC-03_22" name="Modbus FC-03">
-								<FC_config>
-									<block>input</block>
-									<funcode>3</funcode>
-									<type>word</type>
-									<startAddress>45827</startAddress>
-									<pollTime>0</pollTime>
-									<tmo>1000</tmo>
-									<FC_images_in>
-										<FC_image>
-											<label>UVR_Const_2</label>
-											<type>REAL</type>
-											<description/>
-											<dataBlock>MW110.58</dataBlock>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45827"/>
-										</FC_image>
-										<FC_image>
-											<label/>
-											<type/>
-											<description/>
-											<dataBlock/>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45828"/>
-										</FC_image>
-									</FC_images_in>
-									<turnAround>10</turnAround>
-								</FC_config>
-							</FC03>
-							<FC03 template="ModbusGeneric\Messages\FC03.pct" version="2" uniqueID="96" caption="Modbus FC-03_23" name="Modbus FC-03">
-								<FC_config>
-									<block>input</block>
-									<funcode>3</funcode>
-									<type>word</type>
-									<startAddress>45829</startAddress>
-									<pollTime>0</pollTime>
-									<tmo>1000</tmo>
-									<FC_images_in>
-										<FC_image>
-											<label>UVR_Flow_1</label>
-											<type>REAL</type>
-											<description/>
-											<dataBlock>MW110.60</dataBlock>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45829"/>
-										</FC_image>
-										<FC_image>
-											<label/>
-											<type/>
-											<description/>
-											<dataBlock/>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in"/>
-										</FC_image>
-									</FC_images_in>
-									<turnAround>10</turnAround>
-								</FC_config>
-							</FC03>
-							<FC03 template="ModbusGeneric\Messages\FC03.pct" version="2" uniqueID="97" caption="Modbus FC-03_24" name="Modbus FC-03">
-								<FC_config>
-									<block>input</block>
-									<funcode>3</funcode>
-									<type>word</type>
-									<startAddress>45831</startAddress>
-									<pollTime>0</pollTime>
-									<tmo>1000</tmo>
-									<FC_images_in>
-										<FC_image>
-											<label>UVR_Flow_2</label>
-											<type>REAL</type>
-											<description/>
-											<dataBlock>MW110.62</dataBlock>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45831"/>
-										</FC_image>
-										<FC_image>
-											<label/>
-											<type/>
-											<description/>
-											<dataBlock/>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in"/>
-										</FC_image>
-									</FC_images_in>
-									<turnAround>10</turnAround>
-								</FC_config>
-							</FC03>
-							<FC03 template="ModbusGeneric\Messages\FC03.pct" version="2" uniqueID="98" caption="Modbus FC-03_25" name="Modbus FC-03">
-								<FC_config>
-									<block>input</block>
-									<funcode>3</funcode>
-									<type>word</type>
-									<startAddress>45833</startAddress>
-									<pollTime>0</pollTime>
-									<tmo>1000</tmo>
-									<FC_images_in>
-										<FC_image>
-											<label>UVR_Counter_1</label>
-											<type>REAL</type>
-											<description/>
-											<dataBlock>MW110.64</dataBlock>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45833"/>
-										</FC_image>
-										<FC_image>
-											<label/>
-											<type/>
-											<description/>
-											<dataBlock/>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in"/>
-										</FC_image>
-									</FC_images_in>
-									<turnAround>10</turnAround>
-								</FC_config>
-							</FC03>
-							<FC03 template="ModbusGeneric\Messages\FC03.pct" version="2" uniqueID="99" caption="Modbus FC-03_26" name="Modbus FC-03">
-								<FC_config>
-									<block>input</block>
-									<funcode>3</funcode>
-									<type>word</type>
-									<startAddress>45837</startAddress>
-									<pollTime>0</pollTime>
-									<tmo>1000</tmo>
-									<FC_images_in>
-										<FC_image>
-											<label>UVR_Counter_2</label>
-											<type>REAL</type>
-											<description/>
-											<dataBlock>MW110.66</dataBlock>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45837"/>
-										</FC_image>
-										<FC_image>
-											<label/>
-											<type/>
-											<description/>
-											<dataBlock/>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in"/>
-										</FC_image>
-									</FC_images_in>
-									<turnAround>10</turnAround>
-								</FC_config>
-							</FC03>
-							<FC03 template="ModbusGeneric\Messages\FC03.pct" version="2" uniqueID="100" caption="Modbus FC-03_27" name="Modbus FC-03">
-								<FC_config>
-									<block>input</block>
-									<funcode>3</funcode>
-									<type>word</type>
-									<startAddress>45841</startAddress>
-									<pollTime>0</pollTime>
-									<tmo>1000</tmo>
-									<FC_images_in>
-										<FC_image>
-											<label>UVR_Flow_All</label>
-											<type>REAL</type>
-											<description/>
-											<dataBlock>MW110.68</dataBlock>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45841"/>
-										</FC_image>
-										<FC_image>
-											<label/>
-											<type/>
-											<description/>
-											<dataBlock/>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in"/>
-										</FC_image>
-									</FC_images_in>
-									<turnAround>10</turnAround>
-								</FC_config>
-							</FC03>
-							<FC03 template="ModbusGeneric\Messages\FC03.pct" version="2" uniqueID="101" caption="Modbus FC-03_28" name="Modbus FC-03">
-								<FC_config>
-									<block>input</block>
-									<funcode>3</funcode>
-									<type>word</type>
-									<startAddress>45843</startAddress>
-									<pollTime>0</pollTime>
-									<tmo>1000</tmo>
-									<FC_images_in>
-										<FC_image>
-											<label>UVR_Counter_All</label>
-											<type>REAL</type>
-											<description/>
-											<dataBlock>MW110.70</dataBlock>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45843"/>
-										</FC_image>
-										<FC_image>
-											<label/>
-											<type/>
-											<description/>
-											<dataBlock/>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in"/>
-										</FC_image>
-									</FC_images_in>
-									<turnAround>10</turnAround>
-								</FC_config>
-							</FC03>
-							<FC03 template="ModbusGeneric\Messages\FC03.pct" version="2" uniqueID="102" caption="Modbus FC-03_19" name="Modbus FC-03">
+							<FC03 template="ModbusGeneric\Messages\FC03.pct" version="2" uniqueID="113" caption="Modbus FC-03_19" name="Modbus FC-03">
 								<FC_config>
 									<block>input</block>
 									<funcode>3</funcode>
@@ -68276,7 +68237,230 @@ END_PROGRAM
 											<type/>
 											<description/>
 											<dataBlock/>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in"/>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45822"/>
+										</FC_image>
+										<FC_image>
+											<label>UVR_Sensor_2</label>
+											<type>REAL</type>
+											<description/>
+											<dataBlock>MW110.54</dataBlock>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45823"/>
+										</FC_image>
+										<FC_image>
+											<label/>
+											<type/>
+											<description/>
+											<dataBlock/>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45824"/>
+										</FC_image>
+										<FC_image>
+											<label>UVR_Const_1</label>
+											<type>REAL</type>
+											<description/>
+											<dataBlock>MW110.56</dataBlock>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45825"/>
+										</FC_image>
+										<FC_image>
+											<label/>
+											<type/>
+											<description/>
+											<dataBlock/>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45826"/>
+										</FC_image>
+										<FC_image>
+											<label>UVR_Const_2</label>
+											<type>REAL</type>
+											<description/>
+											<dataBlock>MW110.58</dataBlock>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45827"/>
+										</FC_image>
+										<FC_image>
+											<label/>
+											<type/>
+											<description/>
+											<dataBlock/>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45828"/>
+										</FC_image>
+										<FC_image>
+											<label>UVR_Flow_1</label>
+											<type>REAL</type>
+											<description/>
+											<dataBlock>MW110.60</dataBlock>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45829"/>
+										</FC_image>
+										<FC_image>
+											<label/>
+											<type/>
+											<description/>
+											<dataBlock/>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45830"/>
+										</FC_image>
+										<FC_image>
+											<label>UVR_Flow_2</label>
+											<type>REAL</type>
+											<description/>
+											<dataBlock>MW110.62</dataBlock>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45831"/>
+										</FC_image>
+										<FC_image>
+											<label/>
+											<type/>
+											<description/>
+											<dataBlock/>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45832"/>
+										</FC_image>
+										<FC_image>
+											<label>UVR_Counter_1_int</label>
+											<type>REAL</type>
+											<description/>
+											<dataBlock>MW110.64</dataBlock>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45833"/>
+										</FC_image>
+										<FC_image>
+											<label/>
+											<type/>
+											<description/>
+											<dataBlock/>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45834"/>
+										</FC_image>
+										<FC_image>
+											<label>UVR_Counter_1_float</label>
+											<type>REAL</type>
+											<description/>
+											<dataBlock>MW110.72</dataBlock>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45835"/>
+										</FC_image>
+										<FC_image>
+											<label/>
+											<type/>
+											<description/>
+											<dataBlock/>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45836"/>
+										</FC_image>
+									</FC_images_in>
+									<turnAround>10</turnAround>
+								</FC_config>
+							</FC03>
+							<FC03 template="ModbusGeneric\Messages\FC03.pct" version="2" uniqueID="115" caption="Modbus FC-03_20" name="Modbus FC-03">
+								<FC_config>
+									<block>input</block>
+									<funcode>3</funcode>
+									<type>word</type>
+									<startAddress>45837</startAddress>
+									<pollTime>0</pollTime>
+									<tmo>1000</tmo>
+									<FC_images_in>
+										<FC_image>
+											<label>Plug</label>
+											<type>REAL</type>
+											<description/>
+											<dataBlock>MW110.78</dataBlock>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45837"/>
+										</FC_image>
+										<FC_image>
+											<label/>
+											<type/>
+											<description/>
+											<dataBlock/>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45838"/>
+										</FC_image>
+										<FC_image>
+											<label>Plug</label>
+											<type>REAL</type>
+											<description/>
+											<dataBlock>MW110.78</dataBlock>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45839"/>
+										</FC_image>
+										<FC_image>
+											<label/>
+											<type/>
+											<description/>
+											<dataBlock/>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45840"/>
+										</FC_image>
+										<FC_image>
+											<label>Plug</label>
+											<type>REAL</type>
+											<description/>
+											<dataBlock>MW110.78</dataBlock>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45841"/>
+										</FC_image>
+										<FC_image>
+											<label/>
+											<type/>
+											<description/>
+											<dataBlock/>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45842"/>
+										</FC_image>
+										<FC_image>
+											<label>Plug</label>
+											<type>REAL</type>
+											<description/>
+											<dataBlock>MW110.78</dataBlock>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45843"/>
+										</FC_image>
+										<FC_image>
+											<label/>
+											<type/>
+											<description/>
+											<dataBlock/>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45844"/>
+										</FC_image>
+										<FC_image>
+											<label>UVR_Counter_2_int</label>
+											<type>REAL</type>
+											<description/>
+											<dataBlock>MW110.66</dataBlock>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45845"/>
+										</FC_image>
+										<FC_image>
+											<label/>
+											<type/>
+											<description/>
+											<dataBlock/>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45846"/>
+										</FC_image>
+										<FC_image>
+											<label>UVR_Counter_2_float</label>
+											<type>REAL</type>
+											<description/>
+											<dataBlock>MW110.74</dataBlock>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45847"/>
+										</FC_image>
+										<FC_image>
+											<label/>
+											<type/>
+											<description/>
+											<dataBlock/>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45848"/>
+										</FC_image>
+										<FC_image>
+											<label>UVR_Flow_All</label>
+											<type>REAL</type>
+											<description/>
+											<dataBlock>MW110.68</dataBlock>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45849"/>
+										</FC_image>
+										<FC_image>
+											<label/>
+											<type/>
+											<description/>
+											<dataBlock/>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45850"/>
+										</FC_image>
+										<FC_image>
+											<label>UVR_Counter_All_int</label>
+											<type>REAL</type>
+											<description/>
+											<dataBlock>MW110.70</dataBlock>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45851"/>
+										</FC_image>
+										<FC_image>
+											<label/>
+											<type/>
+											<description/>
+											<dataBlock/>
+											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45852"/>
 										</FC_image>
 									</FC_images_in>
 									<turnAround>10</turnAround>
@@ -68408,7 +68592,7 @@ END_PROGRAM
 					<Plugins/>
 					<cfgConfig>
 						<config>
-							<commstring>Modbus:1,1000,M#COM:4,38400,N,8,1,H</commstring>
+							<commstring>ModbusTCP:255,1000,M6#TCPIP:10.10.10.157/502,5000</commstring>
 							<values stopNodeParsing="true">
 								<value ipa="10000" subidx="0">0</value>
 								<value ipa="10001" subidx="0">2053</value>
@@ -68931,13 +69115,17 @@ END_PROGRAM
 								<value ipa="5045" subidx="0">0</value>
 								<value ipa="5046" subidx="0">0</value>
 								<value ipa="5047" subidx="0">0</value>
+								<value ipa="5048" subidx="0">0</value>
+								<value ipa="5049" subidx="0">0</value>
+								<value ipa="5050" subidx="0">0</value>
+								<value ipa="5051" subidx="0">0</value>
 							</values>
 							<commDisabled>0</commDisabled>
 							<downloadVolume>0</downloadVolume>
 							<alignTargetRTC>0</alignTargetRTC>
 						</config>
 						<application>
-							<DNS template="%PCNPATH%\DNS.PCT" version="1" uniqueID="103"/>
+							<DNS template="%PCNPATH%\DNS.PCT" version="1" uniqueID="116"/>
 						</application>
 						<recipes/>
 					</cfgConfig>

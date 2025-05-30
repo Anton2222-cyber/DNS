@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <plcProject caseSensitive="false" extcheck="true">
 	<image>DNS.imgx</image>
-	<commSettings>Modbus:1,1000,M#COM:4,38400,N,8,1,H</commSettings>
+	<commSettings>ModbusTCP:255,1000,M6#TCPIP:10.10.10.157/502,5000</commSettings>
 	<sources>
 		<main>DNS.plc</main>
 		<target id="M172P_596p13">FreeAdvance_HMI_596p13.tgt</target>

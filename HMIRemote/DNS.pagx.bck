@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<PRJ_RESOURCES version="20181002">
+<PRJ_RESOURCES version="20220525">
 	<LANGUAGES>
 		<LANG id="0" descr="BaseLanguage">
 			<ENUMS/>
@@ -42,6 +42,7 @@
 				<SYSMENU>No</SYSMENU>
 				<BORDER>No</BORDER>
 				<DESC/>
+				<HIDDEN>0</HIDDEN>
 			</ATTRIBUTES>
 			<OBJECTS>
 				<STRINGS>
@@ -224,6 +225,7 @@
 				<SYSMENU>No</SYSMENU>
 				<BORDER>No</BORDER>
 				<DESC/>
+				<HIDDEN>0</HIDDEN>
 			</ATTRIBUTES>
 			<OBJECTS>
 				<STRINGS>
@@ -536,6 +538,7 @@
 				<SYSMENU>No</SYSMENU>
 				<BORDER>No</BORDER>
 				<DESC/>
+				<HIDDEN>0</HIDDEN>
 			</ATTRIBUTES>
 			<OBJECTS>
 				<STRINGS>
@@ -978,6 +981,7 @@
 				<SYSMENU>No</SYSMENU>
 				<BORDER>Yes</BORDER>
 				<DESC/>
+				<HIDDEN>0</HIDDEN>
 			</ATTRIBUTES>
 			<OBJECTS>
 				<STRINGS>
@@ -1328,6 +1332,7 @@
 				<SYSMENU>No</SYSMENU>
 				<BORDER>No</BORDER>
 				<DESC/>
+				<HIDDEN>0</HIDDEN>
 			</ATTRIBUTES>
 			<OBJECTS>
 				<STRINGS/>
@@ -1439,6 +1444,7 @@
 				<SYSMENU>No</SYSMENU>
 				<BORDER>Yes</BORDER>
 				<DESC/>
+				<HIDDEN>0</HIDDEN>
 			</ATTRIBUTES>
 			<OBJECTS>
 				<STRINGS/>
@@ -1509,6 +1515,7 @@
 				<SYSMENU>No</SYSMENU>
 				<BORDER>No</BORDER>
 				<DESC/>
+				<HIDDEN>0</HIDDEN>
 			</ATTRIBUTES>
 			<OBJECTS>
 				<STRINGS>
@@ -2277,6 +2284,7 @@
 				<SYSMENU>No</SYSMENU>
 				<BORDER>No</BORDER>
 				<DESC/>
+				<HIDDEN>0</HIDDEN>
 			</ATTRIBUTES>
 			<OBJECTS>
 				<STRINGS/>
@@ -2507,6 +2515,7 @@
 				<SYSMENU>No</SYSMENU>
 				<BORDER>No</BORDER>
 				<DESC/>
+				<HIDDEN>0</HIDDEN>
 			</ATTRIBUTES>
 			<OBJECTS>
 				<STRINGS>

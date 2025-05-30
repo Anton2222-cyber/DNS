@@ -69,10 +69,14 @@ UVR_Const_1 AT %MW110.56 : REAL := 0;
 UVR_Const_2 AT %MW110.58 : REAL := 0;
 UVR_Flow_1 AT %MW110.60 : REAL := 0;
 UVR_Flow_2 AT %MW110.62 : REAL := 0;
-UVR_Counter_1 AT %MW110.64 : REAL := 0;
-UVR_Counter_2 AT %MW110.66 : REAL := 0;
+UVR_Counter_1_int AT %MW110.64 : REAL := 0;
+UVR_Counter_2_int AT %MW110.66 : REAL := 0;
 UVR_Flow_All AT %MW110.68 : REAL := 0;
-UVR_Counter_All AT %MW110.70 : REAL := 0;
+UVR_Counter_All_int AT %MW110.70 : REAL := 0;
+UVR_Counter_1_float AT %MW110.72 : REAL := 0;
+UVR_Counter_2_float AT %MW110.74 : REAL := 0;
+UVR_Counter_All_float AT %MW110.76 : REAL := 0;
+Plug AT %MW110.78 : REAL := 0;
 	{G:"IO_Mapping"}
 i_abc_Tank1_lvl AT %IW1.0 : INT;	{ DE:"AIL1 analogue input" }
 i_abc_Tank2_lvl AT %IW1.1 : INT;	{ DE:"AIL2 analogue input" }
