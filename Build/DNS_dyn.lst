@@ -595,7 +595,7 @@
 ***************************************************
 
 NAME: sysDBase_SetExtTable  - NUM: 1
-	 Patch - TYPE: 0x0 - CODE OFFSET: 0x00004D2C
+	 Patch - TYPE: 0x0 - CODE OFFSET: 0x00004D30
 
 NAME: UDINT_TO_REAL  - NUM: 1
 	 Patch - TYPE: 0x0 - CODE OFFSET: 0x0000522C

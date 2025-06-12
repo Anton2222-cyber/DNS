@@ -63156,7 +63156,7 @@ PROGRAM InitParDB
 		dummyCrc32: UDINT;
 	END_VAR
 
-	dummyCrc32 := 428776436;
+	dummyCrc32 := 2238861069;
 
 	warningsKiller := sysDBase_SetExtTable( ADR( $$ParDB ), $$ParDBLength );
 
@@ -63187,7 +63187,7 @@ END_PROGRAM
 			</src>
 		</aux>
 		<workspace>
-			<root name="DNS" nextID="3632">
+			<root name="DNS" nextID="3690">
 				<GlobalVars name="Global_vars" id="11"/>
 				<Pou name="Auto_sv" id="2"/>
 				<Pou name="Pres_Freq_Flow" id="15"/>
@@ -63232,7 +63232,7 @@ END_PROGRAM
 								<name>ep_iCfgPodves1</name>
 								<typepar>0</typepar>
 								<typetarg>INT</typetarg>
-								<value>0</value>
+								<value>20</value>
 								<min/>
 								<max/>
 								<ipamin/>
@@ -63281,7 +63281,7 @@ END_PROGRAM
 								<name>ep_iCfgPodves2</name>
 								<typepar>0</typepar>
 								<typetarg>INT</typetarg>
-								<value>0</value>
+								<value>-5</value>
 								<min/>
 								<max/>
 								<ipamin/>
@@ -63722,7 +63722,7 @@ END_PROGRAM
 								<name>ep_iCfgPodves3</name>
 								<typepar>0</typepar>
 								<typetarg>INT</typetarg>
-								<value>0</value>
+								<value>40</value>
 								<min/>
 								<max/>
 								<ipamin/>
@@ -63771,7 +63771,7 @@ END_PROGRAM
 								<name>ep_iCfgPodves4</name>
 								<typepar>0</typepar>
 								<typetarg>INT</typetarg>
-								<value>0</value>
+								<value>20</value>
 								<min/>
 								<max/>
 								<ipamin/>
@@ -63820,7 +63820,7 @@ END_PROGRAM
 								<name>ep_iCfgPodves5</name>
 								<typepar>0</typepar>
 								<typetarg>INT</typetarg>
-								<value>0</value>
+								<value>20</value>
 								<min/>
 								<max/>
 								<ipamin/>
@@ -63869,7 +63869,7 @@ END_PROGRAM
 								<name>ep_iCfgPodves6</name>
 								<typepar>0</typepar>
 								<typetarg>INT</typetarg>
-								<value>0</value>
+								<value>20</value>
 								<min/>
 								<max/>
 								<ipamin/>
@@ -63918,7 +63918,7 @@ END_PROGRAM
 								<name>ep_iAreaTank3</name>
 								<typepar>0</typepar>
 								<typetarg>INT</typetarg>
-								<value>0</value>
+								<value>1296</value>
 								<min/>
 								<max/>
 								<ipamin/>
@@ -63967,7 +63967,7 @@ END_PROGRAM
 								<name>ep_iAreaTank4</name>
 								<typepar>0</typepar>
 								<typetarg>INT</typetarg>
-								<value>0</value>
+								<value>1296</value>
 								<min/>
 								<max/>
 								<ipamin/>
@@ -64016,7 +64016,7 @@ END_PROGRAM
 								<name>ep_iAreaTank5</name>
 								<typepar>0</typepar>
 								<typetarg>INT</typetarg>
-								<value>0</value>
+								<value>1296</value>
 								<min/>
 								<max/>
 								<ipamin/>
@@ -64065,7 +64065,7 @@ END_PROGRAM
 								<name>ep_iAreaTank6</name>
 								<typepar>0</typepar>
 								<typetarg>INT</typetarg>
-								<value>0</value>
+								<value>1296</value>
 								<min/>
 								<max/>
 								<ipamin/>
@@ -67239,7 +67239,7 @@ END_PROGRAM
 							</biosParam>
 							<biosParam>
 								<ipa>10343</ipa>
-								<defval>10000</defval>
+								<defval>1000</defval>
 								<addToTelevis>0</addToTelevis>
 							</biosParam>
 							<biosParam>
@@ -67249,7 +67249,7 @@ END_PROGRAM
 							</biosParam>
 							<biosParam>
 								<ipa>10345</ipa>
-								<defval>10000</defval>
+								<defval>1000</defval>
 								<addToTelevis>0</addToTelevis>
 							</biosParam>
 							<biosParam>
@@ -67439,22 +67439,22 @@ END_PROGRAM
 							</biosParam>
 							<biosParam>
 								<ipa>10346</ipa>
-								<defval/>
+								<defval>0</defval>
 								<addToTelevis>0</addToTelevis>
 							</biosParam>
 							<biosParam>
 								<ipa>10347</ipa>
-								<defval/>
+								<defval>1000</defval>
 								<addToTelevis>0</addToTelevis>
 							</biosParam>
 							<biosParam>
 								<ipa>10348</ipa>
-								<defval/>
+								<defval>0</defval>
 								<addToTelevis>0</addToTelevis>
 							</biosParam>
 							<biosParam>
 								<ipa>10349</ipa>
-								<defval/>
+								<defval>1000</defval>
 								<addToTelevis>0</addToTelevis>
 							</biosParam>
 							<biosParam>
@@ -68935,13 +68935,13 @@ END_PROGRAM
 								<value ipa="10340" subidx="0">0</value>
 								<value ipa="10341" subidx="0">1000</value>
 								<value ipa="10342" subidx="0">0</value>
-								<value ipa="10343" subidx="0">10000</value>
+								<value ipa="10343" subidx="0">1000</value>
 								<value ipa="10344" subidx="0">0</value>
-								<value ipa="10345" subidx="0">10000</value>
+								<value ipa="10345" subidx="0">1000</value>
 								<value ipa="10346" subidx="0">0</value>
-								<value ipa="10347" subidx="0">3000</value>
+								<value ipa="10347" subidx="0">1000</value>
 								<value ipa="10348" subidx="0">0</value>
-								<value ipa="10349" subidx="0">3000</value>
+								<value ipa="10349" subidx="0">1000</value>
 								<value ipa="10360" subidx="0">0</value>
 								<value ipa="10361" subidx="0">1000</value>
 								<value ipa="10362" subidx="0">0</value>
@@ -69049,8 +69049,8 @@ END_PROGRAM
 								<value ipa="50002" subidx="0">***************</value>
 								<value ipa="50003" subidx="0">0</value>
 								<value ipa="50004" subidx="0">0</value>
-								<value ipa="0" subidx="0">0</value>
-								<value ipa="1" subidx="0">0</value>
+								<value ipa="0" subidx="0">20</value>
+								<value ipa="1" subidx="0">-5</value>
 								<value ipa="2" subidx="0">0</value>
 								<value ipa="3" subidx="0">0</value>
 								<value ipa="4" subidx="0">0</value>
@@ -69059,14 +69059,14 @@ END_PROGRAM
 								<value ipa="7" subidx="0">1296</value>
 								<value ipa="8" subidx="0">6</value>
 								<value ipa="9" subidx="0">23</value>
-								<value ipa="10" subidx="0">0</value>
-								<value ipa="11" subidx="0">0</value>
-								<value ipa="12" subidx="0">0</value>
-								<value ipa="13" subidx="0">0</value>
-								<value ipa="14" subidx="0">0</value>
-								<value ipa="15" subidx="0">0</value>
-								<value ipa="16" subidx="0">0</value>
-								<value ipa="17" subidx="0">0</value>
+								<value ipa="10" subidx="0">40</value>
+								<value ipa="11" subidx="0">20</value>
+								<value ipa="12" subidx="0">20</value>
+								<value ipa="13" subidx="0">20</value>
+								<value ipa="14" subidx="0">1296</value>
+								<value ipa="15" subidx="0">1296</value>
+								<value ipa="16" subidx="0">1296</value>
+								<value ipa="17" subidx="0">1296</value>
 								<value ipa="5000" subidx="0">-31457</value>
 								<value ipa="5001" subidx="0">-31457</value>
 								<value ipa="5003" subidx="0">0</value>

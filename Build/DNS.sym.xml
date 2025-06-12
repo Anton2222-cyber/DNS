@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?xml-stylesheet type ="text/xsl" href="file://C:/Users/Anton/AppData/Local/Temp/LLSymTab.xsl" version="1.0"?>
-<LLSymbolTable Version="1.4" Name="DNS" TargetID="M172P_596p13" CodeId="0x113FB6D8" DebugMemoId="0xA190B976" MemoId="0x0000984E" DataRelocation="none" DbRelocation="patch" FunctRelocation="patch" dataAddrMode="byte" codeAddrMode="byte" NoIncrAlloc="false" is64bit="false" isBigEndian="false" dataSignature="0x336ECB60">
+<LLSymbolTable Version="1.4" Name="DNS" TargetID="M172P_596p13" CodeId="0xE4BC590E" DebugMemoId="0xA190B976" MemoId="0x0000984E" DataRelocation="none" DbRelocation="patch" FunctRelocation="patch" dataAddrMode="byte" codeAddrMode="byte" NoIncrAlloc="false" is64bit="false" isBigEndian="false" dataSignature="0x336ECB60">
 	<Resource Name="EWAD" Proc="ARMv7M"/>
 	<CaseSensitive>false</CaseSensitive>
 	<CompilerOptions FBExtCheck="true"/>
@@ -579,7 +579,7 @@
 		<Prog Name="AUTO_SV" OrigName="Auto_sv" SrcType="3" CodeAddr="0xA1905240" HashCode="B61C918F">
 			<Var Name="LEVEL" OrigName="level" Type="INT" OrigType="INT" Addr="0xA1A0000C"/>
 		</Prog>
-		<Prog Name="INITPARDB" OrigName="InitParDB" SrcType="3" CodeAddr="0xA1904CE0" HashCode="9A80070C">
+		<Prog Name="INITPARDB" OrigName="InitParDB" SrcType="3" CodeAddr="0xA1904CE0" HashCode="5499239A">
 			<Var Name="WARNINGSKILLER" OrigName="warningsKiller" Type="USINT" OrigType="USINT" Addr="0xA1A0000F"/>
 			<Var Name="DUMMYCRC32" OrigName="dummyCrc32" Type="UDINT" OrigType="UDINT" Addr="0xA1A00010"/>
 		</Prog>

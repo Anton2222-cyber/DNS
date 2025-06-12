@@ -347,19 +347,19 @@ A1904CE6  E92D 0FF0		stmdb sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
 #0		{SRC:InitParDB}
 #1		(*$WAITSWITCH$*)
 #2		
-#3			(* dummyCrc32 := 428776436; *)
-#4			MOVE		428776436,dummyCrc32	{LNXT:3|5|-1}
+#3			(* dummyCrc32 := 2238861069; *)
+#4			MOVE		2238861069,dummyCrc32	{LNXT:3|5|-1}
 (*) UDINT
-A1904CEA  F8DF 7044		ldr r7, [pc, #+68] ; 0x198E9BF4
+A1904CEA  F8DF 7034		ldr r7, [pc, #+52] ; 0x85724F0D
 A1904CEE  4638     		mov r0, r7
-A1904CF0  F8DF 7034		ldr r7, [pc, #+52] ; 0xA1A00010
+A1904CF0  F8DF 7038		ldr r7, [pc, #+56] ; 0xA1A00010
 A1904CF4  6038     		str r0, [r7]
 
 #5		
 #6			(* warningsKiller := sysDBase_SetExtTable( ADR( $$ParDB ), $$ParDBLength ); *)
 #7			ADR		$$ParDB	{LNXT:5|3|-1}
 (*) UDINT
-A1904CF6  F8DF 0028		ldr r0, [pc, #+40] ; 0xA19000E0
+A1904CF6  F8DF 002C		ldr r0, [pc, #+44] ; 0xA19000E0
 
 #8			sysDBase_SetExtTable		$$ParDBLength	{LNXT:5|3|-1}
 (*) @USINT
@@ -367,13 +367,13 @@ A1904CFA  4607     		mov r7, r0
 A1904CFC  4638     		mov r0, r7
 A1904CFE  2746     		mov r7, #70 ; 70
 A1904D00  4639     		mov r1, r7
-A1904D02  F8DF 4028		ldr r4, [pc, #+40] ; 0x139A5
+A1904D02  F8DF 402C		ldr r4, [pc, #+44] ; 0x139A5
 A1904D06  F044 0401		orr r4, r4, #1
 A1904D0A  47A0     		blx r4
 
 #9			ST		warningsKiller	{LNXT:5|3|-1}
 (*) USINT
-A1904D0C  F8DF 7014		ldr r7, [pc, #+20] ; 0xA1A0000F
+A1904D0C  F8DF 7018		ldr r7, [pc, #+24] ; 0xA1A0000F
 A1904D10  7038     		strb r0, [r7]
 
 A1904D12  E8BD 0FF0		ldmia sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
@@ -382,11 +382,11 @@ A1904D1A  B002     		add sp, sp, #8
 
 A1904D1C  4770     		bx lr
 
-A1904D20  A19000E0		; 0xA19000E0
-A1904D24  A1A0000F		; 0xA1A0000F
-A1904D28  A1A00010		; 0xA1A00010
-A1904D2C  FFFFFFFF		; 0x000139A5
-A1904D30  198E9BF4		; 0x198E9BF4
+A1904D20  85724F0D		; 0x85724F0D
+A1904D24  A19000E0		; 0xA19000E0
+A1904D28  A1A0000F		; 0xA1A0000F
+A1904D2C  A1A00010		; 0xA1A00010
+A1904D30  FFFFFFFF		; 0x000139A5
 
 END_PROGRAM
 
@@ -1808,7 +1808,7 @@ Bit data size:            		00000000h
 
 
 ********************************************
-CODE ID:                                113FB6D8
+CODE ID:                                E4BC590E
 DEBUG MEMO ID:                          A190B976
 FULL MEMO ID:                           0000984E
 ********************************************
