@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- #DEFINE PREFIX DNS -->
+<!-- #DEFINE PREFIX _43D43044143E44143D430_3 -->
 <devicetemplate>
-	<deviceinfo caption="DNS" name="DNS" version="0.0" icon="img\application.ico" deviceid="DNS" devicetype="application" PLCApplicationID="DNS">
-		<description>DNS Application</description>
+	<deviceinfo caption="насосна 3" name="насосна 3" version="0.0" icon="img\application.ico" deviceid="_43D43044143E44143D430_3" devicetype="application" PLCApplicationID="насосна 3">
+		<description>насосна 3 Application</description>
 		<protocols><protocol>M172P_596p13_appl</protocol></protocols>
 	</deviceinfo>
 	<plcconfig>
 		<hmi>
 			<tree name="treeCommissioning">
-				<node name="PREFIX" caption="DNS" icon="%CATALOG%\Applications\img\application.ico" datalink="PREFIX" captionedit="false" menu="menuAppPLC"><node name="PREFIX_menu1000" caption="Eprom_podves" STDGRIDICONS="" data="../../config/values" window="maingrid"/></node>
+				<node name="PREFIX" caption="насосна 3" icon="%CATALOG%\Applications\img\application.ico" datalink="PREFIX" captionedit="false" menu="menuAppPLC"><node name="PREFIX_menu1000" caption="Eprom_podves" STDGRIDICONS="" data="../../config/values" window="maingrid"/></node>
 			</tree>
 		</hmi>
 		<templatedata>
@@ -39,7 +39,7 @@
 	<deviceconfig>
 		<hmi>
 			<tree name="tree1">
-				<node name="PREFIX" caption="DNS" icon="%CATALOG%\Applications\img\application.ico" datalink="PREFIX" captionedit="false" menu="menuAppPLC"><node name="PREFIX_menu1000" caption="Eprom_podves" STDGRIDICONS="" data="../../config/values" window="maingrid"/></node>
+				<node name="PREFIX" caption="насосна 3" icon="%CATALOG%\Applications\img\application.ico" datalink="PREFIX" captionedit="false" menu="menuAppPLC"><node name="PREFIX_menu1000" caption="Eprom_podves" STDGRIDICONS="" data="../../config/values" window="maingrid"/></node>
 			</tree>
 		</hmi>
 		<templatedata>
@@ -59,9 +59,9 @@
 								<xs:attribute name="oncreatenode" type="xs:string" fixed="configurator.OnCreateDeviceChild"/>
 								<xs:attribute name="onloadnode" type="xs:string" fixed="configurator.OnLoadDeviceChild"/>
 								<xs:attribute name="ondeletenode" type="xs:string" fixed="configurator.OnDeleteDeviceChild"/>
-								<xs:attribute name="PLCProject" type="xs:string" fixed="DNS.RSM"/>
-								<xs:attribute name="HMIProject" type="xs:string" fixed="HMIRemote\DNS.RSM"/>
-								<xs:attribute name="HMIRemoteProject" type="xs:string" fixed="HMIRemote\Download\DNS.BIN"/>
+								<xs:attribute name="PLCProject" type="xs:string" fixed="насосна 3.RSM"/>
+								<xs:attribute name="HMIProject" type="xs:string" fixed="HMIRemote\насосна 3.RSM"/>
+								<xs:attribute name="HMIRemoteProject" type="xs:string" fixed="HMIRemote\Download\насосна 3.BIN"/>
 								<xs:attribute name="noAutoGenCaption" type="xs:boolean" fixed="true"/>
 							</xs:extension>
 						</xs:complexContent>

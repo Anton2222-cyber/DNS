@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <plcProject caseSensitive="false" extendedIdNames="false" useCustomWorkspace="true" debugMode="false" extcheck="true" SFCControl="false" strictPointerCheck="false" strictInitValuesCheck="false" verboseWarningMode="false" iecTypeConversionRules="false" PNContactsOnEachNetwork="false" LocalVarsFBAccess="false" strictEnumsCheck="false" copyWarningThreshold="0" version="2.11" useLD2="true" useXPLCFiles="false" useFBMethods="false" customSortOfProjectTree="false" autoDerefPointers="false">
-	<image>DNS.imgx</image>
-	<commSettings>ModbusTCP:255,1000,M6#TCPIP:10.10.10.157/502,5000</commSettings>
+	<image>насосна 3.imgx</image>
+	<commSettings>Modbus:1,1000,M6#COM:3,38400,N,8,1,H</commSettings>
 	<sources>
 		<main>
 			<resources>
@@ -291,7 +291,7 @@ END_VAR
 			<subranges/>
 			<interfaces/>
 		</main>
-		<target id="M172P_596p13" name="DNS.tgt" fullXml="false">
+		<target id="M172P_596p13" name="насосна 3.tgt" fullXml="false">
 			<![CDATA[(************************************************************************)
 (*                                                                      *)
 (*	Description: Definition of target variables and functions       *)
@@ -2907,7 +2907,7 @@ END_FUNCTION
 
 ]]>
 		</target>
-		<targetXML name="DNS.tgtx" fullXml="true">
+		<targetXML name="насосна 3.tgtx" fullXml="true">
 			<target>
 				<resources>
 					<resource name="EWAD" processor="ARMv7M">
@@ -63142,7 +63142,7 @@ HAOgUMvO52nzV8Kpw2xPH31hkpuiTcI+bixx9BFzpJnUBKBQ+85XbztQ+ql7bH8f/WfqmbpN
 				<![CDATA[(* Automatically generated, do not edit! *)
 
 VAR_GLOBAL CONSTANT
-$$ParDB : ARRAY[ 0..2519 ] OF USINT; { HIDDEN:ON } { INIT:"DNS.PLK+0" }
+$$ParDB : ARRAY[ 0..2519 ] OF USINT; { HIDDEN:ON } { INIT:"насосна 3.PLK+0" }
 $$ParDBLength  : DWORD := 70; { HIDDEN:ON }
 END_VAR
 
@@ -63156,7 +63156,7 @@ PROGRAM InitParDB
 		dummyCrc32: UDINT;
 	END_VAR
 
-	dummyCrc32 := 2238861069;
+	dummyCrc32 := 656415852;
 
 	warningsKiller := sysDBase_SetExtTable( ADR( $$ParDB ), $$ParDBLength );
 
@@ -63187,7 +63187,7 @@ END_PROGRAM
 			</src>
 		</aux>
 		<workspace>
-			<root name="DNS" nextID="3690">
+			<root name="насосна 3" nextID="3911">
 				<GlobalVars name="Global_vars" id="11"/>
 				<Pou name="Auto_sv" id="2"/>
 				<Pou name="Pres_Freq_Flow" id="15"/>
@@ -63197,7 +63197,7 @@ END_PROGRAM
 			</root>
 		</workspace>
 	</sources>
-	<codegen crossReference="false" crossReferenceOptions="0x3000001D" listing="true" unusedObjs="false" saveEXPFile="true" saveEXPFileLibraries="false" saveTargetFiles="false" warningEnable="true" symMap="true" checkIndexType="false" waitExtension="false" allocateUnusedVariables="false" checkArrayBounds="false" checkDivisionByZero="false" checkPointers="1" checkReferences="false" checkInterfaces="false" ioVarsAsReferences="false" customTargetBINFileName="DNS.bin" customTargetTSCFileName="DNS_source.bin" customTargetTDSFileName="DNS_debug.bin" generateCustomFilesName="false" initFunVarsWithZero="false" enablePreprocessDirectives="false">
+	<codegen crossReference="false" crossReferenceOptions="0x3000001D" listing="true" unusedObjs="false" saveEXPFile="true" saveEXPFileLibraries="false" saveTargetFiles="false" warningEnable="true" symMap="true" checkIndexType="false" waitExtension="false" allocateUnusedVariables="false" checkArrayBounds="false" checkDivisionByZero="false" checkPointers="1" checkReferences="false" checkInterfaces="false" ioVarsAsReferences="false" customTargetBINFileName="насосна 3.bin" customTargetTSCFileName="насосна 3_source.bin" customTargetTDSFileName="насосна 3_debug.bin" generateCustomFilesName="false" initFunVarsWithZero="false" enablePreprocessDirectives="false">
 		<disabledWarnings/>
 		<applicationDataBlocks/>
 	</codegen>
@@ -63224,7 +63224,7 @@ END_PROGRAM
 					<persistentVariables/>
 				</project_config>
 				<M172P_596p13 template="FreeAdvance\M172P_596p13.pct" version="15" uniqueID="0" name="M172 28-42 I/Os" caption="M172 28-42 I/Os">
-					<devConfig HMIProject="" HMIRemoteProject="HMIRemote\DNS.pajx" HMILastProfile="0" HMIProfileConfig="0" DMPROExpNumPar="" resetBindingCfg="0">
+					<devConfig HMIProject="" HMIRemoteProject="HMIRemote\насосна 3.pajx" HMILastProfile="0" HMIProfileConfig="0" DMPROExpNumPar="" resetBindingCfg="0">
 						<params>
 							<param>
 								<ipa>0</ipa>
@@ -67269,7 +67269,7 @@ END_PROGRAM
 							</biosParam>
 							<biosParam>
 								<ipa>10047</ipa>
-								<defval>157</defval>
+								<defval>155</defval>
 								<addToTelevis>0</addToTelevis>
 							</biosParam>
 							<biosParam>
@@ -67778,113 +67778,6 @@ END_PROGRAM
 						</CANcustom_FreeEvolutionExp_640p3>
 					</CANopen_OnBoard>
 					<RS485_OnBoard protocol="FreeAdvance_ModbusRTU_master" mode="1" baudRate="9600" serialMode="3" masterDisableByPar="false">
-						<GenericRTU template="ModbusGeneric\GenericNode\GenericRTU.pct" version="4" uniqueID="4" caption="Mb_INVT200A" name="Generic Modbus">
-							<GenericRTU_config>
-								<modbusAddress>4</modbusAddress>
-								<nodeNumber>0</nodeNumber>
-								<ip/>
-								<nodeID>1</nodeID>
-								<minPollTime>10</minPollTime>
-								<sendParams/>
-								<wordsOrder>0</wordsOrder>
-								<addressType>modbus</addressType>
-							</GenericRTU_config>
-							<FC03 template="ModbusGeneric\Messages\FC03.pct" version="2" uniqueID="5" caption="Modbus FC-03_1" name="Modbus FC-03">
-								<FC_config>
-									<block>input</block>
-									<funcode>3</funcode>
-									<type>word</type>
-									<startAddress>12289</startAddress>
-									<pollTime>0</pollTime>
-									<tmo>1000</tmo>
-									<FC_images_in>
-										<FC_image>
-											<label>Freq_Pump1</label>
-											<type>INT</type>
-											<description>Частота м1</description>
-											<dataBlock>MW110.8</dataBlock>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="12289"/>
-										</FC_image>
-										<FC_image>
-											<label>INVT_SETING_FREQ</label>
-											<type>INT</type>
-											<description/>
-											<dataBlock>IW11.1</dataBlock>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="12290"/>
-										</FC_image>
-										<FC_image>
-											<label>INVT_BUS_Volage</label>
-											<type>INT</type>
-											<description/>
-											<dataBlock>IW11.0</dataBlock>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="12291"/>
-										</FC_image>
-										<FC_image>
-											<label>Voltage_1</label>
-											<type>INT</type>
-											<description>Напруга м1</description>
-											<dataBlock>MW110.10</dataBlock>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="12292"/>
-										</FC_image>
-										<FC_image>
-											<label>Current_motor1</label>
-											<type>INT</type>
-											<description>Струм м1</description>
-											<dataBlock>MW110.9</dataBlock>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="12293"/>
-										</FC_image>
-										<FC_image>
-											<label>Power_m1</label>
-											<type>INT</type>
-											<description>Потужність м1, Кв</description>
-											<dataBlock>MW110.12</dataBlock>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="12294"/>
-										</FC_image>
-									</FC_images_in>
-									<turnAround>10</turnAround>
-								</FC_config>
-							</FC03>
-							<FC03 template="ModbusGeneric\Messages\FC03.pct" version="2" uniqueID="33" caption="Modbus FC-03_2" name="Modbus FC-03">
-								<FC_config>
-									<block>input</block>
-									<funcode>3</funcode>
-									<type>word</type>
-									<startAddress>12302</startAddress>
-									<pollTime>0</pollTime>
-									<tmo>1000</tmo>
-									<FC_images_in>
-										<FC_image>
-											<label>Pressure_out1</label>
-											<type>INT</type>
-											<description>тиск в місто вітка1</description>
-											<dataBlock>MW110.7</dataBlock>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="12302"/>
-										</FC_image>
-									</FC_images_in>
-									<turnAround>10</turnAround>
-								</FC_config>
-							</FC03>
-							<FC03 template="ModbusGeneric\Messages\FC03.pct" version="2" uniqueID="35" caption="Modbus FC-03_3" name="Modbus FC-03">
-								<FC_config>
-									<block>input</block>
-									<funcode>3</funcode>
-									<type>word</type>
-									<startAddress>8449</startAddress>
-									<pollTime>0</pollTime>
-									<tmo>1000</tmo>
-									<FC_images_in>
-										<FC_image>
-											<label>SW_motor1</label>
-											<type>WORD</type>
-											<description>Слово стану</description>
-											<dataBlock>MW110.11</dataBlock>
-											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="8449"/>
-										</FC_image>
-									</FC_images_in>
-									<turnAround>10</turnAround>
-								</FC_config>
-							</FC03>
-						</GenericRTU>
 						<GenericRTU template="ModbusGeneric\GenericNode\GenericRTU.pct" version="4" uniqueID="51" caption="Mb_Danfoss1" name="Generic Modbus">
 							<GenericRTU_config>
 								<modbusAddress>5</modbusAddress>
@@ -68208,12 +68101,12 @@ END_PROGRAM
 						<GenericRTU template="ModbusGeneric\GenericNode\GenericRTU.pct" version="4" uniqueID="90" caption="UVR" name="Generic Modbus">
 							<GenericRTU_config>
 								<modbusAddress>3</modbusAddress>
-								<nodeNumber>3</nodeNumber>
+								<nodeNumber>0</nodeNumber>
 								<ip/>
 								<nodeID>1</nodeID>
 								<minPollTime>10</minPollTime>
 								<sendParams/>
-								<wordsOrder>2</wordsOrder>
+								<wordsOrder>3</wordsOrder>
 								<addressType>modbus</addressType>
 							</GenericRTU_config>
 							<FC03 template="ModbusGeneric\Messages\FC03.pct" version="2" uniqueID="113" caption="Modbus FC-03_19" name="Modbus FC-03">
@@ -68338,7 +68231,7 @@ END_PROGRAM
 											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45836"/>
 										</FC_image>
 									</FC_images_in>
-									<turnAround>10</turnAround>
+									<turnAround>20</turnAround>
 								</FC_config>
 							</FC03>
 							<FC03 template="ModbusGeneric\Messages\FC03.pct" version="2" uniqueID="115" caption="Modbus FC-03_20" name="Modbus FC-03">
@@ -68463,7 +68356,7 @@ END_PROGRAM
 											<ioObject name="Register" subindex="0" objtype="WORD" inout="in" modbusAddress="45852"/>
 										</FC_image>
 									</FC_images_in>
-									<turnAround>10</turnAround>
+									<turnAround>20</turnAround>
 								</FC_config>
 							</FC03>
 						</GenericRTU>
@@ -68592,7 +68485,7 @@ END_PROGRAM
 					<Plugins/>
 					<cfgConfig>
 						<config>
-							<commstring>ModbusTCP:255,1000,M6#TCPIP:10.10.10.157/502,5000</commstring>
+							<commstring>Modbus:1,1000,M6#COM:3,38400,N,8,1,H</commstring>
 							<values stopNodeParsing="true">
 								<value ipa="10000" subidx="0">0</value>
 								<value ipa="10001" subidx="0">2053</value>
@@ -68642,7 +68535,7 @@ END_PROGRAM
 								<value ipa="10044" subidx="0">10</value>
 								<value ipa="10045" subidx="0">10</value>
 								<value ipa="10046" subidx="0">10</value>
-								<value ipa="10047" subidx="0">157</value>
+								<value ipa="10047" subidx="0">155</value>
 								<value ipa="10048" subidx="0">10</value>
 								<value ipa="10049" subidx="0">10</value>
 								<value ipa="10050" subidx="0">10</value>
@@ -69125,7 +69018,7 @@ END_PROGRAM
 							<alignTargetRTC>0</alignTargetRTC>
 						</config>
 						<application>
-							<DNS template="%PCNPATH%\DNS.PCT" version="1" uniqueID="116"/>
+							<_43D43044143E44143D430_3 template="%PCNPATH%\насосна 3.PCT" version="1" uniqueID="116"/>
 						</application>
 						<recipes/>
 					</cfgConfig>
