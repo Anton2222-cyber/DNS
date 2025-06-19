@@ -1,0 +1,1814 @@
+***********************************************************************
+*
+*	CODE GENERATION LISTING FOR: DNS
+*	COMPILER VERSION: 6.0.0.52
+*
+***********************************************************************
+
+**************************************************
+	CODE GENERATOR SUBROUTINES
+**************************************************
+
+$$MOD:
+A1804AE0  FB90 F3F1		sdiv r3, r0, r1
+A1804AE4  4359     		mul r1, r1, r3
+A1804AE6  EBC1 0000		rsb r0, r1, r0
+A1804AEA  4770     		bx lr
+
+$$MOD_U:
+A1804AEC  FBB0 F3F1		udiv r3, r0, r1
+A1804AF0  4359     		mul r1, r1, r3
+A1804AF2  EBC1 0000		rsb r0, r1, r0
+A1804AF6  4770     		bx lr
+
+**************************************************
+	List program: Pr_Boot
+**************************************************
+
+PROGRAM Pr_Boot
+
+END_PROGRAM
+
+A1804B00  B082     		sub sp, sp, #8
+A1804B02  F8CD E000		str lr, [sp]
+A1804B06  E92D 0FF0		stmdb sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+
+#0		{SRC:Pr_Boot}
+#1		(*$WAITSWITCH$*)
+#2		
+#3			(* iCfgPidvisRez1:= ep_iCfgPodves1; *)
+#4			MOVE		ep_iCfgPodves1,iCfgPidvisRez1	{LNXT:1|2|-1}
+(*) UDINT
+A1804B0A  F8DF 70D0		ldr r7, [pc, #+208] ; 0xA00017F0
+A1804B0E  F9B7 0000		ldrsh r0, [r7]
+A1804B12  F8DF 7100		ldr r7, [pc, #+256] ; 0xA1A00016
+A1804B16  8038     		strh r0, [r7]
+
+#5		
+#6			(* iCfgPidvisRez2:= ep_iCfgPodves2; *)
+#7			MOVE		ep_iCfgPodves2,iCfgPidvisRez2	{LNXT:2|3|-1}
+(*) INT
+A1804B18  F8DF 70C4		ldr r7, [pc, #+196] ; 0xA00017F2
+A1804B1C  F9B7 0000		ldrsh r0, [r7]
+A1804B20  F8DF 70F8		ldr r7, [pc, #+248] ; 0xA1A0001C
+A1804B24  8038     		strh r0, [r7]
+
+#8		
+#9			(* iCfgPidvisRez3:= ep_iCfgPodves3; *)
+#10			MOVE		ep_iCfgPodves3,iCfgPidvisRez3	{LNXT:3|4|-1}
+(*) INT
+A1804B26  F8DF 70CC		ldr r7, [pc, #+204] ; 0xA0001804
+A1804B2A  F9B7 0000		ldrsh r0, [r7]
+A1804B2E  F8DF 70F4		ldr r7, [pc, #+244] ; 0xA1A00022
+A1804B32  8038     		strh r0, [r7]
+
+#11		
+#12			(* iCfgPidvisRez4:= ep_iCfgPodves4; *)
+#13			MOVE		ep_iCfgPodves4,iCfgPidvisRez4	{LNXT:4|5|-1}
+(*) INT
+A1804B34  F8DF 70C0		ldr r7, [pc, #+192] ; 0xA0001806
+A1804B38  F9B7 0000		ldrsh r0, [r7]
+A1804B3C  F8DF 70EC		ldr r7, [pc, #+236] ; 0xA1A00028
+A1804B40  8038     		strh r0, [r7]
+
+#14		
+#15			(* iCfgPidvisRez5:= ep_iCfgPodves5; *)
+#16			MOVE		ep_iCfgPodves5,iCfgPidvisRez5	{LNXT:5|6|-1}
+(*) INT
+A1804B42  F8DF 70B8		ldr r7, [pc, #+184] ; 0xA0001808
+A1804B46  F9B7 0000		ldrsh r0, [r7]
+A1804B4A  F8DF 70E8		ldr r7, [pc, #+232] ; 0xA1A0002E
+A1804B4E  8038     		strh r0, [r7]
+
+#17		
+#18			(* iCfgPidvisRez6:= ep_iCfgPodves6; *)
+#19			MOVE		ep_iCfgPodves6,iCfgPidvisRez6	{LNXT:6|9|-1}
+(*) INT
+A1804B50  F8DF 70AC		ldr r7, [pc, #+172] ; 0xA000180A
+A1804B54  F9B7 0000		ldrsh r0, [r7]
+A1804B58  F8DF 70E0		ldr r7, [pc, #+224] ; 0xA1A00034
+A1804B5C  8038     		strh r0, [r7]
+
+#20		
+#21			(* i_Area_Tank1 := ep_iAreaTank1; *)
+#22			MOVE		ep_iAreaTank1,i_Area_Tank1	{LNXT:9|10|-1}
+(*) INT
+A1804B5E  F8DF 7084		ldr r7, [pc, #+132] ; 0xA00017FC
+A1804B62  F9B7 0000		ldrsh r0, [r7]
+A1804B66  F8DF 70B0		ldr r7, [pc, #+176] ; 0xA1A00018
+A1804B6A  8038     		strh r0, [r7]
+
+#23		
+#24			(* i_Area_Tank2 := ep_iAreaTank2; *)
+#25			MOVE		ep_iAreaTank2,i_Area_Tank2	{LNXT:10|11|-1}
+(*) INT
+A1804B6C  F8DF 7078		ldr r7, [pc, #+120] ; 0xA00017FE
+A1804B70  F9B7 0000		ldrsh r0, [r7]
+A1804B74  F8DF 70A8		ldr r7, [pc, #+168] ; 0xA1A0001E
+A1804B78  8038     		strh r0, [r7]
+
+#26		
+#27			(* i_Area_Tank3 := ep_iAreaTank3; *)
+#28			MOVE		ep_iAreaTank3,i_Area_Tank3	{LNXT:11|12|-1}
+(*) INT
+A1804B7A  F8DF 7088		ldr r7, [pc, #+136] ; 0xA000180C
+A1804B7E  F9B7 0000		ldrsh r0, [r7]
+A1804B82  F8DF 70A4		ldr r7, [pc, #+164] ; 0xA1A00024
+A1804B86  8038     		strh r0, [r7]
+
+#29		
+#30			(* i_Area_Tank4 := ep_iAreaTank4; *)
+#31			MOVE		ep_iAreaTank4,i_Area_Tank4	{LNXT:12|13|-1}
+(*) INT
+A1804B88  F8DF 707C		ldr r7, [pc, #+124] ; 0xA000180E
+A1804B8C  F9B7 0000		ldrsh r0, [r7]
+A1804B90  F8DF 709C		ldr r7, [pc, #+156] ; 0xA1A0002A
+A1804B94  8038     		strh r0, [r7]
+
+#32		
+#33			(* i_Area_Tank5 := ep_iAreaTank5; *)
+#34			MOVE		ep_iAreaTank5,i_Area_Tank5	{LNXT:13|14|-1}
+(*) INT
+A1804B96  F8DF 7074		ldr r7, [pc, #+116] ; 0xA0001810
+A1804B9A  F9B7 0000		ldrsh r0, [r7]
+A1804B9E  F8DF 7098		ldr r7, [pc, #+152] ; 0xA1A00030
+A1804BA2  8038     		strh r0, [r7]
+
+#35		
+#36			(* i_Area_Tank6 := ep_iAreaTank6; *)
+#37			MOVE		ep_iAreaTank6,i_Area_Tank6	{LNXT:14|19|-1}
+(*) INT
+A1804BA4  F8DF 7068		ldr r7, [pc, #+104] ; 0xA0001812
+A1804BA8  F9B7 0000		ldrsh r0, [r7]
+A1804BAC  F8DF 7090		ldr r7, [pc, #+144] ; 0xA1A00036
+A1804BB0  8038     		strh r0, [r7]
+
+#38		
+#39			(* iDay_begin:=ep_iDay_begin; *)
+#40			MOVE		ep_iDay_begin,iDay_begin	{LNXT:19|20|-1}
+(*) INT
+A1804BB2  F8DF 7038		ldr r7, [pc, #+56] ; 0xA0001800
+A1804BB6  F9B7 0000		ldrsh r0, [r7]
+A1804BBA  F8DF 708C		ldr r7, [pc, #+140] ; 0xA1A00048
+A1804BBE  8038     		strh r0, [r7]
+
+#41		
+#42			(* iDay_end:= ep_iDay_end; *)
+#43			MOVE		ep_iDay_end,iDay_end	{LNXT:20|1|-1}
+(*) INT
+A1804BC0  F8DF 702C		ldr r7, [pc, #+44] ; 0xA0001802
+A1804BC4  F9B7 0000		ldrsh r0, [r7]
+A1804BC8  F8DF 7078		ldr r7, [pc, #+120] ; 0xA1A00046
+A1804BCC  8038     		strh r0, [r7]
+
+A1804BCE  E8BD 0FF0		ldmia sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+A1804BD2  F8DD E000		ldr lr, [sp]
+A1804BD6  B002     		add sp, sp, #8
+
+A1804BD8  4770     		bx lr
+
+A1804BDC  FFFFFFFF		; 0xA00017F0
+A1804BE0  FFFFFFFF		; 0xA00017F2
+A1804BE4  FFFFFFFF		; 0xA00017FC
+A1804BE8  FFFFFFFF		; 0xA00017FE
+A1804BEC  FFFFFFFF		; 0xA0001800
+A1804BF0  FFFFFFFF		; 0xA0001802
+A1804BF4  FFFFFFFF		; 0xA0001804
+A1804BF8  FFFFFFFF		; 0xA0001806
+A1804BFC  FFFFFFFF		; 0xA0001808
+A1804C00  FFFFFFFF		; 0xA000180A
+A1804C04  FFFFFFFF		; 0xA000180C
+A1804C08  FFFFFFFF		; 0xA000180E
+A1804C0C  FFFFFFFF		; 0xA0001810
+A1804C10  FFFFFFFF		; 0xA0001812
+A1804C14  A1A00016		; 0xA1A00016
+A1804C18  A1A00018		; 0xA1A00018
+A1804C1C  A1A0001C		; 0xA1A0001C
+A1804C20  A1A0001E		; 0xA1A0001E
+A1804C24  A1A00022		; 0xA1A00022
+A1804C28  A1A00024		; 0xA1A00024
+A1804C2C  A1A00028		; 0xA1A00028
+A1804C30  A1A0002A		; 0xA1A0002A
+A1804C34  A1A0002E		; 0xA1A0002E
+A1804C38  A1A00030		; 0xA1A00030
+A1804C3C  A1A00034		; 0xA1A00034
+A1804C40  A1A00036		; 0xA1A00036
+A1804C44  A1A00046		; 0xA1A00046
+A1804C48  A1A00048		; 0xA1A00048
+
+END_PROGRAM
+
+
+**************************************************
+	Target variable image generation
+**************************************************
+
+
+*** INPUT:
+A1804C4C  4770     		bx lr
+
+
+*** OUTPUT:
+A1804C4E  4770     		bx lr
+
+
+
+**************************************************
+	Task Boot init code
+**************************************************
+
+A1804C50  B082     		sub sp, sp, #8
+A1804C52  F8CD E000		str lr, [sp]
+A1804C56  E92D 0FF0		stmdb sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+
+A1804C5A  E8BD 0FF0		ldmia sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+A1804C5E  F8DD E000		ldr lr, [sp]
+A1804C62  B002     		add sp, sp, #8
+
+A1804C64  4770     		bx lr
+
+**************************************************
+	List program: ParCheck
+**************************************************
+
+PROGRAM ParCheck
+
+END_PROGRAM
+
+A1804C70  B082     		sub sp, sp, #8
+A1804C72  F8CD E000		str lr, [sp]
+A1804C76  E92D 0FF0		stmdb sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+
+#0		{SRC:ParCheck}
+#1		(*$WAITSWITCH$*)
+#2		
+#3		
+#4			(* IF Par_POLI AND 16#fc00) <> 2048 *)
+#5			LD		Par_POLI	{LNXT:2|-1|-1}
+(*) UNDEF
+A1804C7A  F8DF 7034		ldr r7, [pc, #+52] ; 0x10000182
+A1804C7E  8838     		ldrh r0, [r7]
+
+#6			AND		16#fc00	{LNXT:2|-1|-1}
+(*) UINT
+A1804C80  F44F 477C		mov r7, #64512 ; 64512
+A1804C84  4038     		and r0, r0, r7
+
+#7			NE		2048	{LNXT:2|-1|-1}
+(*) UINT
+A1804C86  F44F 6700		mov r7, #2048 ; 2048
+A1804C8A  42B8     		cmp r0, r7
+A1804C8C  BF08 2000		eqmov r0, #0
+A1804C90  BF18 2001		nemov r0, #1
+
+#8			JMPCN	$label0	{LNXT:2|3|2}
+(-) BOOL
+A1804C94  2800     		cmp r0, #0
+A1804C96  D005     		beq #10 ; 0xA1804CA4
+
+
+#9		
+#10			(* THEN *)
+#11		
+#12				(* WHILE TRUE *)
+#13		$label1:
+#14				LD		TRUE	{LNXT:3|-1|-1}
+(-) UNDEF
+A1804C9A  2001     		mov r0, #1 ; 1
+
+#15				JMPCN		$label2	{LNXT:3|2|2}
+(-) BOOL
+A1804C9C  2800     		cmp r0, #0
+A1804C9E  D001     		beq #2 ; 0xA1804CA4
+
+
+#16		
+#17				(* DO *)
+#18					JMP		$label1	{LNXT:3|2|2}
+(-) BOOL
+A1804CA2  E7FA     		b #-12 ; 0xA1804C9A
+
+A1804CA4  E8BD 0FF0		ldmia sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+A1804CA8  F8DD E000		ldr lr, [sp]
+A1804CAC  B002     		add sp, sp, #8
+
+A1804CAE  4770     		bx lr
+
+A1804CB0  FFFFFFFF		; 0x10000182
+
+END_PROGRAM
+
+
+**************************************************
+	Target variable image generation
+**************************************************
+
+
+*** INPUT:
+A1804CB4  4770     		bx lr
+
+
+*** OUTPUT:
+A1804CB6  4770     		bx lr
+
+
+
+**************************************************
+	Task Init init code
+**************************************************
+
+A1804CB8  B082     		sub sp, sp, #8
+A1804CBA  F8CD E000		str lr, [sp]
+A1804CBE  E92D 0FF0		stmdb sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+
+A1804CC2  E8BD 0FF0		ldmia sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+A1804CC6  F8DD E000		ldr lr, [sp]
+A1804CCA  B002     		add sp, sp, #8
+
+A1804CCC  4770     		bx lr
+
+**************************************************
+	List program: InitParDB
+**************************************************
+
+PROGRAM InitParDB
+
+        VAR
+warningsKiller : USINT;
+dummyCrc32 : UDINT;
+	END_VAR
+
+END_PROGRAM
+
+A1804CE0  B082     		sub sp, sp, #8
+A1804CE2  F8CD E000		str lr, [sp]
+A1804CE6  E92D 0FF0		stmdb sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+
+#0		{SRC:InitParDB}
+#1		(*$WAITSWITCH$*)
+#2		
+#3			(* dummyCrc32 := 2187283434; *)
+#4			MOVE		2187283434,dummyCrc32	{LNXT:3|5|-1}
+(*) UDINT
+A1804CEA  F8DF 7034		ldr r7, [pc, #+52] ; 0x825F4BEA
+A1804CEE  4638     		mov r0, r7
+A1804CF0  F8DF 7038		ldr r7, [pc, #+56] ; 0xA1A00010
+A1804CF4  6038     		str r0, [r7]
+
+#5		
+#6			(* warningsKiller := sysDBase_SetExtTable( ADR( $$ParDB ), $$ParDBLength ); *)
+#7			ADR		$$ParDB	{LNXT:5|3|-1}
+(*) UDINT
+A1804CF6  F8DF 002C		ldr r0, [pc, #+44] ; 0xA18000E0
+
+#8			sysDBase_SetExtTable		$$ParDBLength	{LNXT:5|3|-1}
+(*) @USINT
+A1804CFA  4607     		mov r7, r0
+A1804CFC  4638     		mov r0, r7
+A1804CFE  2746     		mov r7, #70 ; 70
+A1804D00  4639     		mov r1, r7
+A1804D02  F8DF 402C		ldr r4, [pc, #+44] ; 0x139A5
+A1804D06  F044 0401		orr r4, r4, #1
+A1804D0A  47A0     		blx r4
+
+#9			ST		warningsKiller	{LNXT:5|3|-1}
+(*) USINT
+A1804D0C  F8DF 7018		ldr r7, [pc, #+24] ; 0xA1A0000F
+A1804D10  7038     		strb r0, [r7]
+
+A1804D12  E8BD 0FF0		ldmia sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+A1804D16  F8DD E000		ldr lr, [sp]
+A1804D1A  B002     		add sp, sp, #8
+
+A1804D1C  4770     		bx lr
+
+A1804D20  825F4BEA		; 0x825F4BEA
+A1804D24  A18000E0		; 0xA18000E0
+A1804D28  A1A0000F		; 0xA1A0000F
+A1804D2C  A1A00010		; 0xA1A00010
+A1804D30  FFFFFFFF		; 0x000139A5
+
+END_PROGRAM
+
+
+**************************************************
+	Target variable image generation
+**************************************************
+
+
+*** INPUT:
+A1804D34  4770     		bx lr
+
+
+*** OUTPUT:
+A1804D36  4770     		bx lr
+
+
+
+**************************************************
+	Task Serv init code
+**************************************************
+
+A1804D38  B082     		sub sp, sp, #8
+A1804D3A  F8CD E000		str lr, [sp]
+A1804D3E  E92D 0FF0		stmdb sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+
+A1804D42  E8BD 0FF0		ldmia sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+A1804D46  F8DD E000		ldr lr, [sp]
+A1804D4A  B002     		add sp, sp, #8
+
+A1804D4C  4770     		bx lr
+
+**************************************************
+	List program: Pres_Freq_Flow
+**************************************************
+
+PROGRAM Pres_Freq_Flow
+
+        VAR
+ton_start_up : TON;
+	END_VAR
+
+END_PROGRAM
+
+A1804D60  B082     		sub sp, sp, #8
+A1804D62  F8CD E000		str lr, [sp]
+A1804D66  E92D 0FF0		stmdb sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+
+#0		{SRC:Pres_Freq_Flow}
+#1		(*$WAITSWITCH$*)
+#2		
+#3			(* Tank1_lvl := to_int(to_real(i_abc_Tank1_lvl+iCfgPidvisRez1) * i_Area_Tank1/100); *)
+#4			LD		i_abc_Tank1_lvl	{LNXT:2|3|-1}
+(*) UNDEF
+A1804D6A  F8DF 7470		ldr r7, [pc, #+1136] ; 0xA1A00014
+A1804D6E  F9B7 0000		ldrsh r0, [r7]
+
+#5			ADD		iCfgPidvisRez1	{LNXT:2|3|-1}
+(*) INT
+A1804D72  F8DF 746C		ldr r7, [pc, #+1132] ; 0xA1A00016
+A1804D76  F9B7 7000		ldrsh r7, [r7]
+A1804D7A  19C0     		add r0, r0, r7
+
+#6			to_real	{LNXT:2|3|-1}
+(*) INT
+A1804D7C  F8DF 44B0		ldr r4, [pc, #+1200] ; 0x11203
+A1804D80  F044 0401		orr r4, r4, #1
+A1804D84  47A0     		blx r4
+
+#7			MUL		i_Area_Tank1	{LNXT:2|3|-1}
+(*) REAL
+A1804D86  F8DF 745C		ldr r7, [pc, #+1116] ; 0xA1A00018
+A1804D8A  F9B7 7000		ldrsh r7, [r7]
+A1804D8E  B082     		sub sp, sp, #8
+A1804D90  F8CD 0000		str r0, [sp]
+A1804D94  4638     		mov r0, r7
+A1804D96  F8DF 4498		ldr r4, [pc, #+1176] ; 0x11203
+A1804D9A  F044 0401		orr r4, r4, #1
+A1804D9E  47A0     		blx r4
+A1804DA0  4607     		mov r7, r0
+A1804DA2  F8DD 0000		ldr r0, [sp]
+A1804DA6  B002     		add sp, sp, #8
+A1804DA8  B082     		sub sp, sp, #8
+A1804DAA  F8CD 1000		str r1, [sp]
+A1804DAE  4639     		mov r1, r7
+A1804DB0  F8DF 4484		ldr r4, [pc, #+1156] ; 0x11253
+A1804DB4  F044 0401		orr r4, r4, #1
+A1804DB8  47A0     		blx r4
+A1804DBA  F8DD 1000		ldr r1, [sp]
+A1804DBE  B002     		add sp, sp, #8
+
+#8			DIV		100	{LNXT:2|3|-1}
+(*) REAL
+A1804DC0  2764     		mov r7, #100 ; 100
+A1804DC2  B082     		sub sp, sp, #8
+A1804DC4  F8CD 0000		str r0, [sp]
+A1804DC8  4638     		mov r0, r7
+A1804DCA  F8DF 4460		ldr r4, [pc, #+1120] ; 0x111F3
+A1804DCE  F044 0401		orr r4, r4, #1
+A1804DD2  47A0     		blx r4
+A1804DD4  4607     		mov r7, r0
+A1804DD6  F8DD 0000		ldr r0, [sp]
+A1804DDA  B002     		add sp, sp, #8
+A1804DDC  B082     		sub sp, sp, #8
+A1804DDE  F8CD 1000		str r1, [sp]
+A1804DE2  4639     		mov r1, r7
+A1804DE4  F8DF 4454		ldr r4, [pc, #+1108] ; 0x11263
+A1804DE8  F044 0401		orr r4, r4, #1
+A1804DEC  47A0     		blx r4
+A1804DEE  F8DD 1000		ldr r1, [sp]
+A1804DF2  B002     		add sp, sp, #8
+
+#9			to_int	{LNXT:2|3|-1}
+(*) REAL
+A1804DF4  F8DF 443C		ldr r4, [pc, #+1084] ; 0x11223
+A1804DF8  F044 0401		orr r4, r4, #1
+A1804DFC  47A0     		blx r4
+
+#10			ST		Tank1_lvl	{LNXT:2|3|-1}
+(*) INT
+A1804DFE  F8DF 73B0		ldr r7, [pc, #+944] ; 0xA0003F00
+A1804E02  8038     		strh r0, [r7]
+
+#11		
+#12			(* Tank2_lvl := to_int(to_real(i_abc_Tank2_lvl + iCfgPidvisRez2) * i_Area_Tank2/100); *)
+#13			LD		i_abc_Tank2_lvl	{LNXT:3|4|-1}
+(*) UNDEF
+A1804E04  F8DF 73E0		ldr r7, [pc, #+992] ; 0xA1A0001A
+A1804E08  F9B7 0000		ldrsh r0, [r7]
+
+#14			ADD		iCfgPidvisRez2	{LNXT:3|4|-1}
+(*) INT
+A1804E0C  F8DF 73DC		ldr r7, [pc, #+988] ; 0xA1A0001C
+A1804E10  F9B7 7000		ldrsh r7, [r7]
+A1804E14  19C0     		add r0, r0, r7
+
+#15			to_real	{LNXT:3|4|-1}
+(*) INT
+A1804E16  F8DF 4418		ldr r4, [pc, #+1048] ; 0x11203
+A1804E1A  F044 0401		orr r4, r4, #1
+A1804E1E  47A0     		blx r4
+
+#16			MUL		i_Area_Tank2	{LNXT:3|4|-1}
+(*) REAL
+A1804E20  F8DF 73CC		ldr r7, [pc, #+972] ; 0xA1A0001E
+A1804E24  F9B7 7000		ldrsh r7, [r7]
+A1804E28  B082     		sub sp, sp, #8
+A1804E2A  F8CD 0000		str r0, [sp]
+A1804E2E  4638     		mov r0, r7
+A1804E30  F8DF 43FC		ldr r4, [pc, #+1020] ; 0x11203
+A1804E34  F044 0401		orr r4, r4, #1
+A1804E38  47A0     		blx r4
+A1804E3A  4607     		mov r7, r0
+A1804E3C  F8DD 0000		ldr r0, [sp]
+A1804E40  B002     		add sp, sp, #8
+A1804E42  B082     		sub sp, sp, #8
+A1804E44  F8CD 1000		str r1, [sp]
+A1804E48  4639     		mov r1, r7
+A1804E4A  F8DF 43EC		ldr r4, [pc, #+1004] ; 0x11253
+A1804E4E  F044 0401		orr r4, r4, #1
+A1804E52  47A0     		blx r4
+A1804E54  F8DD 1000		ldr r1, [sp]
+A1804E58  B002     		add sp, sp, #8
+
+#17			DIV		100	{LNXT:3|4|-1}
+(*) REAL
+A1804E5A  2764     		mov r7, #100 ; 100
+A1804E5C  B082     		sub sp, sp, #8
+A1804E5E  F8CD 0000		str r0, [sp]
+A1804E62  4638     		mov r0, r7
+A1804E64  F8DF 43C4		ldr r4, [pc, #+964] ; 0x111F3
+A1804E68  F044 0401		orr r4, r4, #1
+A1804E6C  47A0     		blx r4
+A1804E6E  4607     		mov r7, r0
+A1804E70  F8DD 0000		ldr r0, [sp]
+A1804E74  B002     		add sp, sp, #8
+A1804E76  B082     		sub sp, sp, #8
+A1804E78  F8CD 1000		str r1, [sp]
+A1804E7C  4639     		mov r1, r7
+A1804E7E  F8DF 43BC		ldr r4, [pc, #+956] ; 0x11263
+A1804E82  F044 0401		orr r4, r4, #1
+A1804E86  47A0     		blx r4
+A1804E88  F8DD 1000		ldr r1, [sp]
+A1804E8C  B002     		add sp, sp, #8
+
+#18			to_int	{LNXT:3|4|-1}
+(*) REAL
+A1804E8E  F8DF 43A4		ldr r4, [pc, #+932] ; 0x11223
+A1804E92  F044 0401		orr r4, r4, #1
+A1804E96  47A0     		blx r4
+
+#19			ST		Tank2_lvl	{LNXT:3|4|-1}
+(*) INT
+A1804E98  F8DF 7318		ldr r7, [pc, #+792] ; 0xA0003F02
+A1804E9C  8038     		strh r0, [r7]
+
+#20		
+#21			(* Tank3_lvl := to_int(to_real(i_abc_Tank3_lvl + iCfgPidvisRez3) * i_Area_Tank3/100); *)
+#22			LD		i_abc_Tank3_lvl	{LNXT:4|5|-1}
+(*) UNDEF
+A1804E9E  F8DF 7354		ldr r7, [pc, #+852] ; 0xA1A00020
+A1804EA2  F9B7 0000		ldrsh r0, [r7]
+
+#23			ADD		iCfgPidvisRez3	{LNXT:4|5|-1}
+(*) INT
+A1804EA6  F8DF 7350		ldr r7, [pc, #+848] ; 0xA1A00022
+A1804EAA  F9B7 7000		ldrsh r7, [r7]
+A1804EAE  19C0     		add r0, r0, r7
+
+#24			to_real	{LNXT:4|5|-1}
+(*) INT
+A1804EB0  F8DF 437C		ldr r4, [pc, #+892] ; 0x11203
+A1804EB4  F044 0401		orr r4, r4, #1
+A1804EB8  47A0     		blx r4
+
+#25			MUL		i_Area_Tank3	{LNXT:4|5|-1}
+(*) REAL
+A1804EBA  F8DF 7340		ldr r7, [pc, #+832] ; 0xA1A00024
+A1804EBE  F9B7 7000		ldrsh r7, [r7]
+A1804EC2  B082     		sub sp, sp, #8
+A1804EC4  F8CD 0000		str r0, [sp]
+A1804EC8  4638     		mov r0, r7
+A1804ECA  F8DF 4364		ldr r4, [pc, #+868] ; 0x11203
+A1804ECE  F044 0401		orr r4, r4, #1
+A1804ED2  47A0     		blx r4
+A1804ED4  4607     		mov r7, r0
+A1804ED6  F8DD 0000		ldr r0, [sp]
+A1804EDA  B002     		add sp, sp, #8
+A1804EDC  B082     		sub sp, sp, #8
+A1804EDE  F8CD 1000		str r1, [sp]
+A1804EE2  4639     		mov r1, r7
+A1804EE4  F8DF 4350		ldr r4, [pc, #+848] ; 0x11253
+A1804EE8  F044 0401		orr r4, r4, #1
+A1804EEC  47A0     		blx r4
+A1804EEE  F8DD 1000		ldr r1, [sp]
+A1804EF2  B002     		add sp, sp, #8
+
+#26			DIV		100	{LNXT:4|5|-1}
+(*) REAL
+A1804EF4  2764     		mov r7, #100 ; 100
+A1804EF6  B082     		sub sp, sp, #8
+A1804EF8  F8CD 0000		str r0, [sp]
+A1804EFC  4638     		mov r0, r7
+A1804EFE  F8DF 432C		ldr r4, [pc, #+812] ; 0x111F3
+A1804F02  F044 0401		orr r4, r4, #1
+A1804F06  47A0     		blx r4
+A1804F08  4607     		mov r7, r0
+A1804F0A  F8DD 0000		ldr r0, [sp]
+A1804F0E  B002     		add sp, sp, #8
+A1804F10  B082     		sub sp, sp, #8
+A1804F12  F8CD 1000		str r1, [sp]
+A1804F16  4639     		mov r1, r7
+A1804F18  F8DF 4320		ldr r4, [pc, #+800] ; 0x11263
+A1804F1C  F044 0401		orr r4, r4, #1
+A1804F20  47A0     		blx r4
+A1804F22  F8DD 1000		ldr r1, [sp]
+A1804F26  B002     		add sp, sp, #8
+
+#27			to_int	{LNXT:4|5|-1}
+(*) REAL
+A1804F28  F8DF 4308		ldr r4, [pc, #+776] ; 0x11223
+A1804F2C  F044 0401		orr r4, r4, #1
+A1804F30  47A0     		blx r4
+
+#28			ST		Tank3_lvl	{LNXT:4|5|-1}
+(*) INT
+A1804F32  F8DF 7294		ldr r7, [pc, #+660] ; 0xA0003F22
+A1804F36  8038     		strh r0, [r7]
+
+#29		
+#30			(* Tank4_lvl := to_int(to_real(i_abc_Tank4_lvl + iCfgPidvisRez4) * i_Area_Tank4/100); *)
+#31			LD		i_abc_Tank4_lvl	{LNXT:5|6|-1}
+(*) UNDEF
+A1804F38  F8DF 72C4		ldr r7, [pc, #+708] ; 0xA1A00026
+A1804F3C  F9B7 0000		ldrsh r0, [r7]
+
+#32			ADD		iCfgPidvisRez4	{LNXT:5|6|-1}
+(*) INT
+A1804F40  F8DF 72C0		ldr r7, [pc, #+704] ; 0xA1A00028
+A1804F44  F9B7 7000		ldrsh r7, [r7]
+A1804F48  19C0     		add r0, r0, r7
+
+#33			to_real	{LNXT:5|6|-1}
+(*) INT
+A1804F4A  F8DF 42E4		ldr r4, [pc, #+740] ; 0x11203
+A1804F4E  F044 0401		orr r4, r4, #1
+A1804F52  47A0     		blx r4
+
+#34			MUL		i_Area_Tank4	{LNXT:5|6|-1}
+(*) REAL
+A1804F54  F8DF 72B0		ldr r7, [pc, #+688] ; 0xA1A0002A
+A1804F58  F9B7 7000		ldrsh r7, [r7]
+A1804F5C  B082     		sub sp, sp, #8
+A1804F5E  F8CD 0000		str r0, [sp]
+A1804F62  4638     		mov r0, r7
+A1804F64  F8DF 42C8		ldr r4, [pc, #+712] ; 0x11203
+A1804F68  F044 0401		orr r4, r4, #1
+A1804F6C  47A0     		blx r4
+A1804F6E  4607     		mov r7, r0
+A1804F70  F8DD 0000		ldr r0, [sp]
+A1804F74  B002     		add sp, sp, #8
+A1804F76  B082     		sub sp, sp, #8
+A1804F78  F8CD 1000		str r1, [sp]
+A1804F7C  4639     		mov r1, r7
+A1804F7E  F8DF 42B8		ldr r4, [pc, #+696] ; 0x11253
+A1804F82  F044 0401		orr r4, r4, #1
+A1804F86  47A0     		blx r4
+A1804F88  F8DD 1000		ldr r1, [sp]
+A1804F8C  B002     		add sp, sp, #8
+
+#35			DIV		100	{LNXT:5|6|-1}
+(*) REAL
+A1804F8E  2764     		mov r7, #100 ; 100
+A1804F90  B082     		sub sp, sp, #8
+A1804F92  F8CD 0000		str r0, [sp]
+A1804F96  4638     		mov r0, r7
+A1804F98  F8DF 4290		ldr r4, [pc, #+656] ; 0x111F3
+A1804F9C  F044 0401		orr r4, r4, #1
+A1804FA0  47A0     		blx r4
+A1804FA2  4607     		mov r7, r0
+A1804FA4  F8DD 0000		ldr r0, [sp]
+A1804FA8  B002     		add sp, sp, #8
+A1804FAA  B082     		sub sp, sp, #8
+A1804FAC  F8CD 1000		str r1, [sp]
+A1804FB0  4639     		mov r1, r7
+A1804FB2  F8DF 4288		ldr r4, [pc, #+648] ; 0x11263
+A1804FB6  F044 0401		orr r4, r4, #1
+A1804FBA  47A0     		blx r4
+A1804FBC  F8DD 1000		ldr r1, [sp]
+A1804FC0  B002     		add sp, sp, #8
+
+#36			to_int	{LNXT:5|6|-1}
+(*) REAL
+A1804FC2  F8DF 4270		ldr r4, [pc, #+624] ; 0x11223
+A1804FC6  F044 0401		orr r4, r4, #1
+A1804FCA  47A0     		blx r4
+
+#37			ST		Tank4_lvl	{LNXT:5|6|-1}
+(*) INT
+A1804FCC  F8DF 71FC		ldr r7, [pc, #+508] ; 0xA0003F24
+A1804FD0  8038     		strh r0, [r7]
+
+#38		
+#39			(* Tank5_lvl := to_int(to_real(i_abc_Tank5_lvl + iCfgPidvisRez5) * i_Area_Tank5/100); *)
+#40			LD		i_abc_Tank5_lvl	{LNXT:6|7|-1}
+(*) UNDEF
+A1804FD2  F8DF 7238		ldr r7, [pc, #+568] ; 0xA1A0002C
+A1804FD6  F9B7 0000		ldrsh r0, [r7]
+
+#41			ADD		iCfgPidvisRez5	{LNXT:6|7|-1}
+(*) INT
+A1804FDA  F8DF 7234		ldr r7, [pc, #+564] ; 0xA1A0002E
+A1804FDE  F9B7 7000		ldrsh r7, [r7]
+A1804FE2  19C0     		add r0, r0, r7
+
+#42			to_real	{LNXT:6|7|-1}
+(*) INT
+A1804FE4  F8DF 4248		ldr r4, [pc, #+584] ; 0x11203
+A1804FE8  F044 0401		orr r4, r4, #1
+A1804FEC  47A0     		blx r4
+
+#43			MUL		i_Area_Tank5	{LNXT:6|7|-1}
+(*) REAL
+A1804FEE  F8DF 7224		ldr r7, [pc, #+548] ; 0xA1A00030
+A1804FF2  F9B7 7000		ldrsh r7, [r7]
+A1804FF6  B082     		sub sp, sp, #8
+A1804FF8  F8CD 0000		str r0, [sp]
+A1804FFC  4638     		mov r0, r7
+A1804FFE  F8DF 4230		ldr r4, [pc, #+560] ; 0x11203
+A1805002  F044 0401		orr r4, r4, #1
+A1805006  47A0     		blx r4
+A1805008  4607     		mov r7, r0
+A180500A  F8DD 0000		ldr r0, [sp]
+A180500E  B002     		add sp, sp, #8
+A1805010  B082     		sub sp, sp, #8
+A1805012  F8CD 1000		str r1, [sp]
+A1805016  4639     		mov r1, r7
+A1805018  F8DF 421C		ldr r4, [pc, #+540] ; 0x11253
+A180501C  F044 0401		orr r4, r4, #1
+A1805020  47A0     		blx r4
+A1805022  F8DD 1000		ldr r1, [sp]
+A1805026  B002     		add sp, sp, #8
+
+#44			DIV		100	{LNXT:6|7|-1}
+(*) REAL
+A1805028  2764     		mov r7, #100 ; 100
+A180502A  B082     		sub sp, sp, #8
+A180502C  F8CD 0000		str r0, [sp]
+A1805030  4638     		mov r0, r7
+A1805032  F8DF 41F8		ldr r4, [pc, #+504] ; 0x111F3
+A1805036  F044 0401		orr r4, r4, #1
+A180503A  47A0     		blx r4
+A180503C  4607     		mov r7, r0
+A180503E  F8DD 0000		ldr r0, [sp]
+A1805042  B002     		add sp, sp, #8
+A1805044  B082     		sub sp, sp, #8
+A1805046  F8CD 1000		str r1, [sp]
+A180504A  4639     		mov r1, r7
+A180504C  F8DF 41EC		ldr r4, [pc, #+492] ; 0x11263
+A1805050  F044 0401		orr r4, r4, #1
+A1805054  47A0     		blx r4
+A1805056  F8DD 1000		ldr r1, [sp]
+A180505A  B002     		add sp, sp, #8
+
+#45			to_int	{LNXT:6|7|-1}
+(*) REAL
+A180505C  F8DF 41D4		ldr r4, [pc, #+468] ; 0x11223
+A1805060  F044 0401		orr r4, r4, #1
+A1805064  47A0     		blx r4
+
+#46			ST		Tank5_lvl	{LNXT:6|7|-1}
+(*) INT
+A1805066  F8DF 7168		ldr r7, [pc, #+360] ; 0xA0003F26
+A180506A  8038     		strh r0, [r7]
+
+#47		
+#48			(* Tank6_lvl := to_int(to_real(i_abc_Tank6_lvl + iCfgPidvisRez6) * i_Area_Tank6/100); *)
+#49			LD		i_abc_Tank6_lvl	{LNXT:7|9|-1}
+(*) UNDEF
+A180506C  F8DF 71A8		ldr r7, [pc, #+424] ; 0xA1A00032
+A1805070  F9B7 0000		ldrsh r0, [r7]
+
+#50			ADD		iCfgPidvisRez6	{LNXT:7|9|-1}
+(*) INT
+A1805074  F8DF 71A4		ldr r7, [pc, #+420] ; 0xA1A00034
+A1805078  F9B7 7000		ldrsh r7, [r7]
+A180507C  19C0     		add r0, r0, r7
+
+#51			to_real	{LNXT:7|9|-1}
+(*) INT
+A180507E  F8DF 41B0		ldr r4, [pc, #+432] ; 0x11203
+A1805082  F044 0401		orr r4, r4, #1
+A1805086  47A0     		blx r4
+
+#52			MUL		i_Area_Tank6	{LNXT:7|9|-1}
+(*) REAL
+A1805088  F8DF 7194		ldr r7, [pc, #+404] ; 0xA1A00036
+A180508C  F9B7 7000		ldrsh r7, [r7]
+A1805090  B082     		sub sp, sp, #8
+A1805092  F8CD 0000		str r0, [sp]
+A1805096  4638     		mov r0, r7
+A1805098  F8DF 4194		ldr r4, [pc, #+404] ; 0x11203
+A180509C  F044 0401		orr r4, r4, #1
+A18050A0  47A0     		blx r4
+A18050A2  4607     		mov r7, r0
+A18050A4  F8DD 0000		ldr r0, [sp]
+A18050A8  B002     		add sp, sp, #8
+A18050AA  B082     		sub sp, sp, #8
+A18050AC  F8CD 1000		str r1, [sp]
+A18050B0  4639     		mov r1, r7
+A18050B2  F8DF 4184		ldr r4, [pc, #+388] ; 0x11253
+A18050B6  F044 0401		orr r4, r4, #1
+A18050BA  47A0     		blx r4
+A18050BC  F8DD 1000		ldr r1, [sp]
+A18050C0  B002     		add sp, sp, #8
+
+#53			DIV		100	{LNXT:7|9|-1}
+(*) REAL
+A18050C2  2764     		mov r7, #100 ; 100
+A18050C4  B082     		sub sp, sp, #8
+A18050C6  F8CD 0000		str r0, [sp]
+A18050CA  4638     		mov r0, r7
+A18050CC  F8DF 415C		ldr r4, [pc, #+348] ; 0x111F3
+A18050D0  F044 0401		orr r4, r4, #1
+A18050D4  47A0     		blx r4
+A18050D6  4607     		mov r7, r0
+A18050D8  F8DD 0000		ldr r0, [sp]
+A18050DC  B002     		add sp, sp, #8
+A18050DE  B082     		sub sp, sp, #8
+A18050E0  F8CD 1000		str r1, [sp]
+A18050E4  4639     		mov r1, r7
+A18050E6  F8DF 4154		ldr r4, [pc, #+340] ; 0x11263
+A18050EA  F044 0401		orr r4, r4, #1
+A18050EE  47A0     		blx r4
+A18050F0  F8DD 1000		ldr r1, [sp]
+A18050F4  B002     		add sp, sp, #8
+
+#54			to_int	{LNXT:7|9|-1}
+(*) REAL
+A18050F6  F8DF 413C		ldr r4, [pc, #+316] ; 0x11223
+A18050FA  F044 0401		orr r4, r4, #1
+A18050FE  47A0     		blx r4
+
+#55			ST		Tank6_lvl	{LNXT:7|9|-1}
+(*) INT
+A1805100  F8DF 70D0		ldr r7, [pc, #+208] ; 0xA0003F28
+A1805104  8038     		strh r0, [r7]
+
+#56		
+#57			(* Out_Flow1 := to_int(to_real(i_abc_Flow1) * 0.15); *)
+#58			LDP0		i_abc_Flow1	{LNXT:9|10|-1}
+(-) INT
+#59			to_real	{LNXT:9|10|-1}
+(*) INT
+A1805106  F8DF 711C		ldr r7, [pc, #+284] ; 0xA1A00038
+A180510A  F9B7 0000		ldrsh r0, [r7]
+A180510E  F8DF 4120		ldr r4, [pc, #+288] ; 0x11203
+A1805112  F044 0401		orr r4, r4, #1
+A1805116  47A0     		blx r4
+
+#60			MUL		0.15	{LNXT:9|10|-1}
+(*) REAL
+A1805118  F8DF 70BC		ldr r7, [pc, #+188] ; 0xA1804AD0
+A180511C  683F     		ldr r7, [r7]
+A180511E  B082     		sub sp, sp, #8
+A1805120  F8CD 1000		str r1, [sp]
+A1805124  4639     		mov r1, r7
+A1805126  F8DF 4110		ldr r4, [pc, #+272] ; 0x11253
+A180512A  F044 0401		orr r4, r4, #1
+A180512E  47A0     		blx r4
+A1805130  F8DD 1000		ldr r1, [sp]
+A1805134  B002     		add sp, sp, #8
+
+#61			to_int	{LNXT:9|10|-1}
+(*) REAL
+A1805136  F8DF 40FC		ldr r4, [pc, #+252] ; 0x11223
+A180513A  F044 0401		orr r4, r4, #1
+A180513E  47A0     		blx r4
+
+#62			ST		Out_Flow1	{LNXT:9|10|-1}
+(*) INT
+A1805140  F8DF 7074		ldr r7, [pc, #+116] ; 0xA0003F06
+A1805144  8038     		strh r0, [r7]
+
+#63		
+#64			(* Out_Flow2 := to_int(to_real(i_abc_Flow2) * 0.15); *)
+#65			LDP0		i_abc_Flow2	{LNXT:10|12|-1}
+(-) INT
+#66			to_real	{LNXT:10|12|-1}
+(*) INT
+A1805146  F8DF 70E0		ldr r7, [pc, #+224] ; 0xA1A0003A
+A180514A  F9B7 0000		ldrsh r0, [r7]
+A180514E  F8DF 40E0		ldr r4, [pc, #+224] ; 0x11203
+A1805152  F044 0401		orr r4, r4, #1
+A1805156  47A0     		blx r4
+
+#67			MUL		0.15	{LNXT:10|12|-1}
+(*) REAL
+A1805158  F8DF 707C		ldr r7, [pc, #+124] ; 0xA1804AD0
+A180515C  683F     		ldr r7, [r7]
+A180515E  B082     		sub sp, sp, #8
+A1805160  F8CD 1000		str r1, [sp]
+A1805164  4639     		mov r1, r7
+A1805166  F8DF 40D0		ldr r4, [pc, #+208] ; 0x11253
+A180516A  F044 0401		orr r4, r4, #1
+A180516E  47A0     		blx r4
+A1805170  F8DD 1000		ldr r1, [sp]
+A1805174  B002     		add sp, sp, #8
+
+#68			to_int	{LNXT:10|12|-1}
+(*) REAL
+A1805176  F8DF 40BC		ldr r4, [pc, #+188] ; 0x11223
+A180517A  F044 0401		orr r4, r4, #1
+A180517E  47A0     		blx r4
+
+#69			ST		Out_Flow2	{LNXT:10|12|-1}
+(*) INT
+A1805180  F8DF 7038		ldr r7, [pc, #+56] ; 0xA0003F08
+A1805184  8038     		strh r0, [r7]
+
+#70		
+#71			(* Pressure_out1_cool := to_int(to_real(Pressure_out1-200))*2; *)
+#72			LD		Pressure_out1	{LNXT:12|2|-1}
+(*) UNDEF
+A1805186  F8DF 7038		ldr r7, [pc, #+56] ; 0xA0003F0E
+A180518A  F9B7 0000		ldrsh r0, [r7]
+
+#73			SUB		200	{LNXT:12|2|-1}
+(-) INT
+A180518E  38C8     		sub r0, r0, #200
+
+#74			to_real	{LNXT:12|2|-1}
+(*) INT
+A1805190  F8DF 409C		ldr r4, [pc, #+156] ; 0x11203
+A1805194  F044 0401		orr r4, r4, #1
+A1805198  47A0     		blx r4
+
+#75			to_int	{LNXT:12|2|-1}
+(*) REAL
+A180519A  F8DF 4098		ldr r4, [pc, #+152] ; 0x11223
+A180519E  F044 0401		orr r4, r4, #1
+A18051A2  47A0     		blx r4
+
+#76			MUL		2	{LNXT:12|2|-1}
+(*) INT
+A18051A4  2702     		mov r7, #2 ; 2
+A18051A6  4378     		mul r0, r0, r7
+
+#77			ST		Pressure_out1_cool	{LNXT:12|2|-1}
+(*) INT
+A18051A8  F8DF 7018		ldr r7, [pc, #+24] ; 0xA0003F1A
+A18051AC  8038     		strh r0, [r7]
+
+A18051AE  E047     		b #142
+
+A18051B0  FFFFFFFF		; 0xA0003F00
+A18051B4  FFFFFFFF		; 0xA0003F02
+A18051B8  FFFFFFFF		; 0xA0003F06
+A18051BC  FFFFFFFF		; 0xA0003F08
+A18051C0  FFFFFFFF		; 0xA0003F0E
+A18051C4  FFFFFFFF		; 0xA0003F1A
+A18051C8  FFFFFFFF		; 0xA0003F22
+A18051CC  FFFFFFFF		; 0xA0003F24
+A18051D0  FFFFFFFF		; 0xA0003F26
+A18051D4  FFFFFFFF		; 0xA0003F28
+A18051D8  A1804AD0		; 0xA1804AD0
+A18051DC  A1A00014		; 0xA1A00014
+A18051E0  A1A00016		; 0xA1A00016
+A18051E4  A1A00018		; 0xA1A00018
+A18051E8  A1A0001A		; 0xA1A0001A
+A18051EC  A1A0001C		; 0xA1A0001C
+A18051F0  A1A0001E		; 0xA1A0001E
+A18051F4  A1A00020		; 0xA1A00020
+A18051F8  A1A00022		; 0xA1A00022
+A18051FC  A1A00024		; 0xA1A00024
+A1805200  A1A00026		; 0xA1A00026
+A1805204  A1A00028		; 0xA1A00028
+A1805208  A1A0002A		; 0xA1A0002A
+A180520C  A1A0002C		; 0xA1A0002C
+A1805210  A1A0002E		; 0xA1A0002E
+A1805214  A1A00030		; 0xA1A00030
+A1805218  A1A00032		; 0xA1A00032
+A180521C  A1A00034		; 0xA1A00034
+A1805220  A1A00036		; 0xA1A00036
+A1805224  A1A00038		; 0xA1A00038
+A1805228  A1A0003A		; 0xA1A0003A
+A180522C  FFFFFFFF		; 0x000111F3
+A1805230  FFFFFFFF		; 0x00011203
+A1805234  FFFFFFFF		; 0x00011223
+A1805238  FFFFFFFF		; 0x00011253
+A180523C  FFFFFFFF		; 0x00011263
+
+END_PROGRAM
+**************************************************
+	List program: Auto_sv
+**************************************************
+
+PROGRAM Auto_sv
+
+        VAR
+level : INT;
+level_temp : INT;
+Ton_lvl : TON;
+Ton_lvl2 : TON;
+Ton_lvl3 : TON;
+Ton_lvl4 : TON;
+Ton_lvl_temp : TON;
+Ton_Lvl_stan : BOOL;
+Time_System : DINT;
+	END_VAR
+
+END_PROGRAM
+
+#0		{SRC:Auto_sv}
+#1		(*$WAITSWITCH$*)
+#2		
+#3			(* level:=Tank1_lvl + Tank2_lvl+Tank3_lvl+Tank4_lvl+Tank5_lvl+Tank6_lvl; *)
+#4			LD		Tank1_lvl	{LNXT:1|1|-1}
+(*) UNDEF
+A1805240  F8DF 7040		ldr r7, [pc, #+64] ; 0xA0003F00
+A1805244  F9B7 0000		ldrsh r0, [r7]
+
+#5			ADD		Tank2_lvl	{LNXT:1|1|-1}
+(*) INT
+A1805248  F8DF 703C		ldr r7, [pc, #+60] ; 0xA0003F02
+A180524C  F9B7 7000		ldrsh r7, [r7]
+A1805250  19C0     		add r0, r0, r7
+
+#6			ADD		Tank3_lvl	{LNXT:1|1|-1}
+(*) INT
+A1805252  F8DF 7038		ldr r7, [pc, #+56] ; 0xA0003F22
+A1805256  F9B7 7000		ldrsh r7, [r7]
+A180525A  19C0     		add r0, r0, r7
+
+#7			ADD		Tank4_lvl	{LNXT:1|1|-1}
+(*) INT
+A180525C  F8DF 7030		ldr r7, [pc, #+48] ; 0xA0003F24
+A1805260  F9B7 7000		ldrsh r7, [r7]
+A1805264  19C0     		add r0, r0, r7
+
+#8			ADD		Tank5_lvl	{LNXT:1|1|-1}
+(*) INT
+A1805266  F8DF 702C		ldr r7, [pc, #+44] ; 0xA0003F26
+A180526A  F9B7 7000		ldrsh r7, [r7]
+A180526E  19C0     		add r0, r0, r7
+
+#9			ADD		Tank6_lvl	{LNXT:1|1|-1}
+(*) INT
+A1805270  F8DF 7024		ldr r7, [pc, #+36] ; 0xA0003F28
+A1805274  F9B7 7000		ldrsh r7, [r7]
+A1805278  19C0     		add r0, r0, r7
+
+#10			ST		level	{LNXT:1|1|-1}
+(*) INT
+A180527A  F8DF 7020		ldr r7, [pc, #+32] ; 0xA1A0000C
+A180527E  8038     		strh r0, [r7]
+
+A1805280  E00E     		b #28
+
+A1805284  FFFFFFFF		; 0xA0003F00
+A1805288  FFFFFFFF		; 0xA0003F02
+A180528C  FFFFFFFF		; 0xA0003F22
+A1805290  FFFFFFFF		; 0xA0003F24
+A1805294  FFFFFFFF		; 0xA0003F26
+A1805298  FFFFFFFF		; 0xA0003F28
+A180529C  A1A0000C		; 0xA1A0000C
+
+END_PROGRAM
+**************************************************
+	List program: pr_Alarms
+**************************************************
+
+PROGRAM pr_Alarms
+
+END_PROGRAM
+
+#0		{SRC:pr_Alarms}
+#1		(*$WAITSWITCH$*)
+#2		
+#3			(* Alarms_Tank.0  := i_tank1_min; *)
+#4			MOVE		i_tank1_min,Alarms_Tank.0	{LNXT:1|2|-1}
+(*) UDINT
+A18052A0  F8DF 7294		ldr r7, [pc, #+660] ; 0xA1A0000E
+A18052A4  7838     		ldrb r0, [r7]
+A18052A6  F8DF 7288		ldr r7, [pc, #+648] ; 0xA0003F0A
+A18052AA  F8B7 8000		ldrh r8, [r7]
+A18052AE  F360 0800		bfi r8, r0, #0, #1
+A18052B2  F8A7 8000		strh r8, [r7]
+
+#5		
+#6			(* Alarms_Tank.1  := i_tank1_max; *)
+#7			MOVE		i_tank1_max,Alarms_Tank.1	{LNXT:2|3|-1}
+(*) BOOL
+A18052B6  F8DF 7288		ldr r7, [pc, #+648] ; 0xA1A0003C
+A18052BA  7838     		ldrb r0, [r7]
+A18052BC  F8DF 7270		ldr r7, [pc, #+624] ; 0xA0003F0A
+A18052C0  F8B7 8000		ldrh r8, [r7]
+A18052C4  F360 0841		bfi r8, r0, #1, #1
+A18052C8  F8A7 8000		strh r8, [r7]
+
+#8		
+#9			(* Alarms_Tank.2  := i_tank2_min; *)
+#10			MOVE		i_tank2_min,Alarms_Tank.2	{LNXT:3|4|-1}
+(*) BOOL
+A18052CC  F8DF 7274		ldr r7, [pc, #+628] ; 0xA1A0003D
+A18052D0  7838     		ldrb r0, [r7]
+A18052D2  F8DF 725C		ldr r7, [pc, #+604] ; 0xA0003F0A
+A18052D6  F8B7 8000		ldrh r8, [r7]
+A18052DA  F360 0882		bfi r8, r0, #2, #1
+A18052DE  F8A7 8000		strh r8, [r7]
+
+#11		
+#12			(* Alarms_Tank.3  := i_tank2_max; *)
+#13			MOVE		i_tank2_max,Alarms_Tank.3	{LNXT:4|5|-1}
+(*) BOOL
+A18052E2  F8DF 7264		ldr r7, [pc, #+612] ; 0xA1A0003E
+A18052E6  7838     		ldrb r0, [r7]
+A18052E8  F8DF 7244		ldr r7, [pc, #+580] ; 0xA0003F0A
+A18052EC  F8B7 8000		ldrh r8, [r7]
+A18052F0  F360 08C3		bfi r8, r0, #3, #1
+A18052F4  F8A7 8000		strh r8, [r7]
+
+#14		
+#15			(* Alarms_Tank.4  := i_tank3_min; *)
+#16			MOVE		i_tank3_min,Alarms_Tank.4	{LNXT:5|6|-1}
+(*) BOOL
+A18052F8  F8DF 7250		ldr r7, [pc, #+592] ; 0xA1A0003F
+A18052FC  7838     		ldrb r0, [r7]
+A18052FE  F8DF 7230		ldr r7, [pc, #+560] ; 0xA0003F0A
+A1805302  F8B7 8000		ldrh r8, [r7]
+A1805306  F360 1804		bfi r8, r0, #4, #1
+A180530A  F8A7 8000		strh r8, [r7]
+
+#17		
+#18			(* Alarms_Tank.5  := i_tank3_max; *)
+#19			MOVE		i_tank3_max,Alarms_Tank.5	{LNXT:6|7|-1}
+(*) BOOL
+A180530E  F8DF 7240		ldr r7, [pc, #+576] ; 0xA1A00040
+A1805312  7838     		ldrb r0, [r7]
+A1805314  F8DF 7218		ldr r7, [pc, #+536] ; 0xA0003F0A
+A1805318  F8B7 8000		ldrh r8, [r7]
+A180531C  F360 1845		bfi r8, r0, #5, #1
+A1805320  F8A7 8000		strh r8, [r7]
+
+#20		
+#21			(* Alarms_Tank.6  := i_tank4_min; *)
+#22			MOVE		i_tank4_min,Alarms_Tank.6	{LNXT:7|8|-1}
+(*) BOOL
+A1805324  F8DF 722C		ldr r7, [pc, #+556] ; 0xA1A00041
+A1805328  7838     		ldrb r0, [r7]
+A180532A  F8DF 7204		ldr r7, [pc, #+516] ; 0xA0003F0A
+A180532E  F8B7 8000		ldrh r8, [r7]
+A1805332  F360 1886		bfi r8, r0, #6, #1
+A1805336  F8A7 8000		strh r8, [r7]
+
+#23		
+#24			(* Alarms_Tank.7  := i_tank4_max; *)
+#25			MOVE		i_tank4_max,Alarms_Tank.7	{LNXT:8|9|-1}
+(*) BOOL
+A180533A  F8DF 721C		ldr r7, [pc, #+540] ; 0xA1A00042
+A180533E  7838     		ldrb r0, [r7]
+A1805340  F8DF 71EC		ldr r7, [pc, #+492] ; 0xA0003F0A
+A1805344  F8B7 8000		ldrh r8, [r7]
+A1805348  F360 18C7		bfi r8, r0, #7, #1
+A180534C  F8A7 8000		strh r8, [r7]
+
+#26		
+#27			(* Alarms_Tank.8  := i_tank5_min; *)
+#28			MOVE		i_tank5_min,Alarms_Tank.8	{LNXT:9|10|-1}
+(*) BOOL
+A1805350  F8DF 7210		ldr r7, [pc, #+528] ; 0x10000CCB
+A1805354  7838     		ldrb r0, [r7]
+A1805356  F8DF 71D8		ldr r7, [pc, #+472] ; 0xA0003F0A
+A180535A  F8B7 8000		ldrh r8, [r7]
+A180535E  F360 2808		bfi r8, r0, #8, #1
+A1805362  F8A7 8000		strh r8, [r7]
+
+#29		
+#30			(* Alarms_Tank.9  := i_tank5_max; *)
+#31			MOVE		i_tank5_max,Alarms_Tank.9	{LNXT:10|11|-1}
+(*) BOOL
+A1805366  F8DF 7200		ldr r7, [pc, #+512] ; 0x10000CCC
+A180536A  7838     		ldrb r0, [r7]
+A180536C  F8DF 71C0		ldr r7, [pc, #+448] ; 0xA0003F0A
+A1805370  F8B7 8000		ldrh r8, [r7]
+A1805374  F360 2849		bfi r8, r0, #9, #1
+A1805378  F8A7 8000		strh r8, [r7]
+
+#32		
+#33			(* Alarms_Tank.10 := i_tank6_min; *)
+#34			MOVE		i_tank6_min,Alarms_Tank.10	{LNXT:11|12|-1}
+(*) BOOL
+A180537C  F8DF 71EC		ldr r7, [pc, #+492] ; 0x10000CCD
+A1805380  7838     		ldrb r0, [r7]
+A1805382  F8DF 71AC		ldr r7, [pc, #+428] ; 0xA0003F0A
+A1805386  F8B7 8000		ldrh r8, [r7]
+A180538A  F360 288A		bfi r8, r0, #10, #1
+A180538E  F8A7 8000		strh r8, [r7]
+
+#35		
+#36			(* Alarms_Tank.11 := i_tank6_max; *)
+#37			MOVE		i_tank6_max,Alarms_Tank.11	{LNXT:12|15|-1}
+(*) BOOL
+A1805392  F8DF 71DC		ldr r7, [pc, #+476] ; 0x10000CCE
+A1805396  7838     		ldrb r0, [r7]
+A1805398  F8DF 7194		ldr r7, [pc, #+404] ; 0xA0003F0A
+A180539C  F8B7 8000		ldrh r8, [r7]
+A18053A0  F360 28CB		bfi r8, r0, #11, #1
+A18053A4  F8A7 8000		strh r8, [r7]
+
+#38		
+#39			(* Alarms_Filtr.0  := i_filtr1; *)
+#40			MOVE		i_filtr1,Alarms_Filtr.0	{LNXT:15|16|-1}
+(*) BOOL
+A18053A8  F8DF 71C8		ldr r7, [pc, #+456] ; 0x10000CCF
+A18053AC  7838     		ldrb r0, [r7]
+A18053AE  F8DF 7184		ldr r7, [pc, #+388] ; 0xA0003F2A
+A18053B2  F8B7 8000		ldrh r8, [r7]
+A18053B6  F360 0800		bfi r8, r0, #0, #1
+A18053BA  F8A7 8000		strh r8, [r7]
+
+#41		
+#42			(* Alarms_Filtr.1  := i_filtr2; *)
+#43			MOVE		i_filtr2,Alarms_Filtr.1	{LNXT:16|17|-1}
+(*) BOOL
+A18053BE  F8DF 71B8		ldr r7, [pc, #+440] ; 0x10000CD0
+A18053C2  7838     		ldrb r0, [r7]
+A18053C4  F8DF 716C		ldr r7, [pc, #+364] ; 0xA0003F2A
+A18053C8  F8B7 8000		ldrh r8, [r7]
+A18053CC  F360 0841		bfi r8, r0, #1, #1
+A18053D0  F8A7 8000		strh r8, [r7]
+
+#44		
+#45			(* Alarms_Filtr.2  := i_filtr3; *)
+#46			MOVE		i_filtr3,Alarms_Filtr.2	{LNXT:17|18|-1}
+(*) BOOL
+A18053D4  F8DF 71A4		ldr r7, [pc, #+420] ; 0x10000CD1
+A18053D8  7838     		ldrb r0, [r7]
+A18053DA  F8DF 7158		ldr r7, [pc, #+344] ; 0xA0003F2A
+A18053DE  F8B7 8000		ldrh r8, [r7]
+A18053E2  F360 0882		bfi r8, r0, #2, #1
+A18053E6  F8A7 8000		strh r8, [r7]
+
+#47		
+#48			(* Alarms_Filtr.3  := i_filtr4; *)
+#49			MOVE		i_filtr4,Alarms_Filtr.3	{LNXT:18|19|-1}
+(*) BOOL
+A18053EA  F8DF 7194		ldr r7, [pc, #+404] ; 0x10000CD2
+A18053EE  7838     		ldrb r0, [r7]
+A18053F0  F8DF 7140		ldr r7, [pc, #+320] ; 0xA0003F2A
+A18053F4  F8B7 8000		ldrh r8, [r7]
+A18053F8  F360 08C3		bfi r8, r0, #3, #1
+A18053FC  F8A7 8000		strh r8, [r7]
+
+#50		
+#51			(* Alarms_Filtr.4  := i_filtr5; *)
+#52			MOVE		i_filtr5,Alarms_Filtr.4	{LNXT:19|20|-1}
+(*) BOOL
+A1805400  F8DF 7180		ldr r7, [pc, #+384] ; 0x10000CD3
+A1805404  7838     		ldrb r0, [r7]
+A1805406  F8DF 712C		ldr r7, [pc, #+300] ; 0xA0003F2A
+A180540A  F8B7 8000		ldrh r8, [r7]
+A180540E  F360 1804		bfi r8, r0, #4, #1
+A1805412  F8A7 8000		strh r8, [r7]
+
+#53		
+#54			(* Alarms_Filtr.5  := i_filtr6; *)
+#55			MOVE		i_filtr6,Alarms_Filtr.5	{LNXT:20|21|-1}
+(*) BOOL
+A1805416  F8DF 7170		ldr r7, [pc, #+368] ; 0x10000CD4
+A180541A  7838     		ldrb r0, [r7]
+A180541C  F8DF 7114		ldr r7, [pc, #+276] ; 0xA0003F2A
+A1805420  F8B7 8000		ldrh r8, [r7]
+A1805424  F360 1845		bfi r8, r0, #5, #1
+A1805428  F8A7 8000		strh r8, [r7]
+
+#56		
+#57			(* Alarms_Filtr.6  := i_filtr7; *)
+#58			MOVE		i_filtr7,Alarms_Filtr.6	{LNXT:21|22|-1}
+(*) BOOL
+A180542C  F8DF 715C		ldr r7, [pc, #+348] ; 0x10000CD5
+A1805430  7838     		ldrb r0, [r7]
+A1805432  F8DF 7100		ldr r7, [pc, #+256] ; 0xA0003F2A
+A1805436  F8B7 8000		ldrh r8, [r7]
+A180543A  F360 1886		bfi r8, r0, #6, #1
+A180543E  F8A7 8000		strh r8, [r7]
+
+#59		
+#60			(* Alarms_Filtr.7  := i_filtr8; *)
+#61			MOVE		i_filtr8,Alarms_Filtr.7	{LNXT:22|23|-1}
+(*) BOOL
+A1805442  F8DF 714C		ldr r7, [pc, #+332] ; 0x10000CD6
+A1805446  7838     		ldrb r0, [r7]
+A1805448  F8DF 70E8		ldr r7, [pc, #+232] ; 0xA0003F2A
+A180544C  F8B7 8000		ldrh r8, [r7]
+A1805450  F360 18C7		bfi r8, r0, #7, #1
+A1805454  F8A7 8000		strh r8, [r7]
+
+#62		
+#63			(* Alarms_Filtr.8  := i_filtr9; *)
+#64			MOVE		i_filtr9,Alarms_Filtr.8	{LNXT:23|24|-1}
+(*) BOOL
+A1805458  F8DF 7138		ldr r7, [pc, #+312] ; 0x10000CD7
+A180545C  7838     		ldrb r0, [r7]
+A180545E  F8DF 70D4		ldr r7, [pc, #+212] ; 0xA0003F2A
+A1805462  F8B7 8000		ldrh r8, [r7]
+A1805466  F360 2808		bfi r8, r0, #8, #1
+A180546A  F8A7 8000		strh r8, [r7]
+
+#65		
+#66			(* Alarms_Filtr.9 := i_filtr10; *)
+#67			MOVE		i_filtr10,Alarms_Filtr.9	{LNXT:24|25|-1}
+(*) BOOL
+A180546E  F8DF 7128		ldr r7, [pc, #+296] ; 0x10000CD8
+A1805472  7838     		ldrb r0, [r7]
+A1805474  F8DF 70BC		ldr r7, [pc, #+188] ; 0xA0003F2A
+A1805478  F8B7 8000		ldrh r8, [r7]
+A180547C  F360 2849		bfi r8, r0, #9, #1
+A1805480  F8A7 8000		strh r8, [r7]
+
+#68		
+#69			(* Alarms_Filtr.10 := i_filtr11; *)
+#70			MOVE		i_filtr11,Alarms_Filtr.10	{LNXT:25|26|-1}
+(*) BOOL
+A1805484  F8DF 7114		ldr r7, [pc, #+276] ; 0x10000CD9
+A1805488  7838     		ldrb r0, [r7]
+A180548A  F8DF 70A8		ldr r7, [pc, #+168] ; 0xA0003F2A
+A180548E  F8B7 8000		ldrh r8, [r7]
+A1805492  F360 288A		bfi r8, r0, #10, #1
+A1805496  F8A7 8000		strh r8, [r7]
+
+#71		
+#72			(* Alarms_Filtr.11 := i_filtr12; *)
+#73			MOVE		i_filtr12,Alarms_Filtr.11	{LNXT:26|27|-1}
+(*) BOOL
+A180549A  F8DF 7104		ldr r7, [pc, #+260] ; 0x10000CDA
+A180549E  7838     		ldrb r0, [r7]
+A18054A0  F8DF 7090		ldr r7, [pc, #+144] ; 0xA0003F2A
+A18054A4  F8B7 8000		ldrh r8, [r7]
+A18054A8  F360 28CB		bfi r8, r0, #11, #1
+A18054AC  F8A7 8000		strh r8, [r7]
+
+#74		
+#75			(* Alarms_Filtr.12 :=i_rnpp; *)
+#76			MOVE		i_rnpp,Alarms_Filtr.12	{LNXT:27|29|-1}
+(*) BOOL
+A18054B0  F8DF 70AC		ldr r7, [pc, #+172] ; 0x10000CCA
+A18054B4  7838     		ldrb r0, [r7]
+A18054B6  F8DF 707C		ldr r7, [pc, #+124] ; 0xA0003F2A
+A18054BA  F8B7 8000		ldrh r8, [r7]
+A18054BE  F360 380C		bfi r8, r0, #12, #1
+A18054C2  F8A7 8000		strh r8, [r7]
+
+#77		
+#78		
+#79			(* IF i_abc_Tank1_lvl <0 or i_abc_Tank1_lvl > 33000 *)
+#80			LD		i_abc_Tank1_lvl	{LNXT:29|-1|-1}
+(*) UNDEF
+A18054C6  F8DF 7074		ldr r7, [pc, #+116] ; 0xA1A00014
+A18054CA  F9B7 0000		ldrsh r0, [r7]
+
+#81			GT		33000	{LNXT:29|-1|-1}
+(*) INT
+A18054CE  F8DF 708C		ldr r7, [pc, #+140] ; 0x80E8
+A18054D2  463F     		mov r7, r7
+A18054D4  42B8     		cmp r0, r7
+A18054D6  BFD8 2000		lemov r0, #0
+A18054DA  BFC8 2001		gtmov r0, #1
+
+#82			OR(		i_abc_Tank1_lvl	{LNXT:29|-1|-1}
+(*) BOOL
+A18054DE  B082     		sub sp, sp, #8
+A18054E0  F8CD 0000		str r0, [sp]
+A18054E4  F8DF 7054		ldr r7, [pc, #+84] ; 0xA1A00014
+A18054E8  F9B7 0000		ldrsh r0, [r7]
+
+#83			LT		0	{LNXT:29|-1|-1}
+(*) INT
+A18054EC  2800     		cmp r0, #0
+A18054EE  BFA8 2000		gemov r0, #0
+A18054F2  BFB8 2001		ltmov r0, #1
+
+#84			)	{LNXT:29|-1|-1}
+(*) BOOL
+A18054F6  4607     		mov r7, r0
+A18054F8  F8DD 0000		ldr r0, [sp]
+A18054FC  B002     		add sp, sp, #8
+A18054FE  4338     		orr r0, r0, r7
+
+#85			JMPCN	$label0	{LNXT:29|30|32}
+(-) BOOL
+A1805500  2800     		cmp r0, #0
+A1805502  D00B     		beq #22 ; 0xA180551C
+
+
+#86		
+#87			(* THEN *)
+#88		
+#89				(* Alarms_Tank.12 := true; *)
+#90				MOVE		true,Alarms_Tank.12	{LNXT:30|1|-1}
+(*) BOOL
+A1805506  2001     		mov r0, #1 ; 1
+A1805508  F8DF 7024		ldr r7, [pc, #+36] ; 0xA0003F0A
+A180550C  F8B7 8000		ldrh r8, [r7]
+A1805510  F360 380C		bfi r8, r0, #12, #1
+A1805514  F8A7 8000		strh r8, [r7]
+
+#91				JMP		$label1	{LNXT:29|30|32}
+(-) WORD
+A1805518  E009     		b #18 ; 0xA180552E
+
+
+#92		$label0:
+#93		
+#94			(* ELSE *)
+#95		
+#96				(* Alarms_Tank.12 := False; *)
+#97				MOVE		False,Alarms_Tank.12	{LNXT:32|1|-1}
+(*) WORD
+A180551C  2000     		mov r0, #0 ; 0
+A180551E  F8DF 7010		ldr r7, [pc, #+16] ; 0xA0003F0A
+A1805522  F8B7 8000		ldrh r8, [r7]
+A1805526  F360 380C		bfi r8, r0, #12, #1
+A180552A  F8A7 8000		strh r8, [r7]
+
+A180552E  E039     		b #114
+
+A1805530  FFFFFFFF		; 0xA0003F0A
+A1805534  FFFFFFFF		; 0xA0003F2A
+A1805538  A1A0000E		; 0xA1A0000E
+A180553C  A1A00014		; 0xA1A00014
+A1805540  A1A0003C		; 0xA1A0003C
+A1805544  A1A0003D		; 0xA1A0003D
+A1805548  A1A0003E		; 0xA1A0003E
+A180554C  A1A0003F		; 0xA1A0003F
+A1805550  A1A00040		; 0xA1A00040
+A1805554  A1A00041		; 0xA1A00041
+A1805558  A1A00042		; 0xA1A00042
+A180555C  000080E8		; 0x000080E8
+A1805560  FFFFFFFF		; 0x10000CCA
+A1805564  FFFFFFFF		; 0x10000CCB
+A1805568  FFFFFFFF		; 0x10000CCC
+A180556C  FFFFFFFF		; 0x10000CCD
+A1805570  FFFFFFFF		; 0x10000CCE
+A1805574  FFFFFFFF		; 0x10000CCF
+A1805578  FFFFFFFF		; 0x10000CD0
+A180557C  FFFFFFFF		; 0x10000CD1
+A1805580  FFFFFFFF		; 0x10000CD2
+A1805584  FFFFFFFF		; 0x10000CD3
+A1805588  FFFFFFFF		; 0x10000CD4
+A180558C  FFFFFFFF		; 0x10000CD5
+A1805590  FFFFFFFF		; 0x10000CD6
+A1805594  FFFFFFFF		; 0x10000CD7
+A1805598  FFFFFFFF		; 0x10000CD8
+A180559C  FFFFFFFF		; 0x10000CD9
+A18055A0  FFFFFFFF		; 0x10000CDA
+
+END_PROGRAM
+**************************************************
+	List program: pr_auto_ns
+**************************************************
+
+PROGRAM pr_auto_ns
+
+        VAR
+i_time_hours : INT;
+	END_VAR
+
+END_PROGRAM
+
+#0		{SRC:pr_auto_ns}
+#1		(*$WAITSWITCH$*)
+#2		
+#3			(* i_time_hours := sysClock.hours; *)
+#4			MOVE		sysClock.hours,i_time_hours	{LNXT:1|3|-1}
+(*) UDINT
+A18055A4  F8DF 7084		ldr r7, [pc, #+132] ; 0x10000474
+A18055A8  7838     		ldrb r0, [r7]
+A18055AA  F8DF 7074		ldr r7, [pc, #+116] ; 0xA1A00044
+A18055AE  8038     		strh r0, [r7]
+
+#5		
+#6		
+#7			(* IF i_time_hours >= iDay_begin and i_time_hours<=iDay_end *)
+#8			LD		i_time_hours	{LNXT:3|-1|-1}
+(*) UNDEF
+A18055B0  F8DF 706C		ldr r7, [pc, #+108] ; 0xA1A00044
+A18055B4  F9B7 0000		ldrsh r0, [r7]
+
+#9			LE		iDay_end	{LNXT:3|-1|-1}
+(*) INT
+A18055B8  F8DF 7068		ldr r7, [pc, #+104] ; 0xA1A00046
+A18055BC  F9B7 7000		ldrsh r7, [r7]
+A18055C0  42B8     		cmp r0, r7
+A18055C2  BFC8 2000		gtmov r0, #0
+A18055C6  BFD8 2001		lemov r0, #1
+
+#10			AND(		i_time_hours	{LNXT:3|-1|-1}
+(*) BOOL
+A18055CA  B082     		sub sp, sp, #8
+A18055CC  F8CD 0000		str r0, [sp]
+A18055D0  F8DF 704C		ldr r7, [pc, #+76] ; 0xA1A00044
+A18055D4  F9B7 0000		ldrsh r0, [r7]
+
+#11			GE		iDay_begin	{LNXT:3|-1|-1}
+(*) INT
+A18055D8  F8DF 704C		ldr r7, [pc, #+76] ; 0xA1A00048
+A18055DC  F9B7 7000		ldrsh r7, [r7]
+A18055E0  42B8     		cmp r0, r7
+A18055E2  BFB8 2000		ltmov r0, #0
+A18055E6  BFA8 2001		gemov r0, #1
+
+#12			)	{LNXT:3|-1|-1}
+(*) BOOL
+A18055EA  4607     		mov r7, r0
+A18055EC  F8DD 0000		ldr r0, [sp]
+A18055F0  B002     		add sp, sp, #8
+A18055F2  4038     		and r0, r0, r7
+
+#13			JMPCN	$label0	{LNXT:3|4|6}
+(-) BOOL
+A18055F4  2800     		cmp r0, #0
+A18055F6  D006     		beq #12 ; 0xA1805606
+
+
+#14		
+#15			(* THEN *)
+#16		
+#17				(* b_auto_d_n := TRUE; *)
+#18				MOVE		TRUE,b_auto_d_n	{LNXT:4|1|-1}
+(*) BOOL
+A18055FA  2001     		mov r0, #1 ; 1
+A18055FC  F8DF 701C		ldr r7, [pc, #+28] ; 0xA0003F20
+A1805600  8038     		strh r0, [r7]
+
+#19				JMP		$label1	{LNXT:3|4|6}
+(-) INT
+A1805602  E004     		b #8 ; 0xA180560E
+
+
+#20		$label0:
+#21		
+#22			(* ELSE *)
+#23		
+#24				(* b_auto_d_n := FALSE; *)
+#25				MOVE		FALSE,b_auto_d_n	{LNXT:6|1|-1}
+(*) INT
+A1805606  2000     		mov r0, #0 ; 0
+A1805608  F8DF 7010		ldr r7, [pc, #+16] ; 0xA0003F20
+A180560C  8038     		strh r0, [r7]
+
+A180560E  E8BD 0FF0		ldmia sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+A1805612  F8DD E000		ldr lr, [sp]
+A1805616  B002     		add sp, sp, #8
+
+A1805618  4770     		bx lr
+
+A180561C  FFFFFFFF		; 0xA0003F20
+A1805620  A1A00044		; 0xA1A00044
+A1805624  A1A00046		; 0xA1A00046
+A1805628  A1A00048		; 0xA1A00048
+A180562C  FFFFFFFF		; 0x10000474
+
+END_PROGRAM
+
+
+**************************************************
+	Target variable image generation
+**************************************************
+
+
+*** INPUT:
+A1805630  B082     		sub sp, sp, #8
+A1805632  F8CD E000		str lr, [sp]
+A1805636  E92D 0FF0		stmdb sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+
+A180563A  F8DF 712C		ldr r7, [pc, #+300] ; 0x10000442
+A180563E  8838     		ldrh r0, [r7]
+A1805640  F8DF 70C8		ldr r7, [pc, #+200] ; 0xA1A00014
+A1805644  8038     		strh r0, [r7]
+
+A1805646  F8DF 7124		ldr r7, [pc, #+292] ; 0x10000444
+A180564A  8838     		ldrh r0, [r7]
+A180564C  F8DF 70C0		ldr r7, [pc, #+192] ; 0xA1A0001A
+A1805650  8038     		strh r0, [r7]
+
+A1805652  F8DF 711C		ldr r7, [pc, #+284] ; 0x10000446
+A1805656  8838     		ldrh r0, [r7]
+A1805658  F8DF 70B8		ldr r7, [pc, #+184] ; 0xA1A00020
+A180565C  8038     		strh r0, [r7]
+
+A180565E  F8DF 7114		ldr r7, [pc, #+276] ; 0x10000448
+A1805662  8838     		ldrh r0, [r7]
+A1805664  F8DF 70B0		ldr r7, [pc, #+176] ; 0xA1A00026
+A1805668  8038     		strh r0, [r7]
+
+A180566A  F8DF 710C		ldr r7, [pc, #+268] ; 0x1000044A
+A180566E  8838     		ldrh r0, [r7]
+A1805670  F8DF 70A8		ldr r7, [pc, #+168] ; 0xA1A0002C
+A1805674  8038     		strh r0, [r7]
+
+A1805676  F8DF 7104		ldr r7, [pc, #+260] ; 0x1000044C
+A180567A  8838     		ldrh r0, [r7]
+A180567C  F8DF 70A0		ldr r7, [pc, #+160] ; 0xA1A00032
+A1805680  8038     		strh r0, [r7]
+
+A1805682  F8DF 70FC		ldr r7, [pc, #+252] ; 0x1000044E
+A1805686  8838     		ldrh r0, [r7]
+A1805688  F8DF 7098		ldr r7, [pc, #+152] ; 0xA1A00038
+A180568C  8038     		strh r0, [r7]
+
+A180568E  F8DF 70F4		ldr r7, [pc, #+244] ; 0x10000450
+A1805692  8838     		ldrh r0, [r7]
+A1805694  F8DF 7090		ldr r7, [pc, #+144] ; 0xA1A0003A
+A1805698  8038     		strh r0, [r7]
+
+A180569A  F8DF 70AC		ldr r7, [pc, #+172] ; 0x10000420
+A180569E  7838     		ldrb r0, [r7]
+A18056A0  F8DF 7064		ldr r7, [pc, #+100] ; 0xA1A0000E
+A18056A4  7038     		strb r0, [r7]
+
+A18056A6  F8DF 70A4		ldr r7, [pc, #+164] ; 0x10000421
+A18056AA  7838     		ldrb r0, [r7]
+A18056AC  F8DF 707C		ldr r7, [pc, #+124] ; 0xA1A0003C
+A18056B0  7038     		strb r0, [r7]
+
+A18056B2  F8DF 709C		ldr r7, [pc, #+156] ; 0x10000422
+A18056B6  7838     		ldrb r0, [r7]
+A18056B8  F8DF 7074		ldr r7, [pc, #+116] ; 0xA1A0003D
+A18056BC  7038     		strb r0, [r7]
+
+A18056BE  F8DF 7094		ldr r7, [pc, #+148] ; 0x10000423
+A18056C2  7838     		ldrb r0, [r7]
+A18056C4  F8DF 706C		ldr r7, [pc, #+108] ; 0xA1A0003E
+A18056C8  7038     		strb r0, [r7]
+
+A18056CA  F8DF 708C		ldr r7, [pc, #+140] ; 0x10000424
+A18056CE  7838     		ldrb r0, [r7]
+A18056D0  F8DF 7064		ldr r7, [pc, #+100] ; 0xA1A0003F
+A18056D4  7038     		strb r0, [r7]
+
+A18056D6  F8DF 7084		ldr r7, [pc, #+132] ; 0x10000425
+A18056DA  7838     		ldrb r0, [r7]
+A18056DC  F8DF 705C		ldr r7, [pc, #+92] ; 0xA1A00040
+A18056E0  7038     		strb r0, [r7]
+
+A18056E2  F8DF 707C		ldr r7, [pc, #+124] ; 0x10000426
+A18056E6  7838     		ldrb r0, [r7]
+A18056E8  F8DF 7054		ldr r7, [pc, #+84] ; 0xA1A00041
+A18056EC  7038     		strb r0, [r7]
+
+A18056EE  F8DF 7074		ldr r7, [pc, #+116] ; 0x10000427
+A18056F2  7838     		ldrb r0, [r7]
+A18056F4  F8DF 704C		ldr r7, [pc, #+76] ; 0xA1A00042
+A18056F8  7038     		strb r0, [r7]
+
+A18056FA  E8BD 0FF0		ldmia sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+A18056FE  F8DD E000		ldr lr, [sp]
+A1805702  B002     		add sp, sp, #8
+
+A1805704  4770     		bx lr
+
+A1805708  A1A0000E		; 0xA1A0000E
+A180570C  A1A00014		; 0xA1A00014
+A1805710  A1A0001A		; 0xA1A0001A
+A1805714  A1A00020		; 0xA1A00020
+A1805718  A1A00026		; 0xA1A00026
+A180571C  A1A0002C		; 0xA1A0002C
+A1805720  A1A00032		; 0xA1A00032
+A1805724  A1A00038		; 0xA1A00038
+A1805728  A1A0003A		; 0xA1A0003A
+A180572C  A1A0003C		; 0xA1A0003C
+A1805730  A1A0003D		; 0xA1A0003D
+A1805734  A1A0003E		; 0xA1A0003E
+A1805738  A1A0003F		; 0xA1A0003F
+A180573C  A1A00040		; 0xA1A00040
+A1805740  A1A00041		; 0xA1A00041
+A1805744  A1A00042		; 0xA1A00042
+A1805748  FFFFFFFF		; 0x10000420
+A180574C  FFFFFFFF		; 0x10000421
+A1805750  FFFFFFFF		; 0x10000422
+A1805754  FFFFFFFF		; 0x10000423
+A1805758  FFFFFFFF		; 0x10000424
+A180575C  FFFFFFFF		; 0x10000425
+A1805760  FFFFFFFF		; 0x10000426
+A1805764  FFFFFFFF		; 0x10000427
+A1805768  FFFFFFFF		; 0x10000442
+A180576C  FFFFFFFF		; 0x10000444
+A1805770  FFFFFFFF		; 0x10000446
+A1805774  FFFFFFFF		; 0x10000448
+A1805778  FFFFFFFF		; 0x1000044A
+A180577C  FFFFFFFF		; 0x1000044C
+A1805780  FFFFFFFF		; 0x1000044E
+A1805784  FFFFFFFF		; 0x10000450
+
+
+*** OUTPUT:
+A1805788  B082     		sub sp, sp, #8
+A180578A  F8CD E000		str lr, [sp]
+A180578E  E92D 0FF0		stmdb sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+
+A1805792  E8BD 0FF0		ldmia sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+A1805796  F8DD E000		ldr lr, [sp]
+A180579A  B002     		add sp, sp, #8
+
+A180579C  4770     		bx lr
+
+
+
+**************************************************
+	Task Timed init code
+**************************************************
+
+A180579E  B082     		sub sp, sp, #8
+A18057A0  F8CD E000		str lr, [sp]
+A18057A4  E92D 0FF0		stmdb sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+
+A18057A8  E8BD 0FF0		ldmia sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+A18057AC  F8DD E000		ldr lr, [sp]
+A18057B0  B002     		add sp, sp, #8
+
+A18057B2  4770     		bx lr
+
+
+
+**************************************************
+	Global init code
+**************************************************
+
+A18057D0  B082     		sub sp, sp, #8
+A18057D2  F8CD E000		str lr, [sp]
+A18057D6  E92D 0FF0		stmdb sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+
+A18057DA  E8BD 0FF0		ldmia sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+A18057DE  F8DD E000		ldr lr, [sp]
+A18057E2  B002     		add sp, sp, #8
+
+A18057E4  4770     		bx lr
+
+
+
+**************************************************
+	Global RETAIN init code
+**************************************************
+
+A18057E6  B082     		sub sp, sp, #8
+A18057E8  F8CD E000		str lr, [sp]
+A18057EC  E92D 0FF0		stmdb sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+
+A18057F0  E8BD 0FF0		ldmia sp!, { r4, r5, r6, r7, r8, r9, r10, r11 }
+A18057F4  F8DD E000		ldr lr, [sp]
+A18057F8  B002     		add sp, sp, #8
+
+A18057FA  4770     		bx lr
+
+
+
+********************************************
+MEMORY MAP
+********************************************
+
+Code area type:          		       main code
+Start code area:          		00000000A1800000h
+End code area:            		00000000A1805D58h
+Code size:                		00005D58h
+
+Start local data area:    		00000000A1A00000h
+End local data area:      		00000000A1A0004Ah
+Local data size:          		0000004Ah
+
+Start retentive data area:		0000000000000000h
+End retentive data area:  		0000000000000000h
+Retentive data size:      		00000000h
+
+Start bit data area:      		0000000000000000h
+End bit data area:        		0000000000000000h
+Bit data size:            		00000000h
+
+
+
+********************************************
+CODE ID:                                A034ED98
+DEBUG MEMO ID:                          A180B976
+FULL MEMO ID:                           0000984E
+********************************************

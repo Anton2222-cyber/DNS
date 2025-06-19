@@ -69,6 +69,16 @@ COPM_Command,1,15000
 
 ; Configuration for Modbus Master RTU
 MbMRtu_OpenChn,0,0,9600,3
+MbMRtu_SlaveAssign,0,4
+MbMRtu_SetMessage,0,0,3,12289,6,0,10,1000,110,8,0
+MbMRtu_MapMessage,3,12289,1,110,8,0
+MbMRtu_MapMessage,3,12290,1,11,1,1
+MbMRtu_MapMessage,3,12291,1,11,0,1
+MbMRtu_MapMessage,3,12292,1,110,10,0
+MbMRtu_MapMessage,3,12293,1,110,9,0
+MbMRtu_MapMessage,3,12294,1,110,12,0
+MbMRtu_SetMessage,0,0,3,12302,1,0,10,1000,110,7,0
+MbMRtu_SetMessage,0,0,3,8449,1,0,10,1000,110,11,0
 MbMRtu_SlaveAssign,1,5
 MbMRtu_SetMessage,1,0,3,16640,2,0,10,1000,110,22,0
 MbMRtu_SetMessage,1,0,3,16140,2,0,10,1000,110,24,0
@@ -83,8 +93,8 @@ MbMRtu_SetMessage,2,0,3,16120,2,0,10,1000,110,36,0
 MbMRtu_SetMessage,2,0,3,16130,1,0,10,1000,110,38,0
 MbMRtu_SetMessage,2,0,3,16030,1,0,10,1000,110,39,0
 MbMRtu_SetMessage,2,0,3,16100,2,0,10,1000,110,40,0
-MbMRtu_SlaveAssign,0,3
-MbMRtu_SetMessage,0,0,3,45821,16,0,20,1000,110,52,0
+MbMRtu_SlaveAssign,3,3
+MbMRtu_SetMessage,3,0,3,45821,16,0,200,1000,110,52,0
 MbMRtu_MapMessage,3,45821,1,110,53,0
 MbMRtu_MapMessage,3,45822,1,110,52,0
 MbMRtu_MapMessage,3,45823,1,110,55,0
@@ -101,7 +111,7 @@ MbMRtu_MapMessage,3,45833,1,110,65,0
 MbMRtu_MapMessage,3,45834,1,110,64,0
 MbMRtu_MapMessage,3,45835,1,110,73,0
 MbMRtu_MapMessage,3,45836,1,110,72,0
-MbMRtu_SetMessage,0,0,3,45837,16,0,20,1000,110,78,0
+MbMRtu_SetMessage,3,0,3,45837,16,0,200,1000,110,78,0
 MbMRtu_MapMessage,3,45837,1,110,79,0
 MbMRtu_MapMessage,3,45838,1,110,78,0
 MbMRtu_MapMessage,3,45839,1,110,79,0
@@ -123,11 +133,6 @@ MbMRtu_Start
 ;Ethernet_presence:0
 ; Configuration for Modbus Master TCP
 MbMTcp_OpenChn,0
-MbMTcp_SlaveAssign,0,192,168,1,149
-MbMTcp_SlaveAssign,0,0,0,10,1
-MbMTcp_SetMessage,0,3,309,4,0,1000,110,42,0
-MbMTcp_MapMessage,3,309,2,110,42,0
-MbMTcp_MapMessage,3,311,2,110,44,0
 MbMTcp_SlaveAssign,1,192,168,1,147
 MbMTcp_SlaveAssign,1,0,0,10,1
 MbMTcp_SetMessage,1,3,313,2,0,100,110,14,0
